@@ -1,0 +1,40 @@
+# Red Poppy Art House - URL Map
+# Extracted from live site navigation and Wayback Machine archive
+# Every path listed here needs a matching route in the Next.js site
+
+/
+/about-us/
+/about/mission-vision/
+/about/people/
+/about/people/staff/
+/about/people/performance-host-team/
+/about/people/community-members/
+/about/people/leadership-team/
+/about/community-curatorial-partners/
+/about/art-house-story/
+/about/press-testimonials/
+/about/contact-hours-location/
+/participate/
+/participate/give/
+/participate/volunteer/
+/participate/performance-booking/
+/participate/internships/
+/participate/employment/
+/event/
+/event/[slug]/
+/programs/
+/programs/the-mapp-program/
+/programs/family-art/
+/programs/performance-series/
+/programs/exhibitions/
+/programs/mission-stoop-fest/
+/programs/san-francisco-youth-theatre/
+/programs/artist-residencies/
+/programs/artist-residencies/a-feast-of-communities/
+/programs/artist-residencies/crossover-residencies/
+/programs/fresh-festival/
+/rentals/
+/artist-resources/
+/blog/
+/tag/[tag]/
+/contact/

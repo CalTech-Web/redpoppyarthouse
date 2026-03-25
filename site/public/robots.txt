@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.redpoppyarthouse.org/sitemap.xml
+
+Disallow: /admin/
+Disallow: /staging/
+Disallow: /.next/
+Disallow: /node_modules/
