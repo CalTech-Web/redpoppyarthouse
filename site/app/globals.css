@@ -1,26 +1,124 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand Colors - Red Poppy Palette */
+  --poppy-900: #5C0E0E;
+  --poppy-800: #7A1313;
+  --poppy-700: #8B1A1A;
+  --poppy-600: #A32020;
+  --poppy-500: #C41E3A;
+  --poppy-400: #D94F4F;
+  --poppy-300: #E88080;
+  --poppy-200: #F4B0B0;
+  --poppy-100: #FBE0E0;
+  --poppy-50: #FFF0F0;
+
+  /* Warm Cream Palette */
+  --cream-900: #4A3728;
+  --cream-800: #6B5340;
+  --cream-700: #8C7058;
+  --cream-600: #A68B70;
+  --cream-500: #C4A882;
+  --cream-400: #D4BFA0;
+  --cream-300: #E8D5BC;
+  --cream-200: #F2E8D8;
+  --cream-100: #FAF3EA;
+  --cream-50: #FFF8F0;
+
+  /* Earthy Accent Tones */
+  --earth-warm: #B8860B;
+  --earth-olive: #6B7B3A;
+  --earth-terracotta: #C45B28;
+  --earth-clay: #A0522D;
+  --earth-sage: #9CAF88;
+
+  /* Semantic Colors */
+  --background: #FFF8F0;
+  --foreground: #2C1810;
+  --surface: #FFFFFF;
+  --surface-warm: #FAF3EA;
+  --muted: #8C7058;
+  --muted-light: #C4A882;
+  --border: #E8D5BC;
+  --accent: #C41E3A;
+  --accent-dark: #8B1A1A;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-warm: var(--surface-warm);
+  --color-muted: var(--muted);
+  --color-muted-light: var(--muted-light);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-poppy-50: var(--poppy-50);
+  --color-poppy-100: var(--poppy-100);
+  --color-poppy-200: var(--poppy-200);
+  --color-poppy-300: var(--poppy-300);
+  --color-poppy-400: var(--poppy-400);
+  --color-poppy-500: var(--poppy-500);
+  --color-poppy-600: var(--poppy-600);
+  --color-poppy-700: var(--poppy-700);
+  --color-poppy-800: var(--poppy-800);
+  --color-poppy-900: var(--poppy-900);
+  --color-cream-50: var(--cream-50);
+  --color-cream-100: var(--cream-100);
+  --color-cream-200: var(--cream-200);
+  --color-cream-300: var(--cream-300);
+  --color-cream-400: var(--cream-400);
+  --color-cream-500: var(--cream-500);
+  --color-cream-600: var(--cream-600);
+  --color-cream-700: var(--cream-700);
+  --color-cream-800: var(--cream-800);
+  --color-cream-900: var(--cream-900);
+  --color-earth-warm: var(--earth-warm);
+  --color-earth-olive: var(--earth-olive);
+  --color-earth-terracotta: var(--earth-terracotta);
+  --color-earth-clay: var(--earth-clay);
+  --color-earth-sage: var(--earth-sage);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-serif: var(--font-playfair);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Warm texture overlay for sections */
+.texture-paper {
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(200, 168, 130, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(196, 30, 58, 0.04) 0%, transparent 50%);
+}
+
+/* Warm grain texture */
+.texture-grain {
+  position: relative;
+}
+
+.texture-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(196, 30, 58, 0.15);
+  color: var(--foreground);
 }
