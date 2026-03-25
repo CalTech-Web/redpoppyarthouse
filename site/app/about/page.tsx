@@ -94,7 +94,7 @@ export default function AboutPage() {
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-earth-warm rounded-full blur-3xl -translate-x-1/4 translate-y-1/4" />
         </div>
 
-        <div className="relative max-w-6xl mx-auto px-6 py-20 md:py-28">
+        <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 text-sm text-poppy-200">
               <li>
@@ -150,7 +150,7 @@ export default function AboutPage() {
 
       {/* Introduction */}
       <section className="bg-cream-50 texture-paper">
-        <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -185,7 +185,7 @@ export default function AboutPage() {
 
       {/* Mission & Vision */}
       <section className="bg-surface border-y border-cream-200">
-        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -237,7 +237,7 @@ export default function AboutPage() {
 
       {/* Art House Story / Timeline */}
       <section className="bg-cream-100">
-        <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -293,7 +293,7 @@ export default function AboutPage() {
 
       {/* People Section */}
       <section className="bg-cream-50 texture-paper">
-        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -344,7 +344,7 @@ export default function AboutPage() {
 
       {/* Press & Recognition */}
       <section className="bg-poppy-800 text-cream-50">
-        <div className="relative max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -398,7 +398,7 @@ export default function AboutPage() {
 
       {/* CTA Section */}
       <section className="bg-cream-100 border-t border-cream-200">
-        <div className="max-w-4xl mx-auto px-6 py-16 md:py-20 text-center">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-20 text-center">
           <motion.div
             initial="hidden"
             whileInView="visible"

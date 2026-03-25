@@ -30,7 +30,7 @@ export default async function TagPage({ params }: Props) {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-1/4 w-72 h-72 bg-earth-warm rounded-full blur-3xl" />
         </div>
-        <div className="relative max-w-4xl mx-auto px-6 py-16 md:py-24">
+        <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
           <Link
             href="/event"
             className="inline-flex items-center gap-2 text-sm text-poppy-200 hover:text-cream-50 transition-colors mb-6"
@@ -63,7 +63,7 @@ export default async function TagPage({ params }: Props) {
 
       {/* Tag Content */}
       <section className="bg-cream-50 texture-paper">
-        <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
           <div className="bg-surface rounded-2xl border border-cream-200 p-8 md:p-12 text-center">
             <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-earth-sage/20 flex items-center justify-center">
               <svg

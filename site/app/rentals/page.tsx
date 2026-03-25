@@ -83,7 +83,7 @@ export default function RentalsPage() {
           <div className="absolute bottom-0 left-1/3 w-56 h-56 bg-poppy-400 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative max-w-6xl mx-auto px-6 py-20 md:py-28">
+        <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 text-sm text-poppy-200">
               <li>
@@ -138,7 +138,7 @@ export default function RentalsPage() {
 
       {/* Space Details & Amenities */}
       <section className="bg-cream-50 texture-paper">
-        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -214,7 +214,7 @@ export default function RentalsPage() {
 
       {/* Rates & Policies */}
       <section className="bg-surface border-y border-cream-200">
-        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -348,7 +348,7 @@ export default function RentalsPage() {
 
       {/* Contact CTA */}
       <section className="bg-poppy-800 text-cream-50">
-        <div className="max-w-4xl mx-auto px-6 py-12 md:py-16 text-center">
+        <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 text-center">
           <motion.div
             initial="hidden"
             whileInView="visible"

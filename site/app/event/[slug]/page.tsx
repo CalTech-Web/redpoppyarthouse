@@ -30,7 +30,7 @@ export default async function EventPage({ params }: Props) {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 right-0 w-72 h-72 bg-poppy-500 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
         </div>
-        <div className="relative max-w-4xl mx-auto px-6 py-16 md:py-24">
+        <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
           <Link
             href="/event"
             className="inline-flex items-center gap-2 text-sm text-poppy-200 hover:text-cream-50 transition-colors mb-6"
@@ -58,7 +58,7 @@ export default async function EventPage({ params }: Props) {
 
       {/* Event Content */}
       <section className="bg-cream-50 texture-paper">
-        <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
           <div className="bg-surface rounded-2xl border border-cream-200 p-8 md:p-12 text-center">
             <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-poppy-50 flex items-center justify-center">
               <svg
@@ -111,7 +111,7 @@ export default async function EventPage({ params }: Props) {
 
       {/* Venue Info */}
       <section className="bg-cream-100 border-t border-cream-200">
-        <div className="max-w-4xl mx-auto px-6 py-10">
+        <div className="max-w-7xl mx-auto px-6 py-10">
           <div className="grid sm:grid-cols-3 gap-6 text-center text-sm">
             <div>
               <p className="font-semibold text-cream-900">Location</p>

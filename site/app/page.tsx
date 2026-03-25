@@ -23,7 +23,7 @@ export default function Home() {
           <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-poppy-400 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         </div>
 
-        <div className="relative max-w-6xl mx-auto px-6 py-24 md:py-32 lg:py-40">
+        <div className="relative max-w-7xl mx-auto px-6 py-24 md:py-32 lg:py-40">
           <div className="max-w-3xl">
             <HeroAnimated>
               <span className="inline-block px-4 py-1.5 text-xs uppercase tracking-[0.2em] font-medium bg-poppy-800/60 text-poppy-100 rounded-full border border-poppy-700/40">

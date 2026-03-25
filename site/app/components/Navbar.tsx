@@ -27,7 +27,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 bg-cream-50/95 backdrop-blur-sm border-b border-cream-300/50">
-      <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo / Brand */}
         <Link href="/" className="flex items-center gap-3 group">
           {/* Poppy flower icon */}

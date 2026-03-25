@@ -46,7 +46,7 @@ export default function EventbriteWidget() {
 
   if (!ENABLED) {
     return (
-      <section className="max-w-4xl mx-auto px-6 py-12">
+      <section className="max-w-7xl mx-auto px-6 py-12">
         <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center">
           <p className="text-2xl font-semibold mb-3">
             Tickets &amp; Registration
@@ -63,7 +63,7 @@ export default function EventbriteWidget() {
   }
 
   return (
-    <section className="max-w-4xl mx-auto px-6 py-12">
+    <section className="max-w-7xl mx-auto px-6 py-12">
       <div
         id="eventbrite-widget-container"
         ref={containerRef}

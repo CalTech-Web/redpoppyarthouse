@@ -78,7 +78,7 @@ export function HeroCTA() {
 export function TaglineSection() {
   return (
     <section className="bg-cream-100 border-b border-cream-300/50">
-      <div className="max-w-4xl mx-auto px-6 py-8 md:py-10 text-center">
+      <div className="max-w-7xl mx-auto px-6 py-8 md:py-10 text-center">
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -116,7 +116,7 @@ const communityHighlights = [
 export function CommunityStats() {
   return (
     <section className="bg-cream-50 texture-paper">
-      <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -151,7 +151,7 @@ export function CommunityStats() {
 export function UpcomingEventsTeaser() {
   return (
     <section className="bg-surface border-y border-cream-200">
-      <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -424,7 +424,7 @@ const programs = [
 export function ProgramsSection() {
   return (
     <section className="bg-cream-50 texture-paper">
-      <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -509,7 +509,7 @@ export function AboutCommunitySection() {
         <div className="absolute top-0 right-1/4 w-56 h-56 bg-poppy-400 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative max-w-6xl mx-auto px-6 py-16 md:py-24">
+      <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -690,7 +690,7 @@ export function AboutCommunitySection() {
 export function VisitUsSection() {
   return (
     <section className="bg-cream-100 border-t border-cream-200">
-      <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
         <motion.div
           initial="hidden"
           whileInView="visible"

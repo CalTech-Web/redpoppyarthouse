@@ -22,7 +22,7 @@ export default function GivePage() {
           <div className="absolute bottom-0 left-1/4 w-56 h-56 bg-poppy-400 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative max-w-6xl mx-auto px-6 py-20 md:py-28">
+        <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 text-sm text-poppy-200">
               <li>
@@ -71,7 +71,7 @@ export default function GivePage() {
 
       {/* Patron Membership */}
       <section className="bg-cream-50 texture-paper">
-        <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -132,7 +132,7 @@ export default function GivePage() {
 
       {/* Patreon */}
       <section className="bg-surface border-y border-cream-200">
-        <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -220,7 +220,7 @@ export default function GivePage() {
 
       {/* Other Ways to Give */}
       <section className="bg-cream-50 texture-paper">
-        <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -291,7 +291,7 @@ export default function GivePage() {
 
       {/* Ticket Philosophy */}
       <section className="bg-poppy-800 text-cream-50">
-        <div className="max-w-4xl mx-auto px-6 py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -322,7 +322,7 @@ export default function GivePage() {
 
       {/* Fiscal Sponsor Note */}
       <section className="bg-cream-100 border-t border-cream-200">
-        <div className="max-w-4xl mx-auto px-6 py-12 text-center">
+        <div className="max-w-7xl mx-auto px-6 py-12 text-center">
           <p className="text-sm text-cream-700">
             Red Poppy Art House is fiscally sponsored by{" "}
             <span className="font-semibold text-cream-800">

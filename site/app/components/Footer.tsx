@@ -34,7 +34,7 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer className="bg-poppy-900 text-cream-200">
-      <div className="max-w-6xl mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
             <h3 className="font-serif text-xl font-bold text-cream-50 mb-2">
