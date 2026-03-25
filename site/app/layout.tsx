@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Red Poppy Art House",
   },
   description:
-    "Red Poppy Art House is a community-driven arts venue in San Francisco's Mission District, presenting over 140 performances, exhibitions, workshops, and artist residencies annually.",
+    "Red Poppy Art House is an artist-driven, volunteer-run arts venue in San Francisco's Mission District, presenting over 150 performances, exhibitions, workshops, and artist residencies annually.",
   openGraph: {
     title: "Red Poppy Art House - Community Arts Venue in San Francisco",
     description:

@@ -132,7 +132,7 @@ const programs = [
   {
     title: "FRESH Festival",
     description:
-      "San Francisco's annual festival of experimental dance, music, and performance - starting the new year with an extravaganza of embodied art.",
+      "San Francisco's annual festival of experimental dance, music, and performance, starting the new year with an extravaganza of embodied art.",
     href: "/programs",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">
@@ -141,6 +141,47 @@ const programs = [
           stroke="currentColor"
           strokeWidth="1.5"
           strokeLinecap="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: "Mission Stoop Fest",
+    description:
+      "A civil society arts experiment on front stoops where traditional and contemporary artists perform and local residents share their stories.",
+    href: "/programs",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">
+        <path
+          d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: "Development Track",
+    description:
+      "PRESENCE, our professional development cohort offering training in community arts presentation through workshops and visiting artist sessions.",
+    href: "/programs",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">
+        <path
+          d="M22 10v6M2 10l10-5 10 5-10 5z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     ),
@@ -306,9 +347,10 @@ export default function Home() {
                 Upcoming at the Poppy
               </h2>
               <p className="text-cream-700 max-w-2xl mx-auto">
-                Two to three nights a week, our intimate space comes alive with
-                performances spanning music, poetry, dance, literary events, and
-                more. Sliding scale admission - typically $15 to $25.
+                Two to three nights a week, Thursday through Sunday, our 49-seat
+                room fills with music, poetry, dance, and conversation. Sliding
+                scale admission, typically $15 to $25. Every dollar at the door
+                goes primarily to the performing artists.
               </p>
             </motion.div>
 
@@ -404,7 +446,7 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {programs.map((program, i) => (
                 <motion.div
                   key={program.title}
