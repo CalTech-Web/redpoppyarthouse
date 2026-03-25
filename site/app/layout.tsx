@@ -31,21 +31,12 @@ export const metadata: Metadata = {
     url: "https://www.redpoppyarthouse.org",
     siteName: "Red Poppy Art House",
     type: "website",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Red Poppy Art House",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Red Poppy Art House - Community Arts Venue in San Francisco",
     description:
       "A community-driven arts venue in San Francisco's Mission District, presenting performances, exhibitions, workshops, and artist residencies.",
-    images: ["/og-image.jpg"],
   },
 };
 
@@ -54,7 +45,7 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: "Red Poppy Art House",
   url: "https://www.redpoppyarthouse.org",
-  logo: "https://www.redpoppyarthouse.org/og-image.jpg",
+  logo: "https://www.redpoppyarthouse.org/opengraph-image",
   description:
     "Red Poppy Art House is an artist-driven, volunteer-run arts venue in San Francisco's Mission District, presenting over 150 performances, exhibitions, workshops, and artist residencies annually since 2003.",
   foundingDate: "2003",

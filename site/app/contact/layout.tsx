@@ -22,7 +22,7 @@ const localBusinessJsonLd = {
   url: "https://www.redpoppyarthouse.org",
   telephone: "+1-650-731-5383",
   email: "info@redpoppyarthouse.org",
-  image: "https://www.redpoppyarthouse.org/og-image.jpg",
+  image: "https://www.redpoppyarthouse.org/opengraph-image",
   address: {
     "@type": "PostalAddress",
     streetAddress: "2698 Folsom Street",

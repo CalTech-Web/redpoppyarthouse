@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState, type FormEvent } from "react";
 import { motion, type Variants } from "framer-motion";
 
 const fadeUp: Variants = {
@@ -54,6 +55,217 @@ const hours = [
   { day: "Saturday", time: "7:00pm - 10:00pm", type: "performance" },
   { day: "Sunday", time: "Closed", type: "closed" },
 ];
+
+function ContactFormSection() {
+  const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
+
+  function validate(name: string, email: string, message: string) {
+    const newErrors: typeof errors = {};
+    if (!name.trim()) newErrors.name = "Please enter your name";
+    if (!email.trim()) {
+      newErrors.email = "Please enter your email";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+    if (!message.trim()) newErrors.message = "Please enter a message";
+    return newErrors;
+  }
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const message = formData.get("message") as string;
+
+    const validationErrors = validate(name, email, message);
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) return;
+
+    setFormState("submitting");
+
+    // Placeholder - replace FORM_RECEIVER_EMAIL with the actual endpoint
+    // For now, show success after a brief delay to simulate submission
+    await new Promise((resolve) => setTimeout(resolve, 800));
+    setFormState("success");
+    form.reset();
+  }
+
+  return (
+    <section className="bg-cream-100">
+      <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
+          <motion.div variants={fadeUp} custom={0} className="text-center mb-12">
+            <span className="inline-block px-3 py-1 text-xs uppercase tracking-[0.15em] font-medium text-earth-terracotta bg-earth-terracotta/10 rounded-full mb-4">
+              Send a Message
+            </span>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-cream-900 mb-4">
+              Drop Us a Line
+            </h2>
+            <p className="text-cream-700 max-w-xl mx-auto">
+              Have a question about events, programs, or anything else? Fill out
+              the form below and we will get back to you as soon as we can.
+            </p>
+          </motion.div>
+
+          <motion.div variants={fadeUp} custom={1}>
+            {formState === "success" ? (
+              <div className="bg-surface rounded-xl border border-earth-sage/30 p-8 md:p-12 text-center">
+                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-earth-sage/20 flex items-center justify-center">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="w-8 h-8 text-earth-olive"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M20 6L9 17l-5-5"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+                <h3 className="font-serif text-2xl font-bold text-cream-900 mb-3">
+                  Message Sent
+                </h3>
+                <p className="text-cream-700 mb-6">
+                  Thank you for reaching out. We will get back to you soon.
+                </p>
+                <button
+                  onClick={() => setFormState("idle")}
+                  className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium border border-cream-300 text-cream-800 rounded-full hover:bg-cream-200 transition-colors"
+                >
+                  Send Another Message
+                </button>
+              </div>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                className="bg-surface rounded-xl border border-cream-200 p-6 md:p-8 space-y-6"
+                noValidate
+              >
+                <div>
+                  <label
+                    htmlFor="contact-name"
+                    className="block text-sm font-medium text-cream-900 mb-2"
+                  >
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="contact-name"
+                    name="name"
+                    required
+                    className={`w-full px-4 py-3 rounded-lg border bg-cream-50 text-cream-900 placeholder-cream-500 outline-none transition-colors focus:border-poppy-400 focus:ring-2 focus:ring-poppy-100 ${
+                      errors.name ? "border-poppy-400" : "border-cream-200"
+                    }`}
+                    placeholder="Your name"
+                  />
+                  {errors.name && (
+                    <p className="mt-1.5 text-sm text-poppy-600">{errors.name}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="contact-email"
+                    className="block text-sm font-medium text-cream-900 mb-2"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="contact-email"
+                    name="email"
+                    required
+                    className={`w-full px-4 py-3 rounded-lg border bg-cream-50 text-cream-900 placeholder-cream-500 outline-none transition-colors focus:border-poppy-400 focus:ring-2 focus:ring-poppy-100 ${
+                      errors.email ? "border-poppy-400" : "border-cream-200"
+                    }`}
+                    placeholder="your@email.com"
+                  />
+                  {errors.email && (
+                    <p className="mt-1.5 text-sm text-poppy-600">{errors.email}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="contact-message"
+                    className="block text-sm font-medium text-cream-900 mb-2"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    required
+                    rows={5}
+                    className={`w-full px-4 py-3 rounded-lg border bg-cream-50 text-cream-900 placeholder-cream-500 outline-none transition-colors focus:border-poppy-400 focus:ring-2 focus:ring-poppy-100 resize-y ${
+                      errors.message ? "border-poppy-400" : "border-cream-200"
+                    }`}
+                    placeholder="Tell us what you have in mind..."
+                  />
+                  {errors.message && (
+                    <p className="mt-1.5 text-sm text-poppy-600">{errors.message}</p>
+                  )}
+                </div>
+
+                <div className="flex items-center justify-between pt-2">
+                  <p className="text-xs text-cream-500">
+                    We typically respond within 2 to 3 business days.
+                  </p>
+                  <button
+                    type="submit"
+                    disabled={formState === "submitting"}
+                    className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold bg-poppy-700 text-cream-50 rounded-full hover:bg-poppy-600 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {formState === "submitting" ? (
+                      <>
+                        <svg
+                          className="animate-spin w-4 h-4"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          aria-hidden="true"
+                        >
+                          <circle
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="3"
+                            className="opacity-25"
+                          />
+                          <path
+                            d="M4 12a8 8 0 018-8"
+                            stroke="currentColor"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                        Sending...
+                      </>
+                    ) : (
+                      "Send Message"
+                    )}
+                  </button>
+                </div>
+              </form>
+            )}
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
 
 export default function ContactPage() {
   return (
@@ -276,6 +488,9 @@ export default function ContactPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Contact Form */}
+      <ContactFormSection />
 
       {/* Map / Directions Note */}
       <section className="bg-poppy-800 text-cream-50">
