@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 
 const fadeUp: Variants = {
@@ -65,6 +66,20 @@ export default function ContactPage() {
         </div>
 
         <div className="relative max-w-6xl mx-auto px-6 py-20 md:py-28">
+          <nav aria-label="Breadcrumb" className="mb-6">
+            <ol className="flex items-center gap-2 text-sm text-poppy-200">
+              <li>
+                <Link href="/" className="hover:text-cream-50 transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page" className="text-cream-50 font-medium">
+                Contact
+              </li>
+            </ol>
+          </nav>
+
           <motion.div
             initial="hidden"
             animate="visible"
@@ -271,9 +286,9 @@ export default function ContactPage() {
             viewport={{ once: true, margin: "-50px" }}
           >
             <motion.div variants={fadeUp} custom={0}>
-              <h3 className="font-serif text-2xl font-bold mb-3">
+              <h2 className="font-serif text-2xl font-bold mb-3">
                 Getting Here
-              </h3>
+              </h2>
               <p className="text-cream-200 max-w-lg mx-auto mb-6">
                 We sit at the corner of Folsom and 23rd Street in the heart of
                 the Mission District. Street parking is available, and the 12

@@ -48,9 +48,9 @@ export default function EventbriteWidget() {
     return (
       <section className="max-w-4xl mx-auto px-6 py-12">
         <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center">
-          <h2 className="text-2xl font-semibold mb-3">
+          <p className="text-2xl font-semibold mb-3">
             Tickets &amp; Registration
-          </h2>
+          </p>
           <p className="text-gray-500 mb-4">
             Online ticketing is being set up and will be available soon.
           </p>

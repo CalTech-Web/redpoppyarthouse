@@ -33,6 +33,20 @@ export default function EventsPage() {
         </div>
 
         <div className="relative max-w-6xl mx-auto px-6 py-20 md:py-28">
+          <nav aria-label="Breadcrumb" className="mb-6">
+            <ol className="flex items-center gap-2 text-sm text-poppy-200">
+              <li>
+                <Link href="/" className="hover:text-cream-50 transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page" className="text-cream-50 font-medium">
+                Events
+              </li>
+            </ol>
+          </nav>
+
           <motion.div
             initial="hidden"
             animate="visible"
@@ -210,9 +224,9 @@ export default function EventsPage() {
             viewport={{ once: true, margin: "-50px" }}
           >
             <motion.div variants={fadeUp} custom={0}>
-              <h3 className="font-serif text-2xl font-bold text-cream-900 mb-3">
+              <h2 className="font-serif text-2xl font-bold text-cream-900 mb-3">
                 Want to Perform Here?
-              </h3>
+              </h2>
               <p className="text-cream-700 max-w-md mx-auto mb-6">
                 We welcome artists working in all performing disciplines.
                 Tell us about yourself and your work.

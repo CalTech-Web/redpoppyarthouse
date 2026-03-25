@@ -23,32 +23,25 @@ export default function VolunteerPage() {
         </div>
 
         <div className="relative max-w-6xl mx-auto px-6 py-20 md:py-28">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            custom={0}
-            className="mb-4"
-          >
-            <Link
-              href="/participate"
-              className="inline-flex items-center gap-2 text-sm text-poppy-200 hover:text-cream-50 transition-colors"
-            >
-              <svg
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className="w-4 h-4"
-                aria-hidden="true"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              Participate
-            </Link>
-          </motion.div>
+          <nav aria-label="Breadcrumb" className="mb-6">
+            <ol className="flex items-center gap-2 text-sm text-poppy-200">
+              <li>
+                <Link href="/" className="hover:text-cream-50 transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li>
+                <Link href="/participate" className="hover:text-cream-50 transition-colors">
+                  Participate
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page" className="text-cream-50 font-medium">
+                Volunteer
+              </li>
+            </ol>
+          </nav>
 
           <motion.h1
             initial="hidden"

@@ -95,6 +95,20 @@ export default function AboutPage() {
         </div>
 
         <div className="relative max-w-6xl mx-auto px-6 py-20 md:py-28">
+          <nav aria-label="Breadcrumb" className="mb-6">
+            <ol className="flex items-center gap-2 text-sm text-poppy-200">
+              <li>
+                <Link href="/" className="hover:text-cream-50 transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page" className="text-cream-50 font-medium">
+                About
+              </li>
+            </ol>
+          </nav>
+
           <motion.div
             initial="hidden"
             animate="visible"

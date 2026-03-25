@@ -54,6 +54,34 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Red Poppy Art House",
+  url: "https://www.redpoppyarthouse.org",
+  logo: "https://www.redpoppyarthouse.org/og-image.jpg",
+  description:
+    "Red Poppy Art House is an artist-driven, volunteer-run arts venue in San Francisco's Mission District, presenting over 150 performances, exhibitions, workshops, and artist residencies annually since 2003.",
+  foundingDate: "2003",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "2698 Folsom Street",
+    addressLocality: "San Francisco",
+    addressRegion: "CA",
+    postalCode: "94110",
+    addressCountry: "US",
+  },
+  telephone: "+1-650-731-5383",
+  email: "info@redpoppyarthouse.org",
+  sameAs: [
+    "https://www.facebook.com/RedPoppyArtHouse",
+    "https://www.instagram.com/redpoppyart",
+    "https://twitter.com/redpoppyart",
+    "https://www.linkedin.com/company/red-poppy-art-house",
+    "https://patreon.com/RedPoppy",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -65,6 +93,12 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
         <Navbar />
         <div className="flex-1">{children}</div>
         <Footer />

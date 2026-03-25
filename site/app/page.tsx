@@ -208,7 +208,7 @@ const communityHighlights = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <main className="min-h-screen">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-poppy-900 text-cream-50">
         {/* Decorative background elements */}
@@ -748,6 +748,6 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }
