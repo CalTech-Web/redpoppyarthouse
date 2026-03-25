@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
 
 const navLinks = [
   { href: "/about", label: "About" },
@@ -15,6 +14,16 @@ const navLinks = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const [menuHeight, setMenuHeight] = useState(0);
+
+  useEffect(() => {
+    if (isOpen && menuRef.current) {
+      setMenuHeight(menuRef.current.scrollHeight);
+    } else {
+      setMenuHeight(0);
+    }
+  }, [isOpen]);
 
   return (
     <header className="sticky top-0 z-50 bg-cream-50/95 backdrop-blur-sm border-b border-cream-300/50">
@@ -98,38 +107,35 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="md:hidden overflow-hidden bg-cream-50 border-t border-cream-200"
+      {/* Mobile Menu - CSS transition instead of framer-motion */}
+      <div
+        ref={menuRef}
+        className="md:hidden overflow-hidden bg-cream-50 border-t border-cream-200 transition-[height,opacity] duration-250 ease-in-out"
+        style={{
+          height: menuHeight,
+          opacity: isOpen ? 1 : 0,
+        }}
+      >
+        <div className="px-6 py-4 flex flex-col gap-1">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setIsOpen(false)}
+              className="px-4 py-3 text-base font-medium text-cream-800 hover:text-poppy-700 hover:bg-poppy-50 rounded-lg transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Link
+            href="/participate/give"
+            onClick={() => setIsOpen(false)}
+            className="mt-2 px-4 py-3 text-center text-base font-semibold text-cream-50 bg-poppy-700 hover:bg-poppy-600 rounded-full transition-colors"
           >
-            <div className="px-6 py-4 flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="px-4 py-3 text-base font-medium text-cream-800 hover:text-poppy-700 hover:bg-poppy-50 rounded-lg transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <Link
-                href="/participate/give"
-                onClick={() => setIsOpen(false)}
-                className="mt-2 px-4 py-3 text-center text-base font-semibold text-cream-50 bg-poppy-700 hover:bg-poppy-600 rounded-full transition-colors"
-              >
-                Support Us
-              </Link>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            Support Us
+          </Link>
+        </div>
+      </div>
     </header>
   );
 }

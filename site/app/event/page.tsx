@@ -1,8 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { motion, type Variants } from "framer-motion";
-import EventbriteWidget from "../components/EventbriteWidget";
+
+const EventbriteWidget = dynamic(() => import("../components/EventbriteWidget"), {
+  loading: () => (
+    <div className="border-2 border-dashed border-gray-200 rounded-xl p-8 text-center animate-pulse">
+      <p className="text-cream-500">Loading ticketing...</p>
+    </div>
+  ),
+  ssr: false,
+});
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
