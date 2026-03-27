@@ -18,6 +18,7 @@ const programs = [
     tagline: "Music, poetry, dance, and literary events on our intimate stage",
     description:
       "A diverse and international program of artists working in both traditional and contemporary performing arts. Two to three nights a week, our 49-seat room fills with music, poetry, dance, lectures, and literary events. Sliding scale admission is typically $15 to $25, with door admissions split directly with performing artists.",
+    href: "/pages/performance-series",
     color: "poppy",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">
@@ -38,6 +39,7 @@ const programs = [
     tagline: "Rotating works and socially engaged installations",
     description:
       "Rather than hosting formal exhibitions, the Poppy presents works throughout the year via informal rotations of art for sale alongside socially engaged large-scale installation pieces. Featured artists have included Paz de la Calzada, Alberto Toscano, Fernando Diaz, Yolanda Lopez, and Adriana Camarena.",
+    href: "/pages/exhibitions",
     color: "earth-warm",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">
@@ -52,6 +54,7 @@ const programs = [
     tagline: "Free space for artists to rehearse, develop, and explore",
     description:
       "The Art House provides free and accessible space for Artists-in-Residence. Our Crossover Collaborative Residencies, supported by the Kenneth Rainin Foundation and San Francisco Arts Commission, pair choreographer-dancers with composer-musicians for interdisciplinary work. The program moves through four stages, from orientation workshops to raw presentations, community-engaged showings, and final performances.",
+    href: "/pages/artist-residencies",
     color: "earth-olive",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">
@@ -65,6 +68,7 @@ const programs = [
     tagline: "Mission Arts and Performance Project",
     description:
       "Incubated by the Red Poppy Art House in 2003, MAPP is a homegrown bi-monthly, multidisciplinary, intercultural happening across the Mission District. What started as the \"Mission Arts Party\" at the end of 2003 continues today as a neighborhood-wide arts event that brings together community, culture, and creativity on the streets of the Mission.",
+    href: "/mapp",
     color: "earth-terracotta",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">
@@ -78,6 +82,7 @@ const programs = [
     tagline: "Arte entre Familia - free bilingual art for all ages",
     description:
       "For over a decade, Family Art (also called \"Arte entre Familia\") has offered free, bilingual Spanish and English art programming for families in the Mission District. Held on Saturdays outdoors on the corner of Folsom Street and 23rd Street, the program invites all families with children ages 0 to 5, youth, and adults to explore open-ended art projects in a safe and creative space. Supported by the Sam Mazza Foundation and Art4Moore.",
+    href: "/pages/family-art",
     color: "earth-clay",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">
@@ -92,6 +97,7 @@ const programs = [
     tagline: "Art and storytelling on front stoops across the neighborhood",
     description:
       "A civil society arts experiment on front stoops of local residences in the Mission District. Traditional and contemporary artists perform while local residents share stories and histories from their doorsteps. The front stoop represents a literal threshold between public and private spheres. Stoop Fest provides a program and map of multiple neighborhood stoops and occurs during the day on the same bi-monthly dates as MAPP.",
+    href: "/pages/mission-stoop-fest",
     color: "poppy",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">
@@ -104,6 +110,7 @@ const programs = [
     tagline: "Cutting-edge theater for children and youth ages 3 to 24",
     description:
       "San Francisco Youth Theatre (SFYT) brings cutting-edge theater to children and youth ages 3 to 24. The program offers classes and performance ensembles, produces adult-performed productions for young audiences, facilitates school residencies, and maintains a repertoire of original productions that engage and inspire the next generation of artists.",
+    href: "/pages/san-francisco-youth-theatre",
     color: "earth-warm",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">
@@ -113,10 +120,25 @@ const programs = [
     ),
   },
   {
+    title: "SF International Arts Festival",
+    tagline: "A global community of artists under one roof",
+    description:
+      "Since 2024, Red Poppy Art House has proudly served as a venue for the San Francisco International Arts Festival (SFIAF), continuing our commitment to fostering cross-cultural artistic engagement. SFIAF has coordinated performances from over 700 artistic ensembles from California and 60 other countries.",
+    href: "/pages/san-francisco-international-arts-festival",
+    color: "earth-terracotta",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" stroke="currentColor" strokeWidth="1.5" />
+      </svg>
+    ),
+  },
+  {
     title: "FRESH Festival",
     tagline: "San Francisco's annual festival of experimental performance",
     description:
       "FRESH Festival is San Francisco's annual festival of experimental dance, music, and performance, kicking off the new year with an extravaganza of embodied art, action, and interaction. FRESH Exchanges include RIPE (raw and intimate performance experiments), POTLUCK social practice gatherings with warm food, and the Alternative Conservatory with lectures, panels, and workshops. Affordable social events designed to cultivate, cross-pollinate, and invigorate the performance community.",
+    href: "/pages/fresh-festival",
     color: "earth-olive",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">
@@ -232,9 +254,20 @@ export default function ProgramsPage() {
                       </p>
                     </div>
                   </div>
-                  <p className="text-sm text-cream-700 leading-relaxed">
+                  <p className="text-sm text-cream-700 leading-relaxed mb-4">
                     {program.description}
                   </p>
+                  {program.href && (
+                    <Link
+                      href={program.href}
+                      className="inline-flex items-center gap-1 text-sm font-medium text-poppy-700 hover:text-poppy-600 transition-colors"
+                    >
+                      Learn More
+                      <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+                        <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
+                      </svg>
+                    </Link>
+                  )}
                 </motion.div>
               ))}
             </div>

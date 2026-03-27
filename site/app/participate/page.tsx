@@ -53,7 +53,7 @@ const participateOptions = [
     title: "Performance Booking",
     description:
       "If you are an artist working in music, poetry, dance, theater, or any performing discipline, we want to hear from you. Our stage has hosted hundreds of artists across traditions.",
-    href: "mailto:booking@redpoppyarthouse.org",
+    href: "/pages/performance-booking",
     color: "earth-olive",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">
@@ -73,7 +73,7 @@ const participateOptions = [
     title: "Internships",
     description:
       "Gain hands-on experience in event production, community engagement, public relations, and social media through a 9-month internship program with stipend support.",
-    href: "mailto:info@redpoppyarthouse.org",
+    href: "/pages/internships",
     color: "earth-terracotta",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">
@@ -98,7 +98,7 @@ const participateOptions = [
     title: "Employment",
     description:
       "We occasionally have paid openings for part-time and project-based roles. Reach out to learn about current opportunities at the Art House.",
-    href: "mailto:info@redpoppyarthouse.org",
+    href: "/pages/employment",
     color: "earth-clay",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">

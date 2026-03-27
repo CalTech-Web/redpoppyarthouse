@@ -250,11 +250,14 @@ export default function AboutPage() {
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-cream-900 mb-4">
                 The Art House Story
               </h2>
-              <p className="text-cream-700 max-w-2xl mx-auto">
+              <p className="text-cream-700 max-w-2xl mx-auto mb-4">
                 What started as a big empty room on a corner has grown into one of
                 San Francisco&apos;s most cherished intercultural hubs. Here is
                 how that happened.
               </p>
+              <Link href="/pages/art-house-story" className="text-sm font-medium text-poppy-700 hover:text-poppy-600 transition-colors">
+                Read the full story &rarr;
+              </Link>
             </motion.div>
 
             <div className="relative">
@@ -306,11 +309,16 @@ export default function AboutPage() {
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-cream-900 mb-4">
                 The People Behind the Poppy
               </h2>
-              <p className="text-cream-700 max-w-2xl mx-auto">
+              <p className="text-cream-700 max-w-2xl mx-auto mb-4">
                 Artists, cultural thinkers, volunteers, and neighbors. The Poppy
                 is shaped by the people who walk through its doors and choose to
                 stay.
               </p>
+              <div className="flex gap-4 justify-center flex-wrap">
+                <Link href="/pages/staff" className="text-sm font-medium text-poppy-700 hover:text-poppy-600 transition-colors">Red Poppy Team &rarr;</Link>
+                <Link href="/pages/leadership-team" className="text-sm font-medium text-poppy-700 hover:text-poppy-600 transition-colors">Leadership Team &rarr;</Link>
+                <Link href="/pages/community-members" className="text-sm font-medium text-poppy-700 hover:text-poppy-600 transition-colors">Community Members &rarr;</Link>
+              </div>
             </motion.div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

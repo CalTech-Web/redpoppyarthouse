@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Blog & Press",
   description:
-    "News, stories, and updates from the Red Poppy Art House - a community arts venue in San Francisco's Mission District.",
+    "News, stories, artist spotlights, event recaps, and press coverage from the Red Poppy Art House - a community arts venue in San Francisco's Mission District.",
   openGraph: {
-    title: "Blog | Red Poppy Art House",
+    title: "Blog & Press | Red Poppy Art House",
     description:
-      "News, stories, and updates from the Red Poppy Art House.",
+      "News, stories, artist spotlights, event recaps, and press coverage from the Red Poppy Art House.",
     url: "https://www.redpoppyarthouse.org/blog",
   },
 };

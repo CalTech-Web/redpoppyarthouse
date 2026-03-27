@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useState, useMemo } from "react";
+import blogPosts from "@/src/data/blog-posts.json";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -57,7 +59,75 @@ const pressArticles = [
   },
 ];
 
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  date: string;
+  content: string;
+  contentHtml: string;
+  excerpt: string;
+  image: string | null;
+  categories: string[];
+  tags: string[];
+}
+
+function getImageSrc(image: string | null): string | null {
+  if (!image) return null;
+  if (image.startsWith("http://redpoppyarthouse.org/wp-content/uploads/")) {
+    return image.replace("http://redpoppyarthouse.org", "");
+  }
+  if (image.startsWith("https://redpoppyarthouse.org/wp-content/uploads/")) {
+    return image.replace("https://redpoppyarthouse.org", "");
+  }
+  return image;
+}
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr + "T00:00:00");
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+function getDisplayCategories(categories: string[]): string[] {
+  return categories.filter((c) => c !== "All");
+}
+
+const POSTS_PER_PAGE = 12;
+
 export default function BlogPage() {
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
+
+  const posts = blogPosts as BlogPost[];
+
+  // Sort posts by date, newest first
+  const sortedPosts = useMemo(
+    () => [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
+    [posts]
+  );
+
+  // Get unique categories (excluding "All")
+  const allCategories = useMemo(() => {
+    const cats = new Set<string>();
+    posts.forEach((p) => p.categories.forEach((c) => {
+      if (c !== "All") cats.add(c);
+    }));
+    return ["All", ...Array.from(cats).sort()];
+  }, [posts]);
+
+  // Filter posts by category
+  const filteredPosts = useMemo(() => {
+    if (activeCategory === "All") return sortedPosts;
+    return sortedPosts.filter((p) => p.categories.includes(activeCategory));
+  }, [sortedPosts, activeCategory]);
+
+  const displayedPosts = filteredPosts.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredPosts.length;
+
   return (
     <main className="min-h-screen bg-cream-50">
       {/* Hero */}
@@ -86,111 +156,223 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* Press & Articles */}
-      <section className="max-w-5xl mx-auto px-6 py-16 md:py-24">
+      {/* Blog Posts */}
+      <section className="max-w-6xl mx-auto px-6 py-16 md:py-24">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
         >
-          <motion.h2 variants={fadeUp} custom={0} className="font-serif text-3xl font-bold text-cream-900 mb-10">
-            Press &amp; Media Coverage
+          <motion.h2 variants={fadeUp} custom={0} className="font-serif text-3xl font-bold text-cream-900 mb-8">
+            Stories &amp; Updates
           </motion.h2>
 
-          <div className="space-y-4">
-            {pressArticles.map((article, i) => (
-              <motion.div key={article.title} variants={fadeUp} custom={i + 1}>
-                <div className="bg-surface rounded-2xl border border-cream-200 p-6 hover:border-poppy-200 hover:shadow-lg transition-all duration-300">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="font-serif text-lg font-bold text-cream-900 mb-1">
-                        {article.title}
-                      </h3>
-                      <div className="flex items-center gap-2 text-sm text-cream-600">
-                        <span className="font-medium text-poppy-700">{article.source}</span>
-                        {article.author && (
-                          <>
-                            <span>&middot;</span>
-                            <span>{article.author}</span>
-                          </>
+          {/* Category Filter */}
+          <motion.div variants={fadeUp} custom={1} className="flex flex-wrap gap-2 mb-10">
+            {allCategories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => {
+                  setActiveCategory(cat);
+                  setVisibleCount(POSTS_PER_PAGE);
+                }}
+                className={`px-4 py-1.5 text-sm font-medium rounded-full transition-all duration-300 ${
+                  activeCategory === cat
+                    ? "bg-poppy-700 text-cream-50"
+                    : "bg-cream-100 text-cream-700 hover:bg-cream-200 border border-cream-200"
+                }`}
+              >
+                {cat === "All" ? "All Posts" : cat.replace("&amp;", "&")}
+              </button>
+            ))}
+          </motion.div>
+        </motion.div>
+
+        {/* Posts Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {displayedPosts.map((post, i) => {
+            const imageSrc = getImageSrc(post.image);
+            const displayCats = getDisplayCategories(post.categories);
+
+            return (
+              <motion.div
+                key={post.id}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-40px" }}
+                variants={fadeUp}
+                custom={i % 6}
+              >
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="group block bg-surface rounded-2xl border border-cream-200 overflow-hidden hover:border-poppy-200 hover:shadow-lg transition-all duration-300 h-full"
+                >
+                  {/* Featured Image */}
+                  {imageSrc && (
+                    <div className="relative h-48 overflow-hidden bg-cream-100">
+                      <img
+                        src={imageSrc}
+                        alt={post.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+
+                  {/* Content */}
+                  <div className="p-5">
+                    {/* Categories */}
+                    {displayCats.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        {displayCats.slice(0, 2).map((cat) => (
+                          <span
+                            key={cat}
+                            className="px-2.5 py-0.5 text-xs font-medium bg-poppy-50 text-poppy-700 rounded-full"
+                          >
+                            {cat.replace("&amp;", "&")}
+                          </span>
+                        ))}
+                        {displayCats.length > 2 && (
+                          <span className="px-2.5 py-0.5 text-xs font-medium bg-cream-100 text-cream-600 rounded-full">
+                            +{displayCats.length - 2}
+                          </span>
                         )}
                       </div>
-                    </div>
-                    <span className="text-sm text-cream-500 whitespace-nowrap shrink-0">
-                      {article.date}
+                    )}
+
+                    {/* Date */}
+                    <p className="text-xs text-cream-500 mb-2">{formatDate(post.date)}</p>
+
+                    {/* Title */}
+                    <h3 className="font-serif text-lg font-bold text-cream-900 mb-2 group-hover:text-poppy-700 transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+
+                    {/* Excerpt */}
+                    <p className="text-sm text-cream-600 line-clamp-3 leading-relaxed">
+                      {post.excerpt
+                        .replace(/rn/g, " ")
+                        .replace(/\n/g, " ")
+                        .replace(/\s+/g, " ")
+                        .trim()}
+                    </p>
+
+                    {/* Read More */}
+                    <span className="inline-flex items-center gap-1 mt-4 text-sm font-medium text-poppy-700 group-hover:gap-2 transition-all">
+                      Read more
+                      <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+                        <path
+                          fillRule="evenodd"
+                          d="M3 10a.75.75 0 01.75-.75h10.638l-3.96-4.158a.75.75 0 111.08-1.04l5.25 5.5a.75.75 0 010 1.08l-5.25 5.5a.75.75 0 11-1.08-1.04l3.96-4.158H3.75A.75.75 0 013 10z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
                     </span>
                   </div>
-                </div>
+                </Link>
               </motion.div>
-            ))}
+            );
+          })}
+        </div>
+
+        {/* Empty State */}
+        {filteredPosts.length === 0 && (
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={0}
+            className="text-center py-16"
+          >
+            <p className="text-cream-600 text-lg">No posts found in this category.</p>
+          </motion.div>
+        )}
+
+        {/* Load More */}
+        {hasMore && (
+          <div className="text-center mt-12">
+            <button
+              onClick={() => setVisibleCount((prev) => prev + POSTS_PER_PAGE)}
+              className="inline-flex items-center gap-2 px-8 py-3 text-sm font-semibold border border-cream-300 text-cream-800 rounded-full hover:bg-cream-100 transition-all duration-300 hover:-translate-y-0.5"
+            >
+              Load More Posts
+              <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+                <path
+                  fillRule="evenodd"
+                  d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
           </div>
-        </motion.div>
+        )}
       </section>
 
-      {/* Press Contact */}
+      {/* Press & Media Coverage */}
       <section className="bg-cream-100 texture-paper">
-        <div className="max-w-5xl mx-auto px-6 py-16 md:py-24 text-center">
+        <div className="max-w-5xl mx-auto px-6 py-16 md:py-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
           >
-            <motion.h2 variants={fadeUp} custom={0} className="font-serif text-3xl font-bold text-cream-900 mb-4">
-              Press Inquiries
+            <motion.h2 variants={fadeUp} custom={0} className="font-serif text-3xl font-bold text-cream-900 mb-10">
+              Press &amp; Media Coverage
             </motion.h2>
-            <motion.p variants={fadeUp} custom={1} className="text-cream-700 max-w-xl mx-auto mb-6">
-              For press inquiries, high-res images, and/or spots on media guest list,
-              please contact Dina Zarif.
-            </motion.p>
-            <motion.div variants={fadeUp} custom={2}>
-              <a
-                href="mailto:booking@redpoppyarthouse.org"
-                className="inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold bg-poppy-700 text-cream-50 rounded-full hover:bg-poppy-600 transition-all duration-300 hover:-translate-y-0.5 shadow-md"
-              >
-                Contact Press Team
-              </a>
-            </motion.div>
+
+            <div className="space-y-4">
+              {pressArticles.map((article, i) => (
+                <motion.div key={article.title} variants={fadeUp} custom={i + 1}>
+                  <div className="bg-surface rounded-2xl border border-cream-200 p-6 hover:border-poppy-200 hover:shadow-lg transition-all duration-300">
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <h3 className="font-serif text-lg font-bold text-cream-900 mb-1">
+                          {article.title}
+                        </h3>
+                        <div className="flex items-center gap-2 text-sm text-cream-600">
+                          <span className="font-medium text-poppy-700">{article.source}</span>
+                          {article.author && (
+                            <>
+                              <span>&middot;</span>
+                              <span>{article.author}</span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                      <span className="text-sm text-cream-500 whitespace-nowrap shrink-0">
+                        {article.date}
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Coming Soon Note */}
+      {/* Press Inquiries */}
       <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 text-center">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
         >
-          <motion.div variants={fadeUp} custom={0} className="bg-cream-100 rounded-2xl border border-cream-200 p-10 max-w-2xl mx-auto">
-            <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-poppy-50 flex items-center justify-center">
-              <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7 text-poppy-600" aria-hidden="true">
-                <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <h3 className="font-serif text-2xl font-bold text-cream-900 mb-3">
-              More Stories Coming Soon
-            </h3>
-            <p className="text-cream-700 mb-6">
-              We are building out our blog with artist spotlights, event recaps, and community stories. Follow us on social media for the latest updates.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a
-                href="https://www.instagram.com/redpoppyart"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-semibold bg-poppy-700 text-cream-50 rounded-full hover:bg-poppy-600 transition-colors"
-              >
-                Follow @redpoppyart
-              </a>
-              <a
-                href="https://www.facebook.com/RedPoppyArtHouse"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-semibold border border-cream-300 text-cream-800 rounded-full hover:bg-cream-200 transition-colors"
-              >
-                Facebook
-              </a>
-            </div>
+          <motion.h2 variants={fadeUp} custom={0} className="font-serif text-3xl font-bold text-cream-900 mb-4">
+            Press Inquiries
+          </motion.h2>
+          <motion.p variants={fadeUp} custom={1} className="text-cream-700 max-w-xl mx-auto mb-6">
+            For press inquiries, high-res images, and/or spots on media guest list,
+            please contact Dina Zarif.
+          </motion.p>
+          <motion.div variants={fadeUp} custom={2}>
+            <a
+              href="mailto:booking@redpoppyarthouse.org"
+              className="inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold bg-poppy-700 text-cream-50 rounded-full hover:bg-poppy-600 transition-all duration-300 hover:-translate-y-0.5 shadow-md"
+            >
+              Contact Press Team
+            </a>
           </motion.div>
         </motion.div>
       </section>

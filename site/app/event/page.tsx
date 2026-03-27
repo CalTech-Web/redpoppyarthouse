@@ -1,18 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import dynamic from "next/dynamic";
+import { useState, useMemo } from "react";
 import { motion, type Variants } from "framer-motion";
+import allEvents from "@/src/data/events.json";
 
-const EventbriteWidget = dynamic(() => import("../components/EventbriteWidget"), {
-  loading: () => (
-    <div className="border-2 border-dashed border-gray-200 rounded-xl p-8 text-center animate-pulse">
-      <p className="text-cream-500">Loading ticketing...</p>
-    </div>
-  ),
-  ssr: false,
-});
+/* ------------------------------------------------------------------ */
+/*  Types                                                              */
+/* ------------------------------------------------------------------ */
+interface EventItem {
+  id: string;
+  title: string;
+  slug: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  cost: string;
+  description: string;
+  excerpt: string;
+  image: string | null;
+  links: { eventbrite?: string; facebook?: string };
+}
 
+const events = allEvents as EventItem[];
+
+/* ------------------------------------------------------------------ */
+/*  Animation                                                          */
+/* ------------------------------------------------------------------ */
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
@@ -22,19 +36,100 @@ const fadeUp: Variants = {
   }),
 };
 
-const categories = [
-  { name: "Performances", description: "Music, poetry, dance, literary events" },
-  { name: "Exhibitions", description: "Rotating works and installations" },
-  { name: "Workshops", description: "Hands-on creative sessions" },
-  { name: "Residencies", description: "Works-in-progress showings" },
-  { name: "MAPP Events", description: "Mission Arts & Performance Project" },
-  { name: "Family Art", description: "Free bilingual programs for families" },
-];
+/* ------------------------------------------------------------------ */
+/*  Helpers                                                            */
+/* ------------------------------------------------------------------ */
+const YEARS = Array.from(
+  new Set(events.map((e) => e.date.slice(0, 4)))
+).sort((a, b) => Number(b) - Number(a));
 
-export default function EventsPage() {
+const ITEMS_PER_PAGE = 24;
+
+function formatDate(dateStr: string): string {
+  const [y, m, d] = dateStr.split("-").map(Number);
+  const date = new Date(y, m - 1, d);
+  return date.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
+function formatTime(time: string): string {
+  if (!time || time === "00:00") return "";
+  const [h, m] = time.split(":").map(Number);
+  const ampm = h >= 12 ? "pm" : "am";
+  const hour = h % 12 || 12;
+  return m === 0 ? `${hour} ${ampm}` : `${hour}:${String(m).padStart(2, "0")} ${ampm}`;
+}
+
+function getImageSrc(image: string | null): string | null {
+  if (!image) return null;
+  try {
+    const url = new URL(image);
+    if (
+      url.hostname === "redpoppyarthouse.org" ||
+      url.hostname === "www.redpoppyarthouse.org"
+    ) {
+      return url.pathname;
+    }
+  } catch {
+    // not a valid URL - return as-is
+  }
+  return image;
+}
+
+function truncateExcerpt(excerpt: string, maxLen = 120): string {
+  // Clean up raw whitespace artefacts from WP export
+  const cleaned = excerpt
+    .replace(/\\r\\n|\\n|\\r|rn/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (cleaned.length <= maxLen) return cleaned;
+  return cleaned.slice(0, maxLen).trimEnd() + "...";
+}
+
+/* ------------------------------------------------------------------ */
+/*  Component                                                          */
+/* ------------------------------------------------------------------ */
+export default function EventsArchivePage() {
+  const [activeYear, setActiveYear] = useState<string>(YEARS[0]);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+
+  /* Filter events by year + search */
+  const filtered = useMemo(() => {
+    const lowerSearch = search.toLowerCase().trim();
+    return events.filter((e) => {
+      const matchYear = e.date.startsWith(activeYear);
+      const matchSearch =
+        !lowerSearch || e.title.toLowerCase().includes(lowerSearch);
+      return matchYear && matchSearch;
+    });
+  }, [activeYear, search]);
+
+  /* Pagination */
+  const totalPages = Math.max(1, Math.ceil(filtered.length / ITEMS_PER_PAGE));
+  const safePage = Math.min(page, totalPages);
+  const paged = filtered.slice(
+    (safePage - 1) * ITEMS_PER_PAGE,
+    safePage * ITEMS_PER_PAGE
+  );
+
+  /* Reset page when filters change */
+  const handleYearChange = (year: string) => {
+    setActiveYear(year);
+    setPage(1);
+  };
+  const handleSearchChange = (value: string) => {
+    setSearch(value);
+    setPage(1);
+  };
+
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
+      {/* ── Hero ─────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-poppy-900 text-cream-50">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-1/4 w-80 h-80 bg-earth-warm rounded-full blur-3xl" />
@@ -64,7 +159,7 @@ export default function EventsPage() {
             className="mb-4"
           >
             <span className="inline-block px-4 py-1.5 text-xs uppercase tracking-[0.2em] font-medium bg-poppy-800/60 text-poppy-100 rounded-full border border-poppy-700/40">
-              150+ Events Annually
+              {events.length.toLocaleString()} Events Since 2011
             </span>
           </motion.div>
 
@@ -75,7 +170,7 @@ export default function EventsPage() {
             custom={1}
             className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight mb-6 max-w-3xl"
           >
-            What&apos;s Happening at the Poppy
+            Events Archive
           </motion.h1>
 
           <motion.p
@@ -85,115 +180,281 @@ export default function EventsPage() {
             custom={2}
             className="text-lg sm:text-xl text-cream-200 leading-relaxed max-w-2xl"
           >
-            Performances two to three nights a week, typically Thursday through
-            Sunday. Sliding scale admission, $15 to $25. Every dollar at the door
-            is split with the performing artists.
+            Over a decade of performances, exhibitions, workshops, and community
+            gatherings at the Poppy. Browse by year or search by title.
           </motion.p>
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-poppy-400/30 to-transparent" />
       </section>
 
-      {/* Event Categories */}
-      <section className="bg-cream-50 texture-paper">
-        <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
+      {/* ── Filters ──────────────────────────────────────────────── */}
+      <section className="bg-cream-50 texture-paper border-b border-cream-200">
+        <div className="max-w-7xl mx-auto px-6 py-8 md:py-10">
+          {/* Search */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
-            className="flex flex-wrap justify-center gap-3"
+            variants={fadeUp}
+            custom={0}
+            className="mb-6"
           >
-            {categories.map((cat, i) => (
-              <motion.div
-                key={cat.name}
-                variants={fadeUp}
-                custom={i}
-                className="group relative"
+            <label htmlFor="event-search" className="sr-only">
+              Search events
+            </label>
+            <div className="relative max-w-md">
+              <svg
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-cream-400 pointer-events-none"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
               >
-                <div className="px-4 py-2 bg-surface rounded-full border border-cream-200 text-sm font-medium text-cream-800 hover:border-poppy-200 hover:text-poppy-700 transition-colors cursor-default">
-                  {cat.name}
-                </div>
-              </motion.div>
+                <path
+                  fillRule="evenodd"
+                  d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <input
+                id="event-search"
+                type="text"
+                placeholder="Search events by title..."
+                value={search}
+                onChange={(e) => handleSearchChange(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 text-sm bg-surface border border-cream-200 rounded-full text-cream-900 placeholder:text-cream-400 focus:outline-none focus:ring-2 focus:ring-poppy-300 focus:border-poppy-300 transition-colors"
+              />
+            </div>
+          </motion.div>
+
+          {/* Year tabs */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={fadeUp}
+            custom={1}
+            className="flex flex-wrap gap-2"
+          >
+            {YEARS.map((year) => (
+              <button
+                key={year}
+                onClick={() => handleYearChange(year)}
+                className={`px-4 py-1.5 text-sm font-medium rounded-full border transition-colors cursor-pointer ${
+                  activeYear === year
+                    ? "bg-poppy-700 text-cream-50 border-poppy-700"
+                    : "bg-surface text-cream-700 border-cream-200 hover:border-poppy-200 hover:text-poppy-700"
+                }`}
+              >
+                {year}
+              </button>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Eventbrite Widget */}
-      <section className="bg-surface border-y border-cream-200">
-        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-          >
-            <motion.div variants={fadeUp} custom={0} className="text-center mb-10">
-              <span className="inline-block px-3 py-1 text-xs uppercase tracking-[0.15em] font-medium text-poppy-700 bg-poppy-50 rounded-full mb-4">
-                Upcoming Events
-              </span>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-cream-900 mb-4">
-                Tickets and Registration
-              </h2>
-              <p className="text-cream-700 max-w-xl mx-auto">
-                Browse our upcoming events below. You can also find us on
-                Eventbrite for ticketing and RSVP.
-              </p>
-            </motion.div>
-
-            <motion.div variants={fadeUp} custom={1}>
-              <EventbriteWidget />
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Social Media & Follow */}
+      {/* ── Events Grid ──────────────────────────────────────────── */}
       <section className="bg-cream-50 texture-paper">
-        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 text-center">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-          >
-            <motion.div variants={fadeUp} custom={0}>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-cream-900 mb-4">
-                Stay in the Loop
-              </h2>
-              <p className="text-cream-700 max-w-lg mx-auto mb-8">
-                Follow us on social media for the latest event announcements,
-                artist spotlights, and behind-the-scenes moments from the Art
-                House.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <a
-                  href="https://www.instagram.com/redpoppyart"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-medium bg-poppy-700 text-cream-50 rounded-full hover:bg-poppy-600 transition-colors"
-                >
-                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4" aria-hidden="true">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-                  </svg>
-                  @redpoppyart on Instagram
-                </a>
-                <a
-                  href="https://www.facebook.com/RedPoppyArtHouse"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-medium border border-cream-300 text-cream-800 rounded-full hover:bg-cream-100 transition-colors"
-                >
-                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4" aria-hidden="true">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                  </svg>
-                  Facebook
-                </a>
-              </div>
+        <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
+          {/* Result count */}
+          <p className="text-sm text-cream-500 mb-6">
+            {filtered.length === 0
+              ? "No events found"
+              : `Showing ${(safePage - 1) * ITEMS_PER_PAGE + 1} - ${Math.min(
+                  safePage * ITEMS_PER_PAGE,
+                  filtered.length
+                )} of ${filtered.length} events`}
+          </p>
+
+          {paged.length > 0 ? (
+            <motion.div
+              key={`${activeYear}-${search}-${safePage}`}
+              initial="hidden"
+              animate="visible"
+              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {paged.map((event, i) => {
+                const imgSrc = getImageSrc(event.image);
+                const startFormatted = formatTime(event.startTime);
+                const endFormatted = formatTime(event.endTime);
+                const timeStr =
+                  startFormatted && endFormatted
+                    ? `${startFormatted} - ${endFormatted}`
+                    : startFormatted || "";
+
+                return (
+                  <motion.div
+                    key={event.id}
+                    variants={fadeUp}
+                    custom={i % 6}
+                  >
+                    <Link
+                      href={`/event/${event.slug}`}
+                      className="group block bg-surface rounded-2xl border border-cream-200 overflow-hidden hover:shadow-lg hover:border-poppy-200 transition-all duration-300 h-full"
+                    >
+                      {/* Image */}
+                      {imgSrc ? (
+                        <div className="relative aspect-[16/10] overflow-hidden bg-cream-100">
+                          <img
+                            src={imgSrc}
+                            alt={event.title}
+                            loading="lazy"
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                      ) : (
+                        <div className="relative aspect-[16/10] bg-gradient-to-br from-poppy-100 to-cream-100 flex items-center justify-center">
+                          <svg
+                            className="w-10 h-10 text-poppy-300"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <rect
+                              x="3"
+                              y="4"
+                              width="18"
+                              height="18"
+                              rx="2"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                            />
+                            <path
+                              d="M16 2v4M8 2v4M3 10h18"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                        </div>
+                      )}
+
+                      {/* Content */}
+                      <div className="p-5">
+                        <p className="text-xs font-medium text-poppy-600 mb-1.5">
+                          {formatDate(event.date)}
+                        </p>
+                        <h3 className="font-serif text-lg font-bold text-cream-900 leading-snug mb-2 group-hover:text-poppy-700 transition-colors line-clamp-2">
+                          {event.title}
+                        </h3>
+                        {timeStr && (
+                          <p className="text-xs text-cream-500 mb-2">
+                            {timeStr}
+                          </p>
+                        )}
+                        {event.cost && (
+                          <span className="inline-block px-2 py-0.5 text-xs font-medium bg-poppy-50 text-poppy-700 rounded-full mb-2">
+                            {event.cost}
+                          </span>
+                        )}
+                        <p className="text-sm text-cream-600 leading-relaxed line-clamp-3">
+                          {truncateExcerpt(event.excerpt, 140)}
+                        </p>
+                      </div>
+                    </Link>
+                  </motion.div>
+                );
+              })}
             </motion.div>
-          </motion.div>
+          ) : (
+            <div className="text-center py-16">
+              <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-poppy-50 flex items-center justify-center">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="w-7 h-7 text-poppy-600"
+                  aria-hidden="true"
+                >
+                  <rect
+                    x="3"
+                    y="4"
+                    width="18"
+                    height="18"
+                    rx="2"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M16 2v4M8 2v4M3 10h18"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-serif text-xl font-bold text-cream-900 mb-2">
+                No Events Found
+              </h3>
+              <p className="text-cream-600 text-sm max-w-sm mx-auto">
+                {search
+                  ? `No events matching "${search}" in ${activeYear}. Try a different search or year.`
+                  : `No events found for ${activeYear}.`}
+              </p>
+            </div>
+          )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-2 mt-12">
+              <button
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={safePage === 1}
+                className="px-4 py-2 text-sm font-medium rounded-full border border-cream-200 text-cream-700 hover:border-poppy-200 hover:text-poppy-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+              >
+                Previous
+              </button>
+
+              {/* Page numbers */}
+              {Array.from({ length: totalPages }, (_, i) => i + 1)
+                .filter((p) => {
+                  // Show first, last, and pages near current
+                  if (p === 1 || p === totalPages) return true;
+                  if (Math.abs(p - safePage) <= 2) return true;
+                  return false;
+                })
+                .reduce<(number | "ellipsis")[]>((acc, p, idx, arr) => {
+                  if (idx > 0 && p - (arr[idx - 1] as number) > 1) {
+                    acc.push("ellipsis");
+                  }
+                  acc.push(p);
+                  return acc;
+                }, [])
+                .map((item, idx) =>
+                  item === "ellipsis" ? (
+                    <span
+                      key={`ellipsis-${idx}`}
+                      className="px-2 text-cream-400 text-sm"
+                    >
+                      ...
+                    </span>
+                  ) : (
+                    <button
+                      key={item}
+                      onClick={() => setPage(item as number)}
+                      className={`w-9 h-9 text-sm font-medium rounded-full transition-colors cursor-pointer ${
+                        safePage === item
+                          ? "bg-poppy-700 text-cream-50"
+                          : "text-cream-700 hover:bg-cream-100"
+                      }`}
+                    >
+                      {item}
+                    </button>
+                  )
+                )}
+
+              <button
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={safePage === totalPages}
+                className="px-4 py-2 text-sm font-medium rounded-full border border-cream-200 text-cream-700 hover:border-poppy-200 hover:text-poppy-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Venue Info */}
+      {/* ── Venue Info ────────────────────────────────────────────── */}
       <section className="bg-poppy-800 text-cream-50">
         <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
           <motion.div
@@ -224,7 +485,7 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* Booking CTA */}
+      {/* ── Booking CTA ──────────────────────────────────────────── */}
       <section className="bg-cream-100 border-t border-cream-200">
         <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 text-center">
           <motion.div
