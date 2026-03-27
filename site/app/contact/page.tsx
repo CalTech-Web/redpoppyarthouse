@@ -347,7 +347,7 @@ export default function ContactPage() {
                 Visit the Art House
               </h2>
               <address className="not-italic space-y-4">
-                <div className="bg-surface rounded-xl border border-cream-200 p-6">
+                <div className="bg-[#fdf0eb] rounded-xl border border-earth-terracotta/15 border-l-4 border-l-earth-terracotta/30 p-6 shadow-sm">
                   <p className="font-serif text-lg font-bold text-cream-900 mb-1">
                     Red Poppy Art House
                   </p>
@@ -360,7 +360,7 @@ export default function ContactPage() {
                     Mission District neighborhood
                   </p>
                 </div>
-                <div className="bg-surface rounded-xl border border-cream-200 p-6">
+                <div className="bg-[#fdf6e8] rounded-xl border border-earth-warm/15 border-l-4 border-l-earth-warm/30 p-6 shadow-sm">
                   <p className="font-semibold text-cream-900 mb-1">Phone</p>
                   <a
                     href="tel:+16507315383"
@@ -380,7 +380,7 @@ export default function ContactPage() {
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-cream-900 mb-6">
                 When We&apos;re Open
               </h2>
-              <div className="bg-surface rounded-xl border border-cream-200 overflow-hidden">
+              <div className="bg-[#f3f7f0] rounded-xl border border-earth-sage/20 overflow-hidden shadow-sm">
                 {hours.map((h) => (
                   <div
                     key={h.day}
@@ -471,7 +471,7 @@ export default function ContactPage() {
                   href={`mailto:${contact.email}`}
                   variants={fadeUp}
                   custom={i + 1}
-                  className="group bg-cream-50 rounded-xl border border-cream-200 p-5 hover:border-poppy-200 hover:shadow-md transition-all"
+                  className={`group rounded-xl p-5 border-l-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 ${["bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/30", "bg-[#f3f7f0] border border-earth-olive/15 border-l-earth-olive/30", "bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/30"][i % 3]}`}
                 >
                   <p className="font-semibold text-cream-900 mb-1 group-hover:text-poppy-800 transition-colors">
                     {contact.label}

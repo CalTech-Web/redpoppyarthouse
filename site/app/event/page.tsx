@@ -290,7 +290,7 @@ export default function EventsArchivePage() {
                   >
                     <Link
                       href={`/event/${event.slug}`}
-                      className="group block bg-surface rounded-2xl border border-cream-200 overflow-hidden hover:shadow-lg hover:border-poppy-200 transition-all duration-300 h-full"
+                      className={`group block h-full rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:shadow-cream-800/8 hover:-translate-y-1 transition-all duration-300 border-t-4 ${["bg-[#fdf6e8] border border-earth-warm/15 border-t-earth-warm/30", "bg-[#f3f7f0] border border-earth-olive/15 border-t-earth-olive/30", "bg-[#fdf0eb] border border-earth-terracotta/15 border-t-earth-terracotta/30", "bg-[#f0f3ec] border border-earth-sage/15 border-t-earth-sage/30", "bg-[#f7f0eb] border border-earth-clay/15 border-t-earth-clay/30", "bg-cream-100 border border-cream-300/50 border-t-cream-500/30"][i % 6]}`}
                     >
                       {/* Image */}
                       {imgSrc ? (
@@ -303,7 +303,7 @@ export default function EventsArchivePage() {
                           />
                         </div>
                       ) : (
-                        <div className="relative aspect-[16/10] bg-gradient-to-br from-poppy-100 to-cream-100 flex items-center justify-center">
+                        <div className="relative aspect-[16/10] bg-gradient-to-br from-[#f3f7f0] to-cream-100 flex items-center justify-center">
                           <svg
                             className="w-10 h-10 text-poppy-300"
                             viewBox="0 0 24 24"
@@ -343,7 +343,7 @@ export default function EventsArchivePage() {
                           </p>
                         )}
                         {event.cost && (
-                          <span className="inline-block px-2 py-0.5 text-xs font-medium bg-poppy-50 text-poppy-700 rounded-full mb-2">
+                          <span className="inline-block px-2 py-0.5 text-xs font-medium bg-earth-warm/10 text-earth-warm rounded-full mb-2">
                             {event.cost}
                           </span>
                         )}

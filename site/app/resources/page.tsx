@@ -97,7 +97,7 @@ export default function ResourcesPage() {
           <div className="grid sm:grid-cols-2 gap-6">
             {partners.map((partner, i) => (
               <motion.div key={partner.name} variants={fadeUp} custom={i + 1}>
-                <div className="bg-surface rounded-2xl border border-cream-200 p-6 h-full hover:border-poppy-200 hover:shadow-lg transition-all duration-300">
+                <div className={`rounded-2xl p-6 border-l-4 shadow-sm hover:shadow-lg hover:shadow-cream-800/8 hover:-translate-y-0.5 transition-all duration-300 h-full ${["bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/30", "bg-[#f3f7f0] border border-earth-olive/15 border-l-earth-olive/30", "bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/30", "bg-[#f0f3ec] border border-earth-sage/15 border-l-earth-sage/30", "bg-[#f7f0eb] border border-earth-clay/15 border-l-earth-clay/30"][i % 5]}`}>
                   <h3 className="font-serif text-lg font-bold text-cream-900 mb-2">
                     {partner.name}
                   </h3>
@@ -138,8 +138,8 @@ export default function ResourcesPage() {
             </motion.h2>
 
             <motion.div variants={fadeUp} custom={1} className="flex flex-wrap justify-center gap-4">
-              {supporters.map((name) => (
-                <span key={name} className="bg-surface rounded-full border border-cream-200 px-5 py-2.5 text-sm font-medium text-cream-800">
+              {supporters.map((name, i) => (
+                <span key={name} className={`rounded-full px-5 py-2.5 text-sm font-medium text-cream-800 shadow-sm ${["bg-[#f3f7f0] border border-earth-sage/20", "bg-[#fdf6e8] border border-earth-warm/15", "bg-[#fdf0eb] border border-earth-terracotta/15", "bg-[#f0f3ec] border border-earth-olive/15"][i % 4]}`}>
                   {name}
                 </span>
               ))}
@@ -159,7 +159,7 @@ export default function ResourcesPage() {
           <motion.h2 variants={fadeUp} custom={0} className="font-serif text-3xl font-bold text-cream-900 mb-4">
             Fiscal Sponsor
           </motion.h2>
-          <motion.div variants={fadeUp} custom={1} className="bg-cream-100 rounded-2xl border border-cream-200 p-8 max-w-2xl mx-auto">
+          <motion.div variants={fadeUp} custom={1} className="bg-gradient-to-r from-[#f3f7f0] to-[#fdf6e8] rounded-2xl border border-earth-sage/20 border-l-4 border-l-earth-sage/40 p-8 shadow-sm max-w-2xl mx-auto">
             <p className="text-cream-700 leading-relaxed mb-4">
               We are a member of Intersection for the Arts. Intersection for the Arts is a
               historic arts nonprofit that provides people working in arts and culture with

@@ -205,7 +205,7 @@ export default function BlogPage() {
               >
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="group block bg-surface rounded-2xl border border-cream-200 overflow-hidden hover:border-poppy-200 hover:shadow-lg transition-all duration-300 h-full"
+                  className={`group block rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:shadow-cream-800/8 hover:-translate-y-1 transition-all duration-300 border-t-4 h-full ${["bg-[#fdf6e8] border border-earth-warm/15 border-t-earth-warm/30", "bg-[#f3f7f0] border border-earth-olive/15 border-t-earth-olive/30", "bg-[#fdf0eb] border border-earth-terracotta/15 border-t-earth-terracotta/30", "bg-[#f0f3ec] border border-earth-sage/15 border-t-earth-sage/30", "bg-[#f7f0eb] border border-earth-clay/15 border-t-earth-clay/30", "bg-cream-100 border border-cream-300/50 border-t-cream-500/30"][i % 6]}`}
                 >
                   {/* Featured Image */}
                   {imageSrc && (
@@ -227,7 +227,7 @@ export default function BlogPage() {
                         {displayCats.slice(0, 2).map((cat) => (
                           <span
                             key={cat}
-                            className="px-2.5 py-0.5 text-xs font-medium bg-poppy-50 text-poppy-700 rounded-full"
+                            className="px-2.5 py-0.5 text-xs font-medium bg-earth-warm/10 text-earth-warm rounded-full"
                           >
                             {cat.replace("&amp;", "&")}
                           </span>
@@ -324,7 +324,7 @@ export default function BlogPage() {
             <div className="space-y-4">
               {pressArticles.map((article, i) => (
                 <motion.div key={article.title} variants={fadeUp} custom={i + 1}>
-                  <div className="bg-surface rounded-2xl border border-cream-200 p-6 hover:border-poppy-200 hover:shadow-lg transition-all duration-300">
+                  <div className={`rounded-2xl p-6 shadow-sm border-l-4 hover:shadow-lg hover:shadow-cream-800/8 hover:-translate-y-0.5 transition-all duration-300 ${["bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/30", "bg-[#f3f7f0] border border-earth-olive/15 border-l-earth-olive/30", "bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/30"][i % 3]}`}>
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <h3 className="font-serif text-lg font-bold text-cream-900 mb-1">

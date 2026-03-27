@@ -95,14 +95,14 @@ export default function GivePage() {
             <motion.div
               variants={fadeUp}
               custom={1}
-              className="bg-surface rounded-xl border border-cream-200 p-6 md:p-8"
+              className="bg-[#fdf6e8] rounded-xl border border-earth-warm/20 border-l-4 border-l-earth-warm/40 p-6 md:p-8 shadow-sm"
             >
               <h3 className="font-serif text-xl font-bold text-cream-900 mb-4">
                 Patron Benefits
               </h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 shrink-0 rounded-full bg-poppy-50 text-poppy-700 flex items-center justify-center mt-0.5">
+                  <div className="w-6 h-6 shrink-0 rounded-full bg-earth-warm/15 text-earth-warm flex items-center justify-center mt-0.5">
                     <svg viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5" aria-hidden="true">
                       <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
                     </svg>
@@ -113,7 +113,7 @@ export default function GivePage() {
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 shrink-0 rounded-full bg-poppy-50 text-poppy-700 flex items-center justify-center mt-0.5">
+                  <div className="w-6 h-6 shrink-0 rounded-full bg-earth-warm/15 text-earth-warm flex items-center justify-center mt-0.5">
                     <svg viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5" aria-hidden="true">
                       <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
                     </svg>
@@ -157,19 +157,19 @@ export default function GivePage() {
                 What Your Support Funds
               </h3>
               <div className="grid sm:grid-cols-3 gap-4">
-                <div className="bg-cream-50 rounded-xl border border-cream-200 p-5">
+                <div className="bg-[#f3f7f0] rounded-xl border border-earth-sage/20 border-l-4 border-l-earth-sage p-5 shadow-sm">
                   <p className="text-sm font-semibold text-cream-900 mb-1">Family Art</p>
                   <p className="text-xs text-cream-700 leading-relaxed">
                     Art materials for free arts activities for neighborhood youth
                   </p>
                 </div>
-                <div className="bg-cream-50 rounded-xl border border-cream-200 p-5">
+                <div className="bg-[#fdf6e8] rounded-xl border border-earth-warm/15 border-l-4 border-l-earth-warm p-5 shadow-sm">
                   <p className="text-sm font-semibold text-cream-900 mb-1">Equipment</p>
                   <p className="text-xs text-cream-700 leading-relaxed">
                     Lighting, sound gear, and paint for exhibitions
                   </p>
                 </div>
-                <div className="bg-cream-50 rounded-xl border border-cream-200 p-5">
+                <div className="bg-[#f0f3ec] rounded-xl border border-earth-olive/15 border-l-4 border-l-earth-olive p-5 shadow-sm">
                   <p className="text-sm font-semibold text-cream-900 mb-1">Residencies</p>
                   <p className="text-xs text-cream-700 leading-relaxed">
                     Free, accessible space for Artists-in-Residence
@@ -236,7 +236,7 @@ export default function GivePage() {
               <motion.div
                 variants={fadeUp}
                 custom={1}
-                className="bg-surface rounded-xl border border-cream-200 p-6"
+                className="bg-[#fdf6e8] rounded-xl border border-earth-warm/15 border-l-4 border-l-earth-warm/30 p-6 shadow-sm"
               >
                 <h3 className="font-serif text-lg font-bold text-cream-900 mb-2">
                   Online Donations
@@ -252,7 +252,7 @@ export default function GivePage() {
               <motion.div
                 variants={fadeUp}
                 custom={2}
-                className="bg-surface rounded-xl border border-cream-200 p-6"
+                className="bg-[#f3f7f0] rounded-xl border border-earth-sage/20 border-l-4 border-l-earth-olive/30 p-6 shadow-sm"
               >
                 <h3 className="font-serif text-lg font-bold text-cream-900 mb-2">
                   Corporate Match via Benevity
@@ -267,7 +267,7 @@ export default function GivePage() {
               <motion.div
                 variants={fadeUp}
                 custom={3}
-                className="bg-surface rounded-xl border border-cream-200 p-6"
+                className="bg-[#fdf0eb] rounded-xl border border-earth-terracotta/15 border-l-4 border-l-earth-terracotta/30 p-6 shadow-sm"
               >
                 <h3 className="font-serif text-lg font-bold text-cream-900 mb-2">
                   Wish List

@@ -239,10 +239,34 @@ export default function ProgramsPage() {
                   key={program.title}
                   variants={fadeUp}
                   custom={i + 1}
-                  className="bg-surface rounded-xl border border-cream-200 p-6 md:p-8 hover:shadow-lg hover:shadow-poppy-900/5 hover:border-poppy-200 transition-all duration-300"
+                  className={`rounded-xl border-l-4 p-6 md:p-8 shadow-sm hover:shadow-lg hover:shadow-cream-800/8 hover:-translate-y-0.5 transition-all duration-300 ${
+                    [
+                      "bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/40",
+                      "bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/40",
+                      "bg-[#f3f7f0] border border-earth-olive/15 border-l-earth-olive/40",
+                      "bg-[#f0f3ec] border border-earth-sage/15 border-l-earth-sage/40",
+                      "bg-[#f7f0eb] border border-earth-clay/15 border-l-earth-clay/40",
+                      "bg-cream-100 border border-cream-300/50 border-l-cream-500/40",
+                      "bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/40",
+                      "bg-[#f3f7f0] border border-earth-olive/15 border-l-earth-olive/40",
+                      "bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/40",
+                    ][i % 9]
+                  }`}
                 >
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="w-12 h-12 shrink-0 rounded-lg bg-poppy-50 text-poppy-700 flex items-center justify-center">
+                    <div className={`w-12 h-12 shrink-0 rounded-lg flex items-center justify-center ${
+                      [
+                        "bg-earth-terracotta/10 text-earth-terracotta",
+                        "bg-earth-warm/10 text-earth-warm",
+                        "bg-earth-olive/10 text-earth-olive",
+                        "bg-earth-sage/20 text-earth-olive",
+                        "bg-earth-clay/10 text-earth-clay",
+                        "bg-cream-200 text-cream-700",
+                        "bg-earth-warm/10 text-earth-warm",
+                        "bg-earth-olive/10 text-earth-olive",
+                        "bg-earth-terracotta/10 text-earth-terracotta",
+                      ][i % 9]
+                    }`}>
                       {program.icon}
                     </div>
                     <div>

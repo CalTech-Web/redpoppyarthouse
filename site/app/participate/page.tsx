@@ -208,7 +208,7 @@ export default function ParticipatePage() {
                 <motion.div key={option.title} variants={fadeUp} custom={i + 1}>
                   <Link
                     href={option.href}
-                    className="group block bg-surface rounded-xl border border-cream-200 p-6 hover:border-poppy-200 hover:shadow-lg hover:shadow-poppy-900/5 transition-all duration-300 h-full"
+                    className={`group block rounded-xl border-l-4 p-6 shadow-sm hover:shadow-lg hover:shadow-cream-800/8 hover:-translate-y-0.5 transition-all duration-300 h-full ${["bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/40", "bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/40", "bg-[#f3f7f0] border border-earth-olive/15 border-l-earth-olive/40", "bg-[#f0f3ec] border border-earth-sage/15 border-l-earth-sage/40", "bg-[#f7f0eb] border border-earth-clay/15 border-l-earth-clay/40"][i % 5]}`}
                   >
                     <div className="w-12 h-12 rounded-lg bg-poppy-50 text-poppy-700 flex items-center justify-center mb-4 group-hover:bg-poppy-100 transition-colors">
                       {option.icon}
@@ -263,7 +263,7 @@ export default function ParticipatePage() {
               <motion.div
                 variants={fadeUp}
                 custom={1}
-                className="bg-cream-50 rounded-xl border border-cream-200 p-6"
+                className="bg-[#f3f7f0] rounded-xl border border-earth-sage/20 border-l-4 border-l-earth-olive/30 p-6 shadow-sm"
               >
                 <h3 className="font-serif text-lg font-bold text-cream-900 mb-3">
                   Event Production Internship
@@ -282,7 +282,7 @@ export default function ParticipatePage() {
               <motion.div
                 variants={fadeUp}
                 custom={2}
-                className="bg-cream-50 rounded-xl border border-cream-200 p-6"
+                className="bg-[#fdf6e8] rounded-xl border border-earth-warm/15 border-l-4 border-l-earth-warm/30 p-6 shadow-sm"
               >
                 <h3 className="font-serif text-lg font-bold text-cream-900 mb-3">
                   PR and Social Media Internship

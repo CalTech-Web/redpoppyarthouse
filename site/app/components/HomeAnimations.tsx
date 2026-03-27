@@ -620,7 +620,7 @@ function EventCard({ event, index }: { event: EventData; index: number }) {
       <motion.div
         variants={fadeUp}
         custom={index + 1}
-        className="event-card group bg-surface rounded-2xl border border-cream-200 overflow-hidden cursor-pointer"
+        className={`event-card group rounded-2xl overflow-hidden cursor-pointer shadow-sm ${index % 2 === 0 ? "bg-[#fdf0eb] border border-earth-terracotta/15 border-t-4 border-t-earth-terracotta/40" : "bg-[#fdf6e8] border border-earth-warm/15 border-t-4 border-t-earth-warm/40"}`}
         onClick={() => setOpen(true)}
         role="button"
         tabIndex={0}
@@ -733,7 +733,7 @@ export function UpcomingEventsSection() {
           {/* Artist Support Note */}
           <motion.div
             variants={fadeIn}
-            className="text-center bg-cream-100 rounded-2xl border border-cream-200 p-8 mb-10"
+            className="text-center bg-gradient-to-r from-[#f3f7f0] to-[#fdf6e8] rounded-2xl border border-earth-sage/20 p-8 mb-10 shadow-sm"
           >
             <p className="font-serif text-lg text-cream-800 italic mb-2">
               &quot;Every dollar at the door goes primarily to the performing artists.&quot;
@@ -858,7 +858,18 @@ export function ProgramsSection() {
               <motion.div key={program.title} variants={fadeUp} custom={i + 1}>
                 <Link
                   href="/programs"
-                  className="group flex flex-col h-full bg-surface rounded-2xl border border-cream-200 p-6 hover:border-poppy-200 hover:shadow-xl hover:shadow-poppy-900/5 transition-all duration-300 hover:-translate-y-1"
+                  className={`group flex flex-col h-full rounded-2xl border-l-4 p-6 shadow-sm hover:shadow-xl hover:shadow-cream-800/8 transition-all duration-300 hover:-translate-y-1 ${
+                    [
+                      "bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/40",
+                      "bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/40",
+                      "bg-[#f3f7f0] border border-earth-olive/15 border-l-earth-olive/40",
+                      "bg-[#f0f3ec] border border-earth-sage/15 border-l-earth-sage/40",
+                      "bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/40",
+                      "bg-[#f7f0eb] border border-earth-clay/15 border-l-earth-clay/40",
+                      "bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/40",
+                      "bg-cream-100 border border-cream-300/50 border-l-cream-500/40",
+                    ][i % 8]
+                  }`}
                 >
                   <div className={`w-12 h-12 rounded-xl ${program.color} border flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition-transform`}>
                     {program.emoji}
@@ -1050,7 +1061,14 @@ export function GetInvolvedSection() {
               <motion.div key={option.title} variants={fadeUp} custom={i + 1}>
                 <Link
                   href={option.href}
-                  className="group flex flex-col items-center text-center h-full bg-surface rounded-2xl border border-cream-200 p-8 hover:border-poppy-200 hover:shadow-xl hover:shadow-poppy-900/5 transition-all duration-300 hover:-translate-y-1"
+                  className={`group flex flex-col items-center text-center h-full rounded-2xl border-t-4 p-8 shadow-sm hover:shadow-xl hover:shadow-cream-800/8 transition-all duration-300 hover:-translate-y-1 ${
+                    [
+                      "bg-[#fdf0eb] border border-earth-terracotta/15 border-t-earth-terracotta/30",
+                      "bg-[#fdf6e8] border border-earth-warm/15 border-t-earth-warm/30",
+                      "bg-[#f3f7f0] border border-earth-olive/15 border-t-earth-olive/30",
+                      "bg-[#f7f0eb] border border-earth-clay/15 border-t-earth-clay/30",
+                    ][i % 4]
+                  }`}
                 >
                   <div className={`w-14 h-14 rounded-2xl ${option.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}>
                     {option.icon}
@@ -1122,8 +1140,8 @@ export function VisitUsSection() {
 
             {/* Contact Info */}
             <motion.div variants={fadeUp} custom={2} className="space-y-6">
-              <div className="bg-cream-50 rounded-2xl border border-cream-200 p-6 flex gap-4">
-                <div className="w-12 h-12 shrink-0 rounded-xl bg-poppy-50 text-poppy-600 flex items-center justify-center">
+              <div className="bg-[#fdf0eb] rounded-2xl border border-earth-terracotta/15 border-l-4 border-l-earth-terracotta/30 p-6 flex gap-4 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div className="w-12 h-12 shrink-0 rounded-xl bg-earth-terracotta/10 text-earth-terracotta flex items-center justify-center">
                   <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden="true">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" strokeWidth="1.5" />
                     <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="1.5" />
@@ -1148,7 +1166,7 @@ export function VisitUsSection() {
                 </div>
               </div>
 
-              <div className="bg-cream-50 rounded-2xl border border-cream-200 p-6 flex gap-4">
+              <div className="bg-[#fdf6e8] rounded-2xl border border-earth-warm/15 border-l-4 border-l-earth-warm/30 p-6 flex gap-4 shadow-sm hover:shadow-md transition-shadow duration-300">
                 <div className="w-12 h-12 shrink-0 rounded-xl bg-earth-warm/10 text-earth-warm flex items-center justify-center">
                   <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden="true">
                     <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
@@ -1163,7 +1181,7 @@ export function VisitUsSection() {
                 </div>
               </div>
 
-              <div className="bg-cream-50 rounded-2xl border border-cream-200 p-6 flex gap-4">
+              <div className="bg-[#f3f7f0] rounded-2xl border border-earth-olive/15 border-l-4 border-l-earth-olive/30 p-6 flex gap-4 shadow-sm hover:shadow-md transition-shadow duration-300">
                 <div className="w-12 h-12 shrink-0 rounded-xl bg-earth-olive/10 text-earth-olive flex items-center justify-center">
                   <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden="true">
                     <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -1185,7 +1203,7 @@ export function VisitUsSection() {
                 </div>
               </div>
 
-              <div className="bg-cream-50 rounded-2xl border border-cream-200 p-6">
+              <div className="bg-[#f0f3ec] rounded-2xl border border-earth-sage/15 border-l-4 border-l-earth-sage/30 p-6 shadow-sm">
                 <div className="flex flex-wrap gap-4 text-sm text-cream-700">
                   <span className="flex items-center gap-1.5">
                     <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-poppy-600" aria-hidden="true">

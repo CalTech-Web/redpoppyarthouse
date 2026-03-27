@@ -155,9 +155,9 @@ export default function VolunteerPage() {
               <motion.div
                 variants={fadeUp}
                 custom={1}
-                className="bg-cream-50 rounded-xl border border-cream-200 p-6"
+                className="bg-[#fdf0eb] rounded-xl border border-earth-terracotta/15 border-l-4 border-l-earth-terracotta/30 p-6 shadow-sm"
               >
-                <div className="w-10 h-10 rounded-lg bg-poppy-50 text-poppy-700 flex items-center justify-center mb-4">
+                <div className="w-10 h-10 rounded-lg bg-earth-terracotta/10 text-earth-terracotta flex items-center justify-center mb-4">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -185,9 +185,9 @@ export default function VolunteerPage() {
               <motion.div
                 variants={fadeUp}
                 custom={2}
-                className="bg-cream-50 rounded-xl border border-cream-200 p-6"
+                className="bg-[#fdf6e8] rounded-xl border border-earth-warm/15 border-l-4 border-l-earth-warm/30 p-6 shadow-sm"
               >
-                <div className="w-10 h-10 rounded-lg bg-poppy-50 text-poppy-700 flex items-center justify-center mb-4">
+                <div className="w-10 h-10 rounded-lg bg-earth-warm/10 text-earth-warm flex items-center justify-center mb-4">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -216,7 +216,7 @@ export default function VolunteerPage() {
             <motion.div
               variants={fadeUp}
               custom={3}
-              className="mt-8 bg-cream-50 rounded-xl border border-cream-200 p-6"
+              className="mt-8 bg-[#f3f7f0] rounded-xl border border-earth-sage/20 border-l-4 border-l-earth-olive/30 p-6 shadow-sm"
             >
               <h3 className="font-serif text-lg font-bold text-cream-900 mb-2">
                 Before the Show

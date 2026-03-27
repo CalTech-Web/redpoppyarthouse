@@ -116,9 +116,9 @@ export default function MappPage() {
             </motion.p>
 
             <motion.div variants={fadeUp} custom={2} className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
-              {mappDates2024.map((date) => (
-                <div key={date} className="bg-surface rounded-xl border border-cream-200 p-5 text-center">
-                  <div className="font-serif text-lg font-bold text-poppy-700">{date}</div>
+              {mappDates2024.map((date, i) => (
+                <div key={date} className={`rounded-xl p-5 text-center border-t-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 ${["bg-[#fdf6e8] border border-earth-warm/15 border-t-earth-warm/30", "bg-[#f3f7f0] border border-earth-olive/15 border-t-earth-olive/30", "bg-[#fdf0eb] border border-earth-terracotta/15 border-t-earth-terracotta/30", "bg-[#f0f3ec] border border-earth-sage/15 border-t-earth-sage/30", "bg-[#f7f0eb] border border-earth-clay/15 border-t-earth-clay/30", "bg-cream-100 border border-cream-300/50 border-t-cream-500/30"][i % 6]}`}>
+                  <div className="font-serif text-lg font-bold text-earth-terracotta">{date}</div>
                   <div className="text-sm text-cream-600 mt-1">First Saturday</div>
                 </div>
               ))}

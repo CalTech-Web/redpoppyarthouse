@@ -273,10 +273,19 @@ export default function AboutPage() {
                     className="relative pl-12 md:pl-20"
                   >
                     {/* Timeline dot */}
-                    <div className="absolute left-2.5 md:left-6.5 top-1.5 w-3 h-3 rounded-full bg-poppy-600 ring-4 ring-cream-100" />
+                    <div className="absolute left-2.5 md:left-6.5 top-1.5 w-3 h-3 rounded-full bg-earth-warm ring-4 ring-cream-100" />
 
-                    <div className="bg-surface rounded-xl border border-cream-200 p-6">
-                      <span className="inline-block px-2.5 py-0.5 text-xs font-semibold text-poppy-700 bg-poppy-50 rounded-full mb-2">
+                    <div className={`rounded-xl border-l-4 p-6 shadow-sm ${
+                      [
+                        "bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/30",
+                        "bg-[#f3f7f0] border border-earth-sage/15 border-l-earth-sage/40",
+                        "bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/30",
+                        "bg-[#f0f3ec] border border-earth-olive/15 border-l-earth-olive/30",
+                        "bg-[#f7f0eb] border border-earth-clay/15 border-l-earth-clay/30",
+                        "bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/30",
+                      ][i % 6]
+                    }`}>
+                      <span className="inline-block px-2.5 py-0.5 text-xs font-semibold text-earth-warm bg-earth-warm/10 rounded-full mb-2">
                         {event.year}
                       </span>
                       <h3 className="font-serif text-xl font-bold text-cream-900 mb-2">
@@ -327,10 +336,34 @@ export default function AboutPage() {
                   key={person.name}
                   variants={fadeUp}
                   custom={i + 1}
-                  className="bg-surface rounded-xl border border-cream-200 p-6 hover:shadow-md transition-shadow"
+                  className={`rounded-xl border-t-4 p-6 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 ${
+                    [
+                      "bg-[#fdf6e8] border border-earth-warm/15 border-t-earth-warm/30",
+                      "bg-[#f3f7f0] border border-earth-olive/15 border-t-earth-olive/30",
+                      "bg-[#fdf0eb] border border-earth-terracotta/15 border-t-earth-terracotta/30",
+                      "bg-[#f0f3ec] border border-earth-sage/15 border-t-earth-sage/30",
+                      "bg-[#f7f0eb] border border-earth-clay/15 border-t-earth-clay/30",
+                    ][i % 5]
+                  }`}
                 >
-                  <div className="w-12 h-12 rounded-full bg-poppy-50 flex items-center justify-center mb-4">
-                    <span className="font-serif text-lg font-bold text-poppy-700">
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 ${
+                    [
+                      "bg-earth-warm/10",
+                      "bg-earth-olive/10",
+                      "bg-earth-terracotta/10",
+                      "bg-earth-sage/20",
+                      "bg-earth-clay/10",
+                    ][i % 5]
+                  }`}>
+                    <span className={`font-serif text-lg font-bold ${
+                      [
+                        "text-earth-warm",
+                        "text-earth-olive",
+                        "text-earth-terracotta",
+                        "text-earth-olive",
+                        "text-earth-clay",
+                      ][i % 5]
+                    }`}>
                       {person.name.split(" ").map((n) => n[0]).join("")}
                     </span>
                   </div>
