@@ -96,6 +96,18 @@ body {
     radial-gradient(ellipse at 80% 50%, rgba(196, 30, 58, 0.04) 0%, transparent 50%);
 }
 
+/* Film grain overlay */
+.grain-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
@@ -105,4 +117,75 @@ html {
 ::selection {
   background-color: rgba(196, 30, 58, 0.15);
   color: var(--foreground);
+}
+
+/* Hero parallax background */
+.hero-bg {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 768px) {
+  .hero-bg {
+    background-attachment: scroll;
+  }
+}
+
+/* Decorative line */
+.decorative-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--poppy-500), var(--earth-warm), var(--poppy-500), transparent);
+}
+
+/* Event card hover */
+.event-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(92, 14, 14, 0.12);
+}
+
+/* Stat number animation */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Vignette effect for images */
+.vignette::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(44, 24, 16, 0.4) 100%);
+  pointer-events: none;
+}
+
+/* Smooth image zoom on hover */
+.img-zoom {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.img-zoom:hover {
+  transform: scale(1.05);
+}
+
+/* Google Maps responsive container */
+.map-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.map-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }

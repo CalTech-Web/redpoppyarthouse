@@ -33,26 +33,43 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-poppy-900 text-cream-200">
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="font-serif text-xl font-bold text-cream-50 mb-2">
-              Red Poppy Art House
-            </h3>
-            <p className="text-sm leading-relaxed text-cream-300">
+    <footer className="bg-poppy-900 text-cream-200 relative overflow-hidden">
+      {/* Decorative top border */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-poppy-500/40 to-transparent" />
+
+      {/* Subtle grain texture */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20256%20256%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.9%22%20numOctaves%3D%224%22%20stitchTiles%3D%22stitch%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url(%23n)%22%2F%3E%3C%2Fsvg%3E')] bg-repeat bg-[length:256px_256px]" />
+
+      <div className="relative max-w-7xl mx-auto px-6 py-16">
+        <div className="grid md:grid-cols-12 gap-10 md:gap-8">
+          {/* Brand & Description */}
+          <div className="md:col-span-5">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-poppy-800 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
+                  <circle cx="12" cy="12" r="3" fill="#FFF8F0" />
+                  <path d="M12 2C12 2 14 6 14 9C14 9 18 7 18 7C18 7 16 11 14 12C16 13 18 17 18 17C18 17 14 15 12 14C12 17 12 22 12 22C12 22 12 17 12 14C10 15 6 17 6 17C6 17 8 13 10 12C8 11 6 7 6 7C6 7 10 9 10 9C10 6 12 2 12 2Z" fill="#FBE0E0" stroke="#FFF8F0" strokeWidth="0.5" />
+                </svg>
+              </div>
+              <div>
+                <span className="font-serif text-xl font-bold text-cream-50 leading-tight">
+                  Red Poppy Art House
+                </span>
+              </div>
+            </div>
+            <p className="text-sm leading-relaxed text-cream-300 mb-6 max-w-sm">
               A community-driven arts venue in San Francisco&apos;s Mission
               District, presenting over 150 performances, exhibitions,
               workshops, and artist residencies annually.
             </p>
-            <div className="flex gap-3 mt-4">
+            <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-poppy-800 flex items-center justify-center text-cream-300 hover:bg-poppy-700 hover:text-cream-50 transition-colors"
+                  className="w-10 h-10 rounded-full bg-poppy-800 flex items-center justify-center text-cream-300 hover:bg-poppy-700 hover:text-cream-50 transition-all duration-300 hover:-translate-y-0.5"
                   aria-label={social.label}
                 >
                   {social.icon}
@@ -61,14 +78,17 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
-            <h4 className="font-semibold text-cream-50 mb-3">Navigate</h4>
-            <nav className="flex flex-col space-y-2">
+          {/* Navigation */}
+          <div className="md:col-span-3">
+            <h4 className="font-serif text-base font-bold text-cream-50 mb-4">
+              Navigate
+            </h4>
+            <nav className="flex flex-col space-y-2.5">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-cream-300 hover:text-cream-50 transition-colors"
+                  className="text-sm text-cream-300 hover:text-cream-50 transition-colors w-fit"
                 >
                   {link.label}
                 </Link>
@@ -76,12 +96,15 @@ export default function Footer() {
             </nav>
           </div>
 
-          <div>
-            <h4 className="font-semibold text-cream-50 mb-3">Visit Us</h4>
-            <address className="not-italic text-sm leading-relaxed text-cream-300">
+          {/* Contact & Fiscal Sponsor */}
+          <div className="md:col-span-4">
+            <h4 className="font-serif text-base font-bold text-cream-50 mb-4">
+              Visit Us
+            </h4>
+            <address className="not-italic text-sm leading-relaxed text-cream-300 space-y-1">
               <p>2698 Folsom St @ 23rd St</p>
               <p>San Francisco, CA 94110</p>
-              <p className="mt-3">
+              <p className="pt-2">
                 <a
                   href="tel:+16507315383"
                   className="hover:text-cream-50 transition-colors"
@@ -98,21 +121,35 @@ export default function Footer() {
                 </a>
               </p>
             </address>
-            <div className="mt-4 text-sm text-cream-400">
-              <p>Fiscally sponsored by</p>
-              <p className="text-cream-300">Intersection for the Arts</p>
+
+            {/* Fiscal Sponsor */}
+            <div className="mt-6 pt-5 border-t border-poppy-800/60">
+              <p className="text-xs text-cream-400 mb-1">Fiscally sponsored by</p>
+              <a
+                href="https://theintersection.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-cream-300 hover:text-cream-50 transition-colors font-medium"
+              >
+                Intersection for the Arts
+              </a>
+              <p className="text-xs text-cream-500 mt-0.5">EIN: 94-1593216</p>
             </div>
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-poppy-800 text-center text-sm text-cream-400">
-          <p>
+        {/* Bottom bar */}
+        <div className="mt-14 pt-6 border-t border-poppy-800/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-cream-500">
+            &copy; {new Date().getFullYear()} Red Poppy Art House. All rights reserved.
+          </p>
+          <p className="text-xs text-cream-500">
             Built by{" "}
             <a
               href="https://caltechweb.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline hover:text-cream-200 transition-colors"
+              className="text-cream-400 hover:text-cream-200 transition-colors underline underline-offset-2"
             >
               CalTech Web
             </a>

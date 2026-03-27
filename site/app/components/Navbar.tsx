@@ -14,6 +14,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const [menuHeight, setMenuHeight] = useState(0);
 
@@ -25,13 +26,29 @@ export default function Navbar() {
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 bg-cream-50/95 backdrop-blur-sm border-b border-cream-300/50">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-cream-50/95 backdrop-blur-md border-b border-cream-300/50 shadow-sm"
+          : "bg-transparent"
+      }`}
+    >
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo / Brand */}
         <Link href="/" className="flex items-center gap-3 group">
           {/* Poppy flower icon */}
-          <div className="w-9 h-9 rounded-full bg-poppy-700 flex items-center justify-center shadow-sm group-hover:bg-poppy-600 transition-colors">
+          <div className={`w-10 h-10 rounded-full flex items-center justify-center shadow-sm transition-all duration-300 ${
+            scrolled ? "bg-poppy-700 group-hover:bg-poppy-600" : "bg-poppy-700/80 group-hover:bg-poppy-600/90 backdrop-blur-sm"
+          }`}>
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -48,10 +65,14 @@ export default function Navbar() {
             </svg>
           </div>
           <div className="flex flex-col">
-            <span className="font-serif text-lg font-bold text-poppy-900 leading-tight tracking-tight">
+            <span className={`font-serif text-lg font-bold leading-tight tracking-tight transition-colors duration-300 ${
+              scrolled ? "text-poppy-900" : "text-cream-50"
+            }`}>
               Red Poppy
             </span>
-            <span className="text-[11px] uppercase tracking-[0.15em] text-cream-700 font-medium leading-tight">
+            <span className={`text-[11px] uppercase tracking-[0.15em] font-medium leading-tight transition-colors duration-300 ${
+              scrolled ? "text-cream-700" : "text-cream-200"
+            }`}>
               Art House
             </span>
           </div>
@@ -63,14 +84,22 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="px-3 py-2 text-sm font-medium text-cream-800 hover:text-poppy-700 hover:bg-poppy-50 rounded-lg transition-colors"
+              className={`px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
+                scrolled
+                  ? "text-cream-800 hover:text-poppy-700 hover:bg-poppy-50"
+                  : "text-cream-100 hover:text-cream-50 hover:bg-cream-50/10"
+              }`}
             >
               {link.label}
             </Link>
           ))}
           <Link
             href="/participate/give"
-            className="ml-3 px-5 py-2 text-sm font-semibold text-cream-50 bg-poppy-700 hover:bg-poppy-600 rounded-full transition-colors shadow-sm"
+            className={`ml-3 px-5 py-2.5 text-sm font-semibold rounded-full transition-all duration-300 shadow-sm hover:-translate-y-0.5 ${
+              scrolled
+                ? "text-cream-50 bg-poppy-700 hover:bg-poppy-600 hover:shadow-md"
+                : "text-cream-50 bg-poppy-600/90 hover:bg-poppy-600 backdrop-blur-sm hover:shadow-md"
+            }`}
           >
             Support Us
           </Link>
@@ -79,7 +108,11 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 text-cream-800 hover:text-poppy-700 transition-colors"
+          className={`md:hidden p-2 rounded-lg transition-colors ${
+            scrolled
+              ? "text-cream-800 hover:text-poppy-700 hover:bg-poppy-50"
+              : "text-cream-100 hover:text-cream-50 hover:bg-cream-50/10"
+          }`}
           aria-label={isOpen ? "Close menu" : "Open menu"}
           aria-expanded={isOpen}
         >
@@ -107,10 +140,10 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Menu - CSS transition instead of framer-motion */}
+      {/* Mobile Menu */}
       <div
         ref={menuRef}
-        className="md:hidden overflow-hidden bg-cream-50 border-t border-cream-200 transition-[height,opacity] duration-250 ease-in-out"
+        className="md:hidden overflow-hidden bg-cream-50/98 backdrop-blur-md border-t border-cream-200/50 transition-[height,opacity] duration-300 ease-in-out"
         style={{
           height: menuHeight,
           opacity: isOpen ? 1 : 0,
@@ -122,7 +155,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="px-4 py-3 text-base font-medium text-cream-800 hover:text-poppy-700 hover:bg-poppy-50 rounded-lg transition-colors"
+              className="px-4 py-3 text-base font-medium text-cream-800 hover:text-poppy-700 hover:bg-poppy-50 rounded-xl transition-colors"
             >
               {link.label}
             </Link>
@@ -130,7 +163,7 @@ export default function Navbar() {
           <Link
             href="/participate/give"
             onClick={() => setIsOpen(false)}
-            className="mt-2 px-4 py-3 text-center text-base font-semibold text-cream-50 bg-poppy-700 hover:bg-poppy-600 rounded-full transition-colors"
+            className="mt-3 px-4 py-3.5 text-center text-base font-semibold text-cream-50 bg-poppy-700 hover:bg-poppy-600 rounded-full transition-colors shadow-sm"
           >
             Support Us
           </Link>

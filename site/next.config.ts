@@ -5,6 +5,20 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "redpoppyarthouse.org",
+        pathname: "/wp-content/uploads/**",
+      },
+      {
+        protocol: "https",
+        hostname: "web.archive.org",
+        pathname: "/**",
+      },
+    ],
+  },
   async headers() {
     return [
       {
