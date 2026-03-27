@@ -57,11 +57,12 @@ export default function ResourcesPage() {
   return (
     <main className="min-h-screen bg-cream-50">
       {/* Hero */}
-      <section className="relative bg-poppy-900 text-cream-50 pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-1/4 w-64 h-64 bg-poppy-400 rounded-full blur-[100px]" />
+      <section className="relative bg-poppy-900 text-cream-50 min-h-[500px] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img src="/images/hero/collage-1.png" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
         </div>
-        <div className="relative max-w-5xl mx-auto px-6">
+        <div className="relative max-w-5xl mx-auto px-6 py-16">
           <motion.div initial="hidden" animate="visible">
             <motion.nav variants={fadeUp} custom={0} aria-label="Breadcrumb" className="mb-8">
               <ol className="flex items-center gap-2 text-sm text-cream-300">
@@ -97,7 +98,7 @@ export default function ResourcesPage() {
           <div className="grid sm:grid-cols-2 gap-6">
             {partners.map((partner, i) => (
               <motion.div key={partner.name} variants={fadeUp} custom={i + 1}>
-                <div className={`rounded-2xl p-6 border-l-4 shadow-sm hover:shadow-lg hover:shadow-cream-800/8 hover:-translate-y-0.5 transition-all duration-300 h-full ${["bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/30", "bg-[#f3f7f0] border border-earth-olive/15 border-l-earth-olive/30", "bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/30", "bg-[#f0f3ec] border border-earth-sage/15 border-l-earth-sage/30", "bg-[#f7f0eb] border border-earth-clay/15 border-l-earth-clay/30"][i % 5]}`}>
+                <div className={`rounded-2xl p-6 shadow-sm backdrop-blur-sm ring-1 ring-white/50 hover:shadow-lg hover:shadow-cream-800/8 hover:-translate-y-0.5 transition-all duration-300 h-full ${["bg-[#fdf6e8]/80 border border-earth-warm/15", "bg-[#f3f7f0]/80 border border-earth-olive/15", "bg-[#fdf0eb]/80 border border-earth-terracotta/15", "bg-[#f0f3ec]/80 border border-earth-sage/15", "bg-[#f7f0eb]/80 border border-earth-clay/15"][i % 5]}`}>
                   <h3 className="font-serif text-lg font-bold text-cream-900 mb-2">
                     {partner.name}
                   </h3>
@@ -159,7 +160,7 @@ export default function ResourcesPage() {
           <motion.h2 variants={fadeUp} custom={0} className="font-serif text-3xl font-bold text-cream-900 mb-4">
             Fiscal Sponsor
           </motion.h2>
-          <motion.div variants={fadeUp} custom={1} className="bg-gradient-to-r from-[#f3f7f0] to-[#fdf6e8] rounded-2xl border border-earth-sage/20 border-l-4 border-l-earth-sage/40 p-8 shadow-sm max-w-2xl mx-auto">
+          <motion.div variants={fadeUp} custom={1} className="bg-gradient-to-r from-[#f3f7f0]/80 to-[#fdf6e8]/80 rounded-2xl border border-earth-sage/20 backdrop-blur-sm ring-1 ring-white/50 p-8 shadow-sm max-w-2xl mx-auto">
             <p className="text-cream-700 leading-relaxed mb-4">
               We are a member of Intersection for the Arts. Intersection for the Arts is a
               historic arts nonprofit that provides people working in arts and culture with

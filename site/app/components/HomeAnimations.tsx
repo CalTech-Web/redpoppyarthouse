@@ -203,79 +203,95 @@ export function StatsSection() {
 export function OurStorySection() {
   return (
     <section className="bg-cream-50 texture-paper relative overflow-hidden">
-      {/* Decorative poppy accent */}
-      <div className="absolute -right-32 top-1/2 -translate-y-1/2 w-64 h-64 opacity-[0.04]">
-        <svg viewBox="0 0 200 200" fill="currentColor" className="w-full h-full text-poppy-600">
-          <path d="M100 20c0 0 20 40 20 80s-20 80-20 80-20-40-20-80 20-80 20-80z" />
-          <path d="M20 100c0 0 40-20 80-20s80 20 80 20-40 20-80 20-80-20-80-20z" />
-          <path d="M35 35c0 0 40 10 65 45s25 85 25 85-40-10-65-45-25-85-25-85z" />
-          <path d="M165 35c0 0-40 10-65 45s-25 85-25 85 40-10 65-45 25-85 25-85z" />
-          <circle cx="100" cy="100" r="15" />
-        </svg>
-      </div>
+      {/* Subtle warm gradient wash */}
+      <div className="absolute inset-0 bg-gradient-to-br from-earth-warm/[0.04] via-transparent to-earth-sage/[0.04]" />
 
-      <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-32">
+      <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+          className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-stretch"
         >
-          {/* Pull Quote Side */}
-          <motion.div variants={fadeUp} custom={0}>
-            <div className="relative">
-              <div className="absolute -top-6 -left-4 text-8xl font-serif text-poppy-200/40 leading-none select-none" aria-hidden="true">
-                &ldquo;
+          {/* Left Side: Image with overlaid quote card */}
+          <motion.div variants={fadeUp} custom={0} className="relative">
+            {/* Large background image */}
+            <div className="relative rounded-2xl overflow-hidden aspect-[4/5] lg:aspect-auto lg:h-full min-h-[480px]">
+              <Image
+                src="/images/hero/venue-interior.jpg"
+                alt="Interior of Red Poppy Art House - an intimate community arts venue"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-earth-warm/50 via-earth-warm/10 to-transparent" />
+            </div>
+            {/* Glass quote card overlaid on image */}
+            <div className="absolute bottom-6 left-4 right-4 sm:left-6 sm:right-6 z-10">
+              <div className="bg-[#fdf6e8]/85 backdrop-blur-md ring-1 ring-white/60 border border-earth-warm/20 rounded-2xl shadow-lg p-6 sm:p-8">
+                <div className="relative">
+                  <div className="absolute -top-4 -left-2 text-6xl font-serif text-earth-warm/30 leading-none select-none" aria-hidden="true">
+                    &ldquo;
+                  </div>
+                  <blockquote className="relative z-10 font-serif text-2xl sm:text-3xl font-bold text-cream-900 leading-[1.25]">
+                    An old world cafe crossed with a painter&apos;s studio and living room.
+                  </blockquote>
+                  <div className="mt-4 w-12 h-1 bg-gradient-to-r from-earth-warm to-earth-terracotta/60 rounded-full" />
+                </div>
               </div>
-              <blockquote className="relative z-10 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-poppy-800 leading-[1.2] mb-6">
-                An old world cafe crossed with a painter&apos;s studio and living room.
-              </blockquote>
-              <div className="w-16 h-1 bg-gradient-to-r from-poppy-500 to-earth-warm rounded-full" />
             </div>
           </motion.div>
 
-          {/* Content Side */}
-          <motion.div variants={fadeUp} custom={1}>
-            <div className="relative rounded-2xl overflow-hidden mb-8 aspect-[16/10]">
+          {/* Right Side: Story content in a glass card */}
+          <motion.div variants={fadeUp} custom={1} className="flex flex-col">
+            {/* Smaller story image */}
+            <div className="relative rounded-2xl overflow-hidden mb-6 aspect-[16/9]">
               <Image
                 src="/images/venue/story.jpg"
                 alt="Red Poppy Art House founding - artists and community members gathered in the original space at Folsom and 23rd"
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                sizes="(max-width: 1024px) 100vw, 45vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-poppy-900/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-poppy-900/20 to-transparent" />
             </div>
-            <p className="text-cream-800 leading-relaxed mb-4 text-lg">
-              In February 2003, Alexander Allende and Todd Brown signed a lease on a big
-              empty room on the corner of Folsom and 23rd that had one closet, a bathroom,
-              and two layers of decades-old linoleum flooring. Armed with a couple of credit
-              cards and basic carpentry skills, they set out to forge a basic artist workspace
-              and dance studio.
-            </p>
-            <p className="text-cream-700 leading-relaxed mb-4">
-              The Red Poppy Art House was founded to serve as an intercultural and
-              multidisciplinary &quot;space of encounter,&quot; a hub where multiple
-              social-cultural groups could interconnect to experience one another and therefore
-              potentiate one another&apos;s endeavors while weaving a more solid and tolerant
-              social fabric.
-            </p>
-            <p className="text-cream-700 leading-relaxed mb-8">
-              By the end of 2003, a small group of artists staged the first &quot;Mission Arts
-              Party&quot; - later renamed the Mission Arts &amp; Performance Project (MAPP) - a
-              bimonthly community arts festival that continues to this day. After seven years,
-              the organization&apos;s role within the arts ecology has become highly recognized
-              and valued among its local community and the broader Bay Area.
-            </p>
-            <Link
-              href="/about"
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold bg-poppy-700 text-cream-50 rounded-full hover:bg-poppy-600 transition-all duration-300 hover:-translate-y-0.5 shadow-md hover:shadow-lg"
-            >
-              Learn Our Story
-              <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
-                <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
-              </svg>
-            </Link>
+
+            {/* Text content in a glass card */}
+            <div className="bg-[#fdf6e8]/80 backdrop-blur-sm ring-1 ring-white/50 border border-earth-warm/15 rounded-2xl shadow-sm p-6 sm:p-8 flex-1">
+              <span className="inline-block px-3 py-1 text-xs uppercase tracking-[0.15em] font-medium text-earth-warm bg-earth-warm/10 rounded-full mb-4">
+                Our Story
+              </span>
+              <p className="text-cream-800 leading-relaxed mb-4 text-lg">
+                In February 2003, Alexander Allende and Todd Brown signed a lease on a big
+                empty room on the corner of Folsom and 23rd that had one closet, a bathroom,
+                and two layers of decades-old linoleum flooring. Armed with a couple of credit
+                cards and basic carpentry skills, they set out to forge a basic artist workspace
+                and dance studio.
+              </p>
+              <p className="text-cream-700 leading-relaxed mb-4">
+                The Red Poppy Art House was founded to serve as an intercultural and
+                multidisciplinary &quot;space of encounter,&quot; a hub where multiple
+                social-cultural groups could interconnect to experience one another and therefore
+                potentiate one another&apos;s endeavors while weaving a more solid and tolerant
+                social fabric.
+              </p>
+              <p className="text-cream-700 leading-relaxed mb-6">
+                By the end of 2003, a small group of artists staged the first &quot;Mission Arts
+                Party&quot; - later renamed the Mission Arts &amp; Performance Project (MAPP) - a
+                bimonthly community arts festival that continues to this day. After seven years,
+                the organization&apos;s role within the arts ecology has become highly recognized
+                and valued among its local community and the broader Bay Area.
+              </p>
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold bg-earth-warm text-cream-50 rounded-full hover:bg-earth-warm/90 transition-all duration-300 hover:-translate-y-0.5 shadow-md hover:shadow-lg"
+              >
+                Learn Our Story
+                <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+                  <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
+                </svg>
+              </Link>
+            </div>
           </motion.div>
         </motion.div>
       </div>
@@ -733,7 +749,7 @@ export function UpcomingEventsSection() {
           {/* Artist Support Note */}
           <motion.div
             variants={fadeIn}
-            className="text-center bg-gradient-to-r from-[#f3f7f0] to-[#fdf6e8] rounded-2xl border border-earth-sage/20 p-8 mb-10 shadow-sm"
+            className="text-center bg-gradient-to-r from-[#f3f7f0]/80 to-[#fdf6e8]/80 rounded-2xl border border-earth-sage/20 p-8 mb-10 shadow-sm backdrop-blur-sm ring-1 ring-white/50"
           >
             <p className="font-serif text-lg text-cream-800 italic mb-2">
               &quot;Every dollar at the door goes primarily to the performing artists.&quot;
@@ -858,16 +874,16 @@ export function ProgramsSection() {
               <motion.div key={program.title} variants={fadeUp} custom={i + 1}>
                 <Link
                   href="/programs"
-                  className={`group flex flex-col h-full rounded-2xl border-l-4 p-6 shadow-sm hover:shadow-xl hover:shadow-cream-800/8 transition-all duration-300 hover:-translate-y-1 ${
+                  className={`group flex flex-col h-full rounded-2xl p-6 shadow-sm hover:shadow-xl hover:shadow-cream-800/8 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm ring-1 ring-white/50 ${
                     [
-                      "bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/40",
-                      "bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/40",
-                      "bg-[#f3f7f0] border border-earth-olive/15 border-l-earth-olive/40",
-                      "bg-[#f0f3ec] border border-earth-sage/15 border-l-earth-sage/40",
-                      "bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/40",
-                      "bg-[#f7f0eb] border border-earth-clay/15 border-l-earth-clay/40",
-                      "bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/40",
-                      "bg-cream-100 border border-cream-300/50 border-l-cream-500/40",
+                      "bg-[#fdf0eb]/80 border border-earth-terracotta/15",
+                      "bg-[#fdf6e8]/80 border border-earth-warm/15",
+                      "bg-[#f3f7f0]/80 border border-earth-olive/15",
+                      "bg-[#f0f3ec]/80 border border-earth-sage/15",
+                      "bg-[#fdf6e8]/80 border border-earth-warm/15",
+                      "bg-[#f7f0eb]/80 border border-earth-clay/15",
+                      "bg-[#fdf0eb]/80 border border-earth-terracotta/15",
+                      "bg-cream-100/80 border border-cream-300/50",
                     ][i % 8]
                   }`}
                 >
@@ -1140,7 +1156,7 @@ export function VisitUsSection() {
 
             {/* Contact Info */}
             <motion.div variants={fadeUp} custom={2} className="space-y-6">
-              <div className="bg-[#fdf0eb] rounded-2xl border border-earth-terracotta/15 border-l-4 border-l-earth-terracotta/30 p-6 flex gap-4 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div className="bg-[#fdf0eb]/80 rounded-2xl border border-earth-terracotta/15 p-6 flex gap-4 shadow-sm hover:shadow-md transition-shadow duration-300 backdrop-blur-sm ring-1 ring-white/50">
                 <div className="w-12 h-12 shrink-0 rounded-xl bg-earth-terracotta/10 text-earth-terracotta flex items-center justify-center">
                   <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden="true">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" strokeWidth="1.5" />
@@ -1166,7 +1182,7 @@ export function VisitUsSection() {
                 </div>
               </div>
 
-              <div className="bg-[#fdf6e8] rounded-2xl border border-earth-warm/15 border-l-4 border-l-earth-warm/30 p-6 flex gap-4 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div className="bg-[#fdf6e8]/80 rounded-2xl border border-earth-warm/15 p-6 flex gap-4 shadow-sm hover:shadow-md transition-shadow duration-300 backdrop-blur-sm ring-1 ring-white/50">
                 <div className="w-12 h-12 shrink-0 rounded-xl bg-earth-warm/10 text-earth-warm flex items-center justify-center">
                   <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden="true">
                     <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
@@ -1181,7 +1197,7 @@ export function VisitUsSection() {
                 </div>
               </div>
 
-              <div className="bg-[#f3f7f0] rounded-2xl border border-earth-olive/15 border-l-4 border-l-earth-olive/30 p-6 flex gap-4 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div className="bg-[#f3f7f0]/80 rounded-2xl border border-earth-olive/15 p-6 flex gap-4 shadow-sm hover:shadow-md transition-shadow duration-300 backdrop-blur-sm ring-1 ring-white/50">
                 <div className="w-12 h-12 shrink-0 rounded-xl bg-earth-olive/10 text-earth-olive flex items-center justify-center">
                   <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden="true">
                     <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -1203,7 +1219,7 @@ export function VisitUsSection() {
                 </div>
               </div>
 
-              <div className="bg-[#f0f3ec] rounded-2xl border border-earth-sage/15 border-l-4 border-l-earth-sage/30 p-6 shadow-sm">
+              <div className="bg-[#f0f3ec]/80 rounded-2xl border border-earth-sage/15 p-6 shadow-sm backdrop-blur-sm ring-1 ring-white/50">
                 <div className="flex flex-wrap gap-4 text-sm text-cream-700">
                   <span className="flex items-center gap-1.5">
                     <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-poppy-600" aria-hidden="true">

@@ -152,13 +152,13 @@ export default function ProgramsPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-poppy-900 text-cream-50">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-1/4 w-80 h-80 bg-poppy-500 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/3 w-64 h-64 bg-earth-warm rounded-full blur-3xl" />
+      <section className="relative overflow-hidden bg-poppy-900 text-cream-50 min-h-[500px] flex items-center">
+        <div className="absolute inset-0">
+          <img src="/images/hero/collage-1.png" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
+        <div className="relative max-w-7xl mx-auto px-6 py-16">
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 text-sm text-poppy-200">
               <li>
@@ -239,17 +239,17 @@ export default function ProgramsPage() {
                   key={program.title}
                   variants={fadeUp}
                   custom={i + 1}
-                  className={`rounded-xl border-l-4 p-6 md:p-8 shadow-sm hover:shadow-lg hover:shadow-cream-800/8 hover:-translate-y-0.5 transition-all duration-300 ${
+                  className={`rounded-xl p-6 md:p-8 shadow-sm hover:shadow-lg hover:shadow-cream-800/8 hover:-translate-y-0.5 transition-all duration-300 backdrop-blur-sm ring-1 ring-white/50 ${
                     [
-                      "bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/40",
-                      "bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/40",
-                      "bg-[#f3f7f0] border border-earth-olive/15 border-l-earth-olive/40",
-                      "bg-[#f0f3ec] border border-earth-sage/15 border-l-earth-sage/40",
-                      "bg-[#f7f0eb] border border-earth-clay/15 border-l-earth-clay/40",
-                      "bg-cream-100 border border-cream-300/50 border-l-cream-500/40",
-                      "bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/40",
-                      "bg-[#f3f7f0] border border-earth-olive/15 border-l-earth-olive/40",
-                      "bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/40",
+                      "bg-[#fdf0eb]/80 border border-earth-terracotta/15",
+                      "bg-[#fdf6e8]/80 border border-earth-warm/15",
+                      "bg-[#f3f7f0]/80 border border-earth-olive/15",
+                      "bg-[#f0f3ec]/80 border border-earth-sage/15",
+                      "bg-[#f7f0eb]/80 border border-earth-clay/15",
+                      "bg-cream-100/80 border border-cream-300/50",
+                      "bg-[#fdf6e8]/80 border border-earth-warm/15",
+                      "bg-[#f3f7f0]/80 border border-earth-olive/15",
+                      "bg-[#fdf0eb]/80 border border-earth-terracotta/15",
                     ][i % 9]
                   }`}
                 >

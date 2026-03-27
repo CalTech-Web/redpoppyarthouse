@@ -63,17 +63,6 @@ function formatTime(time: string): string {
 
 function getImageSrc(image: string | null): string | null {
   if (!image) return null;
-  try {
-    const url = new URL(image);
-    if (
-      url.hostname === "redpoppyarthouse.org" ||
-      url.hostname === "www.redpoppyarthouse.org"
-    ) {
-      return url.pathname;
-    }
-  } catch {
-    // not a valid URL
-  }
   return image;
 }
 
@@ -101,8 +90,9 @@ export default function EventDetailPage() {
     return (
       <main className="min-h-screen">
         <section className="relative overflow-hidden bg-poppy-900 text-cream-50">
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 right-0 w-72 h-72 bg-poppy-500 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
+          <div className="absolute inset-0">
+            <img src="/images/venue/performance.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
           </div>
           <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
             <Link
@@ -208,9 +198,9 @@ export default function EventDetailPage() {
 
         {/* Decorative blobs */}
         {!imgSrc && (
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 right-0 w-72 h-72 bg-poppy-500 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
-            <div className="absolute bottom-1/4 left-0 w-56 h-56 bg-earth-warm rounded-full blur-3xl -translate-x-1/3" />
+          <div className="absolute inset-0">
+            <img src="/images/venue/performance.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
           </div>
         )}
 

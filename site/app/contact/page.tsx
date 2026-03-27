@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, type FormEvent } from "react";
 import { motion, type Variants } from "framer-motion";
 
@@ -271,13 +272,13 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-poppy-900 text-cream-50">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-1/3 w-72 h-72 bg-earth-warm rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-56 h-56 bg-poppy-400 rounded-full blur-3xl" />
+      <section className="relative overflow-hidden bg-poppy-900 text-cream-50 min-h-[500px] flex items-center">
+        <div className="absolute inset-0">
+          <img src="/images/hero/venue-interior.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
+        <div className="relative max-w-7xl mx-auto px-6 py-16">
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 text-sm text-poppy-200">
               <li>
@@ -330,114 +331,170 @@ export default function ContactPage() {
       </section>
 
       {/* Location & Hours */}
-      <section className="bg-cream-50 texture-paper">
-        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
+      <section className="bg-cream-50 texture-paper relative overflow-hidden">
+        {/* Subtle warm gradient wash */}
+        <div className="absolute inset-0 bg-gradient-to-br from-earth-warm/[0.04] via-transparent to-earth-sage/[0.04]" />
+
+        <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
-            className="grid md:grid-cols-2 gap-12 md:gap-16"
           >
-            {/* Address & Phone */}
-            <motion.div variants={fadeUp} custom={0}>
-              <span className="inline-block px-3 py-1 text-xs uppercase tracking-[0.15em] font-medium text-earth-terracotta bg-earth-terracotta/10 rounded-full mb-4">
-                Location
-              </span>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-cream-900 mb-6">
-                Visit the Art House
-              </h2>
-              <address className="not-italic space-y-4">
-                <div className="bg-[#fdf0eb] rounded-xl border border-earth-terracotta/15 border-l-4 border-l-earth-terracotta/30 p-6 shadow-sm">
-                  <p className="font-serif text-lg font-bold text-cream-900 mb-1">
-                    Red Poppy Art House
-                  </p>
-                  <p className="text-cream-700">2698 Folsom Street</p>
-                  <p className="text-cream-700">
-                    at 23rd Street (cross-street)
-                  </p>
-                  <p className="text-cream-700">San Francisco, CA 94110</p>
-                  <p className="text-cream-700 mt-3">
-                    Mission District neighborhood
-                  </p>
+            {/* Top row: Image + Address/Phone side by side */}
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-stretch mb-10">
+              {/* Venue interior image */}
+              <motion.div variants={fadeUp} custom={0} className="relative rounded-2xl overflow-hidden min-h-[340px] lg:min-h-0">
+                <Image
+                  src="/images/venue/interior-1.jpg"
+                  alt="Interior of the Red Poppy Art House venue at 23rd and Folsom"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-earth-warm/30 via-transparent to-transparent" />
+                {/* Location badge overlaid on image */}
+                <div className="absolute top-5 left-5">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs uppercase tracking-[0.15em] font-medium text-cream-50 bg-earth-warm/80 backdrop-blur-sm rounded-full">
+                    <svg viewBox="0 0 24 24" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" strokeWidth="1.5" />
+                      <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="1.5" />
+                    </svg>
+                    Mission District
+                  </span>
                 </div>
-                <div className="bg-[#fdf6e8] rounded-xl border border-earth-warm/15 border-l-4 border-l-earth-warm/30 p-6 shadow-sm">
-                  <p className="font-semibold text-cream-900 mb-1">Phone</p>
-                  <a
-                    href="tel:+16507315383"
-                    className="text-poppy-700 hover:text-poppy-600 font-medium transition-colors"
-                  >
-                    (650) 731-5383
-                  </a>
-                </div>
-              </address>
-            </motion.div>
+              </motion.div>
 
-            {/* Hours */}
-            <motion.div variants={fadeUp} custom={1}>
-              <span className="inline-block px-3 py-1 text-xs uppercase tracking-[0.15em] font-medium text-earth-olive bg-earth-sage/20 rounded-full mb-4">
-                Hours
-              </span>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-cream-900 mb-6">
-                When We&apos;re Open
-              </h2>
-              <div className="bg-[#f3f7f0] rounded-xl border border-earth-sage/20 overflow-hidden shadow-sm">
-                {hours.map((h) => (
-                  <div
-                    key={h.day}
-                    className={`flex items-center justify-between px-6 py-3.5 border-b border-cream-100 last:border-b-0 ${
-                      h.type === "closed"
-                        ? "bg-cream-50"
-                        : ""
-                    }`}
-                  >
-                    <span className="font-medium text-cream-900">{h.day}</span>
-                    <span className="flex items-center gap-2">
-                      {h.type === "performance" && (
-                        <span className="w-2 h-2 rounded-full bg-poppy-500" />
-                      )}
-                      {h.type === "office" && (
-                        <span className="w-2 h-2 rounded-full bg-earth-sage" />
-                      )}
-                      <span
-                        className={`text-sm ${
-                          h.type === "closed"
-                            ? "text-cream-500"
-                            : "text-cream-700"
-                        }`}
-                      >
-                        {h.time}
-                      </span>
+              {/* Address, Phone, and quick info cards */}
+              <motion.div variants={fadeUp} custom={1} className="flex flex-col gap-4">
+                <h2 className="font-serif text-3xl md:text-4xl font-bold text-cream-900 mb-2">
+                  Visit the Art House
+                </h2>
+                <address className="not-italic flex flex-col gap-4 flex-1">
+                  {/* Address card */}
+                  <div className="bg-[#fdf0eb]/80 backdrop-blur-sm ring-1 ring-white/50 border border-earth-terracotta/15 rounded-2xl shadow-sm p-6 flex-1">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-full bg-earth-terracotta/10 flex items-center justify-center shrink-0 mt-0.5">
+                        <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-earth-terracotta" aria-hidden="true">
+                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" strokeWidth="1.5" />
+                          <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="1.5" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-serif text-lg font-bold text-cream-900 mb-1">
+                          Red Poppy Art House
+                        </p>
+                        <p className="text-cream-700">2698 Folsom Street</p>
+                        <p className="text-cream-700">
+                          at 23rd Street (cross-street)
+                        </p>
+                        <p className="text-cream-700">San Francisco, CA 94110</p>
+                        <p className="text-cream-600 mt-2 text-sm">
+                          Mission District neighborhood
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Phone card */}
+                  <div className="bg-[#fdf6e8]/80 backdrop-blur-sm ring-1 ring-white/50 border border-earth-warm/15 rounded-2xl shadow-sm p-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-earth-warm/10 flex items-center justify-center shrink-0">
+                        <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-earth-warm" aria-hidden="true">
+                          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="currentColor" strokeWidth="1.5" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-cream-900 mb-0.5">Phone</p>
+                        <a
+                          href="tel:+16507315383"
+                          className="text-earth-warm hover:text-earth-warm/80 font-medium transition-colors text-lg"
+                        >
+                          (650) 731-5383
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </address>
+              </motion.div>
+            </div>
+
+            {/* Hours section - full width glass card */}
+            <motion.div variants={fadeUp} custom={2}>
+              <div className="bg-[#f3f7f0]/80 backdrop-blur-sm ring-1 ring-white/50 border border-earth-sage/15 rounded-2xl shadow-sm p-6 sm:p-8">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                  <div>
+                    <span className="inline-block px-3 py-1 text-xs uppercase tracking-[0.15em] font-medium text-earth-olive bg-earth-sage/20 rounded-full mb-3">
+                      Hours
+                    </span>
+                    <h2 className="font-serif text-2xl md:text-3xl font-bold text-cream-900">
+                      When We&apos;re Open
+                    </h2>
+                  </div>
+                  <div className="flex items-center gap-4 text-xs text-cream-600">
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-earth-sage" />
+                      Office hours
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-earth-terracotta/70" />
+                      Performance evenings
                     </span>
                   </div>
-                ))}
+                </div>
+
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                  {hours.map((h) => (
+                    <div
+                      key={h.day}
+                      className={`rounded-xl px-5 py-4 transition-all ${
+                        h.type === "closed"
+                          ? "bg-cream-100/60 border border-cream-200/50"
+                          : h.type === "performance"
+                          ? "bg-[#fdf0eb]/60 border border-earth-terracotta/10"
+                          : "bg-white/60 border border-earth-sage/10"
+                      }`}
+                    >
+                      <span className="font-medium text-cream-900 block mb-1">{h.day}</span>
+                      <span className="flex items-center gap-2">
+                        {h.type === "performance" && (
+                          <span className="w-2 h-2 rounded-full bg-earth-terracotta/70" />
+                        )}
+                        {h.type === "office" && (
+                          <span className="w-2 h-2 rounded-full bg-earth-sage" />
+                        )}
+                        <span
+                          className={`text-sm ${
+                            h.type === "closed"
+                              ? "text-cream-500"
+                              : "text-cream-700"
+                          }`}
+                        >
+                          {h.time}
+                        </span>
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                <p className="mt-5 text-sm text-cream-600 bg-cream-100/60 rounded-xl px-5 py-3.5">
+                  Hours are subject to change. All other times by appointment. Call{" "}
+                  <a
+                    href="tel:+16507315383"
+                    className="text-earth-warm hover:text-earth-warm/80 transition-colors font-medium"
+                  >
+                    (650) 731-5383
+                  </a>{" "}
+                  or email{" "}
+                  <a
+                    href="mailto:info@redpoppyarthouse.org"
+                    className="text-earth-warm hover:text-earth-warm/80 transition-colors font-medium"
+                  >
+                    info@redpoppyarthouse.org
+                  </a>{" "}
+                  to schedule a time for viewing exhibitions.
+                </p>
               </div>
-              <div className="mt-4 flex items-center gap-4 text-xs text-cream-600">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-earth-sage" />
-                  Office hours
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-poppy-500" />
-                  Performance evenings
-                </span>
-              </div>
-              <p className="mt-4 text-sm text-cream-600 bg-cream-100 rounded-lg px-4 py-3">
-                Hours are subject to change. All other times by appointment. Call{" "}
-                <a
-                  href="tel:+16507315383"
-                  className="text-poppy-700 hover:text-poppy-600 transition-colors"
-                >
-                  (650) 731-5383
-                </a>{" "}
-                or email{" "}
-                <a
-                  href="mailto:info@redpoppyarthouse.org"
-                  className="text-poppy-700 hover:text-poppy-600 transition-colors"
-                >
-                  info@redpoppyarthouse.org
-                </a>{" "}
-                to schedule a time for viewing exhibitions.
-              </p>
             </motion.div>
           </motion.div>
         </div>
@@ -471,7 +528,7 @@ export default function ContactPage() {
                   href={`mailto:${contact.email}`}
                   variants={fadeUp}
                   custom={i + 1}
-                  className={`group rounded-xl p-5 border-l-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 ${["bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/30", "bg-[#f3f7f0] border border-earth-olive/15 border-l-earth-olive/30", "bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/30"][i % 3]}`}
+                  className={`group rounded-xl p-5 shadow-sm backdrop-blur-sm ring-1 ring-white/50 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 ${["bg-[#fdf6e8]/80 border border-earth-warm/15", "bg-[#f3f7f0]/80 border border-earth-olive/15", "bg-[#fdf0eb]/80 border border-earth-terracotta/15"][i % 3]}`}
                 >
                   <p className="font-semibold text-cream-900 mb-1 group-hover:text-poppy-800 transition-colors">
                     {contact.label}

@@ -16,13 +16,13 @@ export default function VolunteerPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-poppy-900 text-cream-50">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-1/3 w-72 h-72 bg-earth-warm rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-56 h-56 bg-poppy-400 rounded-full blur-3xl" />
+      <section className="relative overflow-hidden bg-poppy-900 text-cream-50 min-h-[500px] flex items-center">
+        <div className="absolute inset-0">
+          <img src="/images/hero/venue-interior.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
+        <div className="relative max-w-7xl mx-auto px-6 py-16">
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 text-sm text-poppy-200">
               <li>
@@ -155,7 +155,7 @@ export default function VolunteerPage() {
               <motion.div
                 variants={fadeUp}
                 custom={1}
-                className="bg-[#fdf0eb] rounded-xl border border-earth-terracotta/15 border-l-4 border-l-earth-terracotta/30 p-6 shadow-sm"
+                className="bg-[#fdf0eb]/80 rounded-xl border border-earth-terracotta/15 p-6 shadow-sm backdrop-blur-sm ring-1 ring-white/50"
               >
                 <div className="w-10 h-10 rounded-lg bg-earth-terracotta/10 text-earth-terracotta flex items-center justify-center mb-4">
                   <svg
@@ -185,7 +185,7 @@ export default function VolunteerPage() {
               <motion.div
                 variants={fadeUp}
                 custom={2}
-                className="bg-[#fdf6e8] rounded-xl border border-earth-warm/15 border-l-4 border-l-earth-warm/30 p-6 shadow-sm"
+                className="bg-[#fdf6e8]/80 rounded-xl border border-earth-warm/15 p-6 shadow-sm backdrop-blur-sm ring-1 ring-white/50"
               >
                 <div className="w-10 h-10 rounded-lg bg-earth-warm/10 text-earth-warm flex items-center justify-center mb-4">
                   <svg
@@ -216,7 +216,7 @@ export default function VolunteerPage() {
             <motion.div
               variants={fadeUp}
               custom={3}
-              className="mt-8 bg-[#f3f7f0] rounded-xl border border-earth-sage/20 border-l-4 border-l-earth-olive/30 p-6 shadow-sm"
+              className="mt-8 bg-[#f3f7f0]/80 rounded-xl border border-earth-sage/20 p-6 shadow-sm backdrop-blur-sm ring-1 ring-white/50"
             >
               <h3 className="font-serif text-lg font-bold text-cream-900 mb-2">
                 Before the Show

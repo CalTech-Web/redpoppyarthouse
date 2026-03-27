@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 
 const fadeUp: Variants = {
@@ -88,13 +89,13 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-poppy-900 text-cream-50">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-poppy-500 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-earth-warm rounded-full blur-3xl -translate-x-1/4 translate-y-1/4" />
+      <section className="relative overflow-hidden bg-poppy-900 text-cream-50 min-h-[500px] flex items-center">
+        <div className="absolute inset-0">
+          <img src="/images/venue/story.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
+        <div className="relative max-w-7xl mx-auto px-6 py-16">
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 text-sm text-poppy-200">
               <li>
@@ -184,53 +185,109 @@ export default function AboutPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="bg-surface border-y border-cream-200">
-        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
+      <section className="bg-surface border-y border-cream-200 relative overflow-hidden">
+        {/* Subtle decorative gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-earth-sage/[0.05] via-transparent to-earth-warm/[0.05]" />
+
+        <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
-            className="grid md:grid-cols-2 gap-12 md:gap-16"
           >
-            <motion.div variants={fadeUp} custom={0}>
-              <span className="inline-block px-3 py-1 text-xs uppercase tracking-[0.15em] font-medium text-poppy-700 bg-poppy-50 rounded-full mb-4">
-                Mission
-              </span>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-cream-900 mb-6">
-                Empowering Society Through Creative Processes
-              </h2>
-              <p className="text-cream-700 leading-relaxed mb-4">
-                The Poppy is an artist-driven organization that seeks to empower
-                and transform society by addressing current social issues that
-                impact our community and society at large through creative
-                processes.
-              </p>
-              <p className="text-cream-700 leading-relaxed">
-                More specifically, the intent of Red Poppy Art House is to forge a
-                bridge between high caliber artistic work and community life
-                through visibility and inclusiveness.
-              </p>
-            </motion.div>
+            {/* Mission - image + glass card, side by side */}
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-stretch mb-16 md:mb-20">
+              {/* Performance image */}
+              <motion.div variants={fadeUp} custom={0} className="relative rounded-2xl overflow-hidden min-h-[360px] lg:min-h-0">
+                <Image
+                  src="/images/venue/performance.jpg"
+                  alt="A live performance at the Red Poppy Art House"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-earth-warm/30 via-transparent to-transparent" />
+              </motion.div>
 
-            <motion.div variants={fadeUp} custom={1}>
-              <span className="inline-block px-3 py-1 text-xs uppercase tracking-[0.15em] font-medium text-earth-olive bg-earth-sage/20 rounded-full mb-4">
-                Vision
-              </span>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-cream-900 mb-6">
-                A Space of Encounter
-              </h2>
-              <p className="text-cream-700 leading-relaxed mb-4">
-                Founded in 2003 to serve as an intercultural and multidisciplinary
-                &quot;space of encounter&quot; - a hub where multiple
-                social-cultural groups could interconnect to experience one another
-                and therefore potentiate one another&apos;s endeavors.
-              </p>
-              <p className="text-cream-700 leading-relaxed">
-                We weave a more solid and tolerant social fabric through the arts.
-                Every performance, every exhibition, every workshop is an
-                invitation to cross boundaries and discover common ground.
-              </p>
-            </motion.div>
+              {/* Mission glass card */}
+              <motion.div variants={fadeUp} custom={1} className="flex flex-col">
+                <div className="bg-[#fdf6e8]/80 backdrop-blur-sm ring-1 ring-white/50 border border-earth-warm/15 rounded-2xl shadow-sm p-6 sm:p-8 flex-1 relative">
+                  {/* Decorative quote accent */}
+                  <div className="absolute -top-3 -left-1 text-7xl font-serif text-earth-warm/15 leading-none select-none" aria-hidden="true">
+                    &ldquo;
+                  </div>
+                  <span className="inline-block px-3 py-1 text-xs uppercase tracking-[0.15em] font-medium text-earth-warm bg-earth-warm/10 rounded-full mb-4 relative z-10">
+                    Mission
+                  </span>
+                  <h2 className="font-serif text-3xl md:text-4xl font-bold text-cream-900 mb-2 relative z-10">
+                    Empowering Society Through Creative Processes
+                  </h2>
+                  <p className="text-sm text-earth-warm/80 font-medium mb-6 italic relative z-10">
+                    A bridge between artistic work and community life
+                  </p>
+                  {/* Decorative divider */}
+                  <div className="w-12 h-1 bg-gradient-to-r from-earth-warm to-earth-terracotta/60 rounded-full mb-6" />
+                  <p className="text-cream-700 leading-relaxed mb-4">
+                    The Poppy is an artist-driven organization that seeks to empower
+                    and transform society by addressing current social issues that
+                    impact our community and society at large through creative
+                    processes.
+                  </p>
+                  <p className="text-cream-700 leading-relaxed">
+                    More specifically, the intent of Red Poppy Art House is to forge a
+                    bridge between high caliber artistic work and community life
+                    through visibility and inclusiveness.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Vision - glass card + image, reversed order */}
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-stretch">
+              {/* Vision glass card */}
+              <motion.div variants={fadeUp} custom={2} className="flex flex-col order-2 lg:order-1">
+                <div className="bg-[#f3f7f0]/80 backdrop-blur-sm ring-1 ring-white/50 border border-earth-sage/15 rounded-2xl shadow-sm p-6 sm:p-8 flex-1 relative">
+                  {/* Decorative accent */}
+                  <div className="absolute -top-3 -right-1 text-7xl font-serif text-earth-sage/15 leading-none select-none" aria-hidden="true">
+                    &rdquo;
+                  </div>
+                  <span className="inline-block px-3 py-1 text-xs uppercase tracking-[0.15em] font-medium text-earth-olive bg-earth-sage/20 rounded-full mb-4 relative z-10">
+                    Vision
+                  </span>
+                  <h2 className="font-serif text-3xl md:text-4xl font-bold text-cream-900 mb-2 relative z-10">
+                    A Space of Encounter
+                  </h2>
+                  <p className="text-sm text-earth-olive/80 font-medium mb-6 italic relative z-10">
+                    Where multiple social-cultural groups interconnect
+                  </p>
+                  {/* Decorative divider */}
+                  <div className="w-12 h-1 bg-gradient-to-r from-earth-sage to-earth-olive/60 rounded-full mb-6" />
+                  <p className="text-cream-700 leading-relaxed mb-4">
+                    Founded in 2003 to serve as an intercultural and multidisciplinary
+                    &quot;space of encounter&quot; - a hub where multiple
+                    social-cultural groups could interconnect to experience one another
+                    and therefore potentiate one another&apos;s endeavors.
+                  </p>
+                  <p className="text-cream-700 leading-relaxed">
+                    We weave a more solid and tolerant social fabric through the arts.
+                    Every performance, every exhibition, every workshop is an
+                    invitation to cross boundaries and discover common ground.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* MAPP collage image */}
+              <motion.div variants={fadeUp} custom={3} className="relative rounded-2xl overflow-hidden min-h-[360px] lg:min-h-0 order-1 lg:order-2">
+                <Image
+                  src="/images/venue/mapp-collage.jpg"
+                  alt="MAPP community arts events at the Red Poppy Art House"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-earth-sage/20 via-transparent to-transparent" />
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -275,14 +332,14 @@ export default function AboutPage() {
                     {/* Timeline dot */}
                     <div className="absolute left-2.5 md:left-6.5 top-1.5 w-3 h-3 rounded-full bg-earth-warm ring-4 ring-cream-100" />
 
-                    <div className={`rounded-xl border-l-4 p-6 shadow-sm ${
+                    <div className={`rounded-xl p-6 shadow-sm backdrop-blur-sm ring-1 ring-white/50 ${
                       [
-                        "bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/30",
-                        "bg-[#f3f7f0] border border-earth-sage/15 border-l-earth-sage/40",
-                        "bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/30",
-                        "bg-[#f0f3ec] border border-earth-olive/15 border-l-earth-olive/30",
-                        "bg-[#f7f0eb] border border-earth-clay/15 border-l-earth-clay/30",
-                        "bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/30",
+                        "bg-[#fdf6e8]/80 border border-earth-warm/15",
+                        "bg-[#f3f7f0]/80 border border-earth-sage/15",
+                        "bg-[#fdf0eb]/80 border border-earth-terracotta/15",
+                        "bg-[#f0f3ec]/80 border border-earth-olive/15",
+                        "bg-[#f7f0eb]/80 border border-earth-clay/15",
+                        "bg-[#fdf6e8]/80 border border-earth-warm/15",
                       ][i % 6]
                     }`}>
                       <span className="inline-block px-2.5 py-0.5 text-xs font-semibold text-earth-warm bg-earth-warm/10 rounded-full mb-2">
@@ -336,13 +393,13 @@ export default function AboutPage() {
                   key={person.name}
                   variants={fadeUp}
                   custom={i + 1}
-                  className={`rounded-xl border-t-4 p-6 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 ${
+                  className={`rounded-xl border-t-4 p-6 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 backdrop-blur-sm ring-1 ring-white/50 ${
                     [
-                      "bg-[#fdf6e8] border border-earth-warm/15 border-t-earth-warm/30",
-                      "bg-[#f3f7f0] border border-earth-olive/15 border-t-earth-olive/30",
-                      "bg-[#fdf0eb] border border-earth-terracotta/15 border-t-earth-terracotta/30",
-                      "bg-[#f0f3ec] border border-earth-sage/15 border-t-earth-sage/30",
-                      "bg-[#f7f0eb] border border-earth-clay/15 border-t-earth-clay/30",
+                      "bg-[#fdf6e8]/80 border border-earth-warm/15 border-t-earth-warm/30",
+                      "bg-[#f3f7f0]/80 border border-earth-olive/15 border-t-earth-olive/30",
+                      "bg-[#fdf0eb]/80 border border-earth-terracotta/15 border-t-earth-terracotta/30",
+                      "bg-[#f0f3ec]/80 border border-earth-sage/15 border-t-earth-sage/30",
+                      "bg-[#f7f0eb]/80 border border-earth-clay/15 border-t-earth-clay/30",
                     ][i % 5]
                   }`}
                 >

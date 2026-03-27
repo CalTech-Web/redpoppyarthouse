@@ -66,17 +66,6 @@ function formatTime(time: string): string {
 
 function getImageSrc(image: string | null): string | null {
   if (!image) return null;
-  try {
-    const url = new URL(image);
-    if (
-      url.hostname === "redpoppyarthouse.org" ||
-      url.hostname === "www.redpoppyarthouse.org"
-    ) {
-      return url.pathname;
-    }
-  } catch {
-    // not a valid URL - return as-is
-  }
   return image;
 }
 
@@ -130,13 +119,13 @@ export default function EventsArchivePage() {
   return (
     <main className="min-h-screen">
       {/* ── Hero ─────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-poppy-900 text-cream-50">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-1/4 w-80 h-80 bg-earth-warm rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/3 w-56 h-56 bg-poppy-400 rounded-full blur-3xl" />
+      <section className="relative overflow-hidden bg-poppy-900 text-cream-50 min-h-[500px] flex items-center">
+        <div className="absolute inset-0">
+          <img src="/images/venue/performance.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
+        <div className="relative max-w-7xl mx-auto px-6 py-16">
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 text-sm text-poppy-200">
               <li>
@@ -290,7 +279,7 @@ export default function EventsArchivePage() {
                   >
                     <Link
                       href={`/event/${event.slug}`}
-                      className={`group block h-full rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:shadow-cream-800/8 hover:-translate-y-1 transition-all duration-300 border-t-4 ${["bg-[#fdf6e8] border border-earth-warm/15 border-t-earth-warm/30", "bg-[#f3f7f0] border border-earth-olive/15 border-t-earth-olive/30", "bg-[#fdf0eb] border border-earth-terracotta/15 border-t-earth-terracotta/30", "bg-[#f0f3ec] border border-earth-sage/15 border-t-earth-sage/30", "bg-[#f7f0eb] border border-earth-clay/15 border-t-earth-clay/30", "bg-cream-100 border border-cream-300/50 border-t-cream-500/30"][i % 6]}`}
+                      className={`group block h-full rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:shadow-cream-800/8 hover:-translate-y-1 transition-all duration-300 border-t-4 backdrop-blur-sm ring-1 ring-white/50 ${["bg-[#fdf6e8]/80 border border-earth-warm/15 border-t-earth-warm/30", "bg-[#f3f7f0]/80 border border-earth-olive/15 border-t-earth-olive/30", "bg-[#fdf0eb]/80 border border-earth-terracotta/15 border-t-earth-terracotta/30", "bg-[#f0f3ec]/80 border border-earth-sage/15 border-t-earth-sage/30", "bg-[#f7f0eb]/80 border border-earth-clay/15 border-t-earth-clay/30", "bg-cream-100/80 border border-cream-300/50 border-t-cream-500/30"][i % 6]}`}
                     >
                       {/* Image */}
                       {imgSrc ? (

@@ -77,13 +77,13 @@ export default function RentalsPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-poppy-900 text-cream-50">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-1/4 w-72 h-72 bg-earth-warm rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-1/3 w-56 h-56 bg-poppy-400 rounded-full blur-3xl" />
+      <section className="relative overflow-hidden bg-poppy-900 text-cream-50 min-h-[500px] flex items-center">
+        <div className="absolute inset-0">
+          <img src="/images/venue/interior-1.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
+        <div className="relative max-w-7xl mx-auto px-6 py-16">
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 text-sm text-poppy-200">
               <li>
@@ -168,11 +168,11 @@ export default function RentalsPage() {
               </p>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-[#fdf6e8] rounded-xl border border-earth-warm/20 border-t-4 border-t-earth-warm/30 p-4 text-center shadow-sm">
+                <div className="bg-[#fdf6e8]/80 rounded-xl border border-earth-warm/20 border-t-4 border-t-earth-warm/30 p-4 text-center shadow-sm backdrop-blur-sm ring-1 ring-white/50">
                   <div className="font-serif text-3xl font-bold text-earth-warm">650</div>
                   <div className="text-sm text-cream-700">Square feet</div>
                 </div>
-                <div className="bg-[#f3f7f0] rounded-xl border border-earth-sage/20 border-t-4 border-t-earth-olive/30 p-4 text-center shadow-sm">
+                <div className="bg-[#f3f7f0]/80 rounded-xl border border-earth-sage/20 border-t-4 border-t-earth-olive/30 p-4 text-center shadow-sm backdrop-blur-sm ring-1 ring-white/50">
                   <div className="font-serif text-3xl font-bold text-earth-warm">49</div>
                   <div className="text-sm text-cream-700">Seats</div>
                 </div>
@@ -190,10 +190,10 @@ export default function RentalsPage() {
               <div className="space-y-4">
                 {amenities.map((amenity, i) => {
                   const cardClasses = [
-                    "bg-[#fdf6e8] border-l-4 border-l-earth-warm/30 border border-earth-warm/15",
-                    "bg-[#f3f7f0] border-l-4 border-l-earth-olive/30 border border-earth-olive/15",
-                    "bg-[#fdf0eb] border-l-4 border-l-earth-terracotta/30 border border-earth-terracotta/15",
-                    "bg-[#f0f3ec] border-l-4 border-l-earth-sage/30 border border-earth-sage/15",
+                    "bg-[#fdf6e8]/80 border border-earth-warm/15 backdrop-blur-sm ring-1 ring-white/50",
+                    "bg-[#f3f7f0]/80 border border-earth-olive/15 backdrop-blur-sm ring-1 ring-white/50",
+                    "bg-[#fdf0eb]/80 border border-earth-terracotta/15 backdrop-blur-sm ring-1 ring-white/50",
+                    "bg-[#f0f3ec]/80 border border-earth-sage/15 backdrop-blur-sm ring-1 ring-white/50",
                   ][i % 4];
                   const iconClasses = [
                     "bg-earth-warm/10 text-earth-warm",
@@ -244,7 +244,7 @@ export default function RentalsPage() {
                 Rental Pricing
               </h2>
               <div className="space-y-4">
-                <div className="bg-[#fdf6e8] rounded-xl border border-earth-warm/15 border-l-4 border-l-earth-warm/40 p-6 shadow-sm">
+                <div className="bg-[#fdf6e8]/80 rounded-xl border border-earth-warm/15 p-6 shadow-sm backdrop-blur-sm ring-1 ring-white/50">
                   <div className="flex items-baseline justify-between mb-2">
                     <h3 className="font-semibold text-cream-900">
                       Standard Rental
@@ -258,7 +258,7 @@ export default function RentalsPage() {
                     for a custom quote based on your needs.
                   </p>
                 </div>
-                <div className="bg-[#fdf0eb] rounded-xl border border-earth-terracotta/15 border-l-4 border-l-earth-terracotta/40 p-6 shadow-sm">
+                <div className="bg-[#fdf0eb]/80 rounded-xl border border-earth-terracotta/15 p-6 shadow-sm backdrop-blur-sm ring-1 ring-white/50">
                   <div className="flex items-baseline justify-between mb-2">
                     <h3 className="font-semibold text-cream-900">
                       Reception Package
@@ -272,7 +272,7 @@ export default function RentalsPage() {
                     and cleanup time.
                   </p>
                 </div>
-                <div className="bg-[#f3f7f0] rounded-xl border border-earth-sage/20 border-l-4 border-l-earth-olive/40 p-6 shadow-sm">
+                <div className="bg-[#f3f7f0]/80 rounded-xl border border-earth-sage/20 p-6 shadow-sm backdrop-blur-sm ring-1 ring-white/50">
                   <div className="flex items-baseline justify-between mb-2">
                     <h3 className="font-semibold text-cream-900">
                       Nonprofit Rate

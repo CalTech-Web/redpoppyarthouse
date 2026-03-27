@@ -131,11 +131,12 @@ export default function BlogPage() {
   return (
     <main className="min-h-screen bg-cream-50">
       {/* Hero */}
-      <section className="relative bg-poppy-900 text-cream-50 pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-earth-warm rounded-full blur-[100px]" />
+      <section className="relative bg-poppy-900 text-cream-50 min-h-[500px] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img src="/images/events/string-skin-breath.png" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
         </div>
-        <div className="relative max-w-5xl mx-auto px-6">
+        <div className="relative max-w-5xl mx-auto px-6 py-16">
           <motion.div initial="hidden" animate="visible">
             <motion.nav variants={fadeUp} custom={0} aria-label="Breadcrumb" className="mb-8">
               <ol className="flex items-center gap-2 text-sm text-cream-300">
@@ -324,7 +325,7 @@ export default function BlogPage() {
             <div className="space-y-4">
               {pressArticles.map((article, i) => (
                 <motion.div key={article.title} variants={fadeUp} custom={i + 1}>
-                  <div className={`rounded-2xl p-6 shadow-sm border-l-4 hover:shadow-lg hover:shadow-cream-800/8 hover:-translate-y-0.5 transition-all duration-300 ${["bg-[#fdf6e8] border border-earth-warm/15 border-l-earth-warm/30", "bg-[#f3f7f0] border border-earth-olive/15 border-l-earth-olive/30", "bg-[#fdf0eb] border border-earth-terracotta/15 border-l-earth-terracotta/30"][i % 3]}`}>
+                  <div className={`rounded-2xl p-6 shadow-sm backdrop-blur-sm ring-1 ring-white/50 hover:shadow-lg hover:shadow-cream-800/8 hover:-translate-y-0.5 transition-all duration-300 ${["bg-[#fdf6e8]/80 border border-earth-warm/15", "bg-[#f3f7f0]/80 border border-earth-olive/15", "bg-[#fdf0eb]/80 border border-earth-terracotta/15"][i % 3]}`}>
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <h3 className="font-serif text-lg font-bold text-cream-900 mb-1">
