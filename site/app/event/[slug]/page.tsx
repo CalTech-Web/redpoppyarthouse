@@ -94,7 +94,7 @@ export default function EventDetailPage() {
             <img src="/images/venue/performance.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
           </div>
-          <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
+          <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24 w-full">
             <Link
               href="/event"
               className="inline-flex items-center gap-2 text-sm text-poppy-200 hover:text-cream-50 transition-colors mb-6"
@@ -204,7 +204,7 @@ export default function EventDetailPage() {
           </div>
         )}
 
-        <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
+        <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24 w-full">
           <motion.div initial="hidden" animate="visible">
             <motion.div variants={fadeUp} custom={0}>
               <Link

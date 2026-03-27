@@ -86,7 +86,7 @@ export default function BlogPostPage() {
             <img src="/images/hero/collage-4.png" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
           </div>
-          <div className="relative max-w-7xl mx-auto px-6 py-16">
+          <div className="relative max-w-7xl mx-auto px-6 py-16 w-full">
             <Link
               href="/blog"
               className="inline-flex items-center gap-2 text-sm text-poppy-200 hover:text-cream-50 transition-colors mb-6"

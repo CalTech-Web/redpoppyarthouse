@@ -73,7 +73,7 @@ export default function WPPage() {
     return (
       <main className="min-h-screen bg-cream-50">
         <section className="relative bg-poppy-900 text-cream-50 pt-32 pb-20">
-          <div className="relative max-w-7xl mx-auto px-6 text-center">
+          <div className="relative max-w-7xl mx-auto px-6 w-full text-center">
             <h1 className="font-serif text-4xl font-bold mb-4">Page Not Found</h1>
             <p className="text-cream-200 mb-8">The page you are looking for does not exist.</p>
             <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold bg-cream-50 text-poppy-900 rounded-full hover:bg-cream-100 transition-colors">
@@ -96,7 +96,7 @@ export default function WPPage() {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-earth-warm rounded-full blur-[100px]" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-6">
+        <div className="relative max-w-7xl mx-auto px-6 w-full">
           <motion.div initial="hidden" animate="visible">
             <motion.nav variants={fadeUp} custom={0} aria-label="Breadcrumb" className="mb-8">
               <ol className="flex items-center gap-2 text-sm text-cream-300">
