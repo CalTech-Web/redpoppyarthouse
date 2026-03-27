@@ -1,12 +1,15 @@
 import Link from "next/link";
 
 const navLinks = [
-  { href: "/event", label: "Events" },
   { href: "/about", label: "About" },
-  { href: "/programs", label: "Programs" },
-  { href: "/participate/volunteer", label: "Volunteer" },
   { href: "/participate/give", label: "Give" },
+  { href: "/event", label: "Events" },
+  { href: "/mapp", label: "MAPP" },
+  { href: "/programs", label: "Programs" },
+  { href: "/participate", label: "Participate" },
   { href: "/rentals", label: "Rentals" },
+  { href: "/resources", label: "Resources" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];
 

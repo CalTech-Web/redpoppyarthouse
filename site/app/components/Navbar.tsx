@@ -5,11 +5,14 @@ import { useState, useRef, useEffect } from "react";
 
 const navLinks = [
   { href: "/about", label: "About" },
+  { href: "/participate/give", label: "Give" },
   { href: "/event", label: "Events" },
+  { href: "/mapp", label: "MAPP" },
   { href: "/programs", label: "Programs" },
   { href: "/participate", label: "Participate" },
   { href: "/rentals", label: "Rentals" },
-  { href: "/contact", label: "Contact" },
+  { href: "/resources", label: "Resources" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export default function Navbar() {
@@ -79,12 +82,12 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
+              className={`px-2.5 py-2 text-[13px] font-medium rounded-lg transition-all duration-300 ${
                 scrolled
                   ? "text-cream-800 hover:text-poppy-700 hover:bg-poppy-50"
                   : "text-cream-100 hover:text-cream-50 hover:bg-cream-50/10"
@@ -108,7 +111,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`md:hidden p-2 rounded-lg transition-colors ${
+          className={`lg:hidden p-2 rounded-lg transition-colors ${
             scrolled
               ? "text-cream-800 hover:text-poppy-700 hover:bg-poppy-50"
               : "text-cream-100 hover:text-cream-50 hover:bg-cream-50/10"
@@ -143,7 +146,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <div
         ref={menuRef}
-        className="md:hidden overflow-hidden bg-cream-50/98 backdrop-blur-md border-t border-cream-200/50 transition-[height,opacity] duration-300 ease-in-out"
+        className="lg:hidden overflow-hidden bg-cream-50/98 backdrop-blur-md border-t border-cream-200/50 transition-[height,opacity] duration-300 ease-in-out"
         style={{
           height: menuHeight,
           opacity: isOpen ? 1 : 0,
