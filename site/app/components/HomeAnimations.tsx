@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion, type Variants, useInView } from "framer-motion";
-import { useRef, useEffect, useState, useCallback } from "react";
+import { motion, type Variants, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -19,15 +20,6 @@ const fadeIn: Variants = {
   visible: {
     opacity: 1,
     transition: { duration: 0.8, ease: "easeOut" as const },
-  },
-};
-
-const scaleIn: Variants = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.6, ease: "easeOut" as const },
   },
 };
 
@@ -70,15 +62,13 @@ export function HeroSection() {
       <div className="absolute inset-0">
         <Image
           src="/images/hero/venue-interior.jpg"
-          alt="Red Poppy Art House interior - an intimate performance venue"
+          alt="Red Poppy Art House interior - an intimate performance venue with warm lighting, eclectic furniture, and art-covered walls"
           fill
           className="object-cover"
           priority
           quality={85}
         />
-        {/* Dark + Red gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-poppy-900/60 to-black/80" />
-        {/* Vignette */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.5)_100%)]" />
       </div>
 
@@ -110,10 +100,12 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-lg sm:text-xl text-cream-200/90 leading-relaxed max-w-2xl mx-auto mb-12"
+          className="text-lg sm:text-xl text-cream-200/90 leading-relaxed max-w-3xl mx-auto mb-12"
         >
-          A place for slowness and the nuanced intermingling of ideas and
-          activities generally termed &quot;art.&quot;
+          The Red Poppy Art House is a room on a corner in the Mission District
+          of San Francisco, nestled between a myriad of communities. It is a place
+          for slowness and the nuanced intermingling of ideas and activities
+          generally termed &quot;art.&quot;
         </motion.p>
 
         <motion.div
@@ -156,7 +148,6 @@ export function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* Bottom decorative line */}
       <div className="absolute bottom-0 left-0 right-0 decorative-line" />
     </section>
   );
@@ -190,12 +181,10 @@ function StatItem({ value, suffix, label }: { value: number; suffix: string; lab
 export function StatsSection() {
   return (
     <section className="bg-poppy-900 relative overflow-hidden grain-overlay">
-      {/* Decorative accents */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-1/4 w-64 h-64 bg-poppy-400 rounded-full blur-[100px]" />
         <div className="absolute bottom-0 right-1/4 w-48 h-48 bg-earth-warm rounded-full blur-[80px]" />
       </div>
-
       <div className="relative max-w-6xl mx-auto px-6 py-16 md:py-20">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
           {stats.map((stat) => (
@@ -250,7 +239,7 @@ export function OurStorySection() {
             <div className="relative rounded-2xl overflow-hidden mb-8 aspect-[16/10]">
               <Image
                 src="/images/venue/story.jpg"
-                alt="Red Poppy Art House - a room where art finds home"
+                alt="Red Poppy Art House founding - artists and community members gathered in the original space at Folsom and 23rd"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -258,18 +247,25 @@ export function OurStorySection() {
               <div className="absolute inset-0 bg-gradient-to-t from-poppy-900/30 to-transparent" />
             </div>
             <p className="text-cream-800 leading-relaxed mb-4 text-lg">
-              The Red Poppy Art House (&quot;The Poppy&quot;) was founded in 2003 to serve
-              as an intercultural and multidisciplinary &quot;space of encounter,&quot; a hub
-              where multiple social-cultural groups could interconnect to experience
-              one another and therefore potentiate one another&apos;s endeavors while
-              weaving a more solid and tolerant social fabric.
+              In February 2003, Alexander Allende and Todd Brown signed a lease on a big
+              empty room on the corner of Folsom and 23rd that had one closet, a bathroom,
+              and two layers of decades-old linoleum flooring. Armed with a couple of credit
+              cards and basic carpentry skills, they set out to forge a basic artist workspace
+              and dance studio.
+            </p>
+            <p className="text-cream-700 leading-relaxed mb-4">
+              The Red Poppy Art House was founded to serve as an intercultural and
+              multidisciplinary &quot;space of encounter,&quot; a hub where multiple
+              social-cultural groups could interconnect to experience one another and therefore
+              potentiate one another&apos;s endeavors while weaving a more solid and tolerant
+              social fabric.
             </p>
             <p className="text-cream-700 leading-relaxed mb-8">
-              It began as a working artist studio offering classes in painting and
-              Argentine tango, a weekly jazz night, and curated exhibitions. Since that
-              time, the Poppy has been gradually evolving to respond to the needs and
-              opportunities presented by its surrounding community and the arts ecology
-              at large.
+              By the end of 2003, a small group of artists staged the first &quot;Mission Arts
+              Party&quot; - later renamed the Mission Arts &amp; Performance Project (MAPP) - a
+              bimonthly community arts festival that continues to this day. After seven years,
+              the organization&apos;s role within the arts ecology has become highly recognized
+              and valued among its local community and the broader Bay Area.
             </p>
             <Link
               href="/about"
@@ -288,10 +284,26 @@ export function OurStorySection() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   SECTION 4: UPCOMING EVENTS
+   SECTION 4: UPCOMING EVENTS + EVENT MODAL
    ═══════════════════════════════════════════════════════════════ */
 
-const upcomingEvents = [
+interface EventData {
+  title: string;
+  subtitle: string;
+  date: string;
+  day: string;
+  year: string;
+  time: string;
+  doors: string;
+  artists: { name: string; instrument: string }[];
+  description: string;
+  fullDescription: string;
+  pricing: { label: string; price: string }[];
+  ticketUrl: string;
+  image: string;
+}
+
+const upcomingEvents: EventData[] = [
   {
     title: "Julio Lemos - Brian Rice Duo",
     subtitle: "Intimate Brazilian Grooves",
@@ -300,10 +312,20 @@ const upcomingEvents = [
     year: "2025",
     time: "7:30 PM",
     doors: "7:00 PM",
-    artists: "Julio Lemos (7-string guitar), Brian Rice (percussion)",
+    artists: [
+      { name: "Julio Lemos", instrument: "7-string guitar" },
+      { name: "Brian Rice", instrument: "Percussion" },
+    ],
     description:
-      "Join us for an unforgettable evening of Brazilian music with renowned 7-string guitarist Julio Lemos and master percussionist Brian Rice, one of the leading American specialists in Brazilian rhythms.",
-    price: "$25 - $35",
+      "An unforgettable evening of Brazilian music with renowned 7-string guitarist Julio Lemos and master percussionist Brian Rice.",
+    fullDescription:
+      "Join us for an unforgettable evening of Brazilian music with renowned 7-string guitarist Julio Lemos and master percussionist Brian Rice, one of the leading American specialists in Brazilian rhythms. Recognized today as one of the leading contemporary Brazilian 7-string guitarists, Julio Lemos follows in the tradition of great masters such as Rafael Rabello and Dino Sete Cordas. Together with Brian Rice, they bring the rich tapestry of Brazilian musical traditions to life in the intimate setting of the Red Poppy Art House.",
+    pricing: [
+      { label: "Students & Seniors", price: "$25" },
+      { label: "Early Bird", price: "$29" },
+      { label: "General", price: "$35" },
+      { label: "At the Door", price: "$35" },
+    ],
     ticketUrl: "https://www.eventbrite.com/e/julio-lemos-brian-rice-duo-tickets-1510843085339",
     image: "/images/events/julio-lemos.png",
   },
@@ -315,10 +337,22 @@ const upcomingEvents = [
     year: "2025",
     time: "7:30 PM",
     doors: "7:00 PM",
-    artists: "Teresa Tam (Voice), Winnie Cheung (Piano), Janice Lee (Violin), C.C. Lee (Bandoneon)",
+    artists: [
+      { name: "Teresa Tam", instrument: "Voice" },
+      { name: "Winnie Cheung", instrument: "Piano" },
+      { name: "Janice Lee", instrument: "Violin" },
+      { name: "C.C. Lee", instrument: "Bandoneon" },
+    ],
     description:
-      "Celebration of a two-year collaboration with tango musicians in Taiwan. Tango classics of Troilo, Pugliese, and Gobbi performed alongside tango composers of today.",
-    price: "$29 - $40",
+      "A celebration of a two-year collaboration with tango musicians in Taiwan. Tango classics performed alongside tango composers of today.",
+    fullDescription:
+      "Celebration of a two-year collaboration with tango musicians in Taiwan. Tango classics of Troilo, Pugliese, and Gobbi performed alongside tango composers of today. The Winnie Collective brings together an extraordinary ensemble spanning continents, united by their passion for the tango tradition and its evolution. Each piece is a three-minute mini drama - an exploration of humanity through the language of tango, where every note carries the weight of longing, joy, and the complexity of human connection.",
+    pricing: [
+      { label: "Students & Seniors", price: "$29" },
+      { label: "Early Bird", price: "$35" },
+      { label: "General", price: "$40" },
+      { label: "At the Door", price: "$40" },
+    ],
     ticketUrl: "https://www.eventbrite.com/e/tango-with-winnie-collective-tickets-1405565116099",
     image: "/images/events/winnie-collective.jpg",
   },
@@ -330,10 +364,23 @@ const upcomingEvents = [
     year: "2025",
     time: "7:00 PM",
     doors: "6:30 PM",
-    artists: "Dan Auvil (percussion, voice), Sal Beeby (guitar), Juliana Graffagna (voice, accordion), Gari Hegedus (oud, saz), Shira Kammen (violin, harp)",
+    artists: [
+      { name: "Dan Auvil", instrument: "Percussion, Voice" },
+      { name: "Sal Beeby", instrument: "Guitar" },
+      { name: "Juliana Graffagna", instrument: "Voice, Accordion, Tambura" },
+      { name: "Gari Hegedus", instrument: "Oud, Saz, Mandocello, Mandolin" },
+      { name: "Shira Kammen", instrument: "Violin, Harp, Voice" },
+    ],
     description:
-      "Fusing funky Balkan rhythms, gritty Appalachian ballads, arresting vocal harmonies, and enchanting acoustic textures, Janam takes you on a labyrinthine musical ride.",
-    price: "$25 - $35",
+      "Fusing funky Balkan rhythms, gritty Appalachian ballads, arresting vocal harmonies, and enchanting acoustic textures.",
+    fullDescription:
+      "Fusing funky Balkan rhythms, gritty Appalachian ballads, arresting vocal harmonies, and enchanting acoustic textures, Janam takes you on a labyrinthine musical ride. Drawing from the rich musical traditions of the Balkans, the Appalachian mountains, and beyond, this ensemble weaves together seemingly disparate threads into a tapestry of sound that is both ancient and utterly contemporary. Their performances are journeys without a map, full of surprises, detours, and breathtaking vistas.",
+    pricing: [
+      { label: "Students & Seniors", price: "$25" },
+      { label: "Early Bird", price: "$29" },
+      { label: "General", price: "$35" },
+      { label: "At the Door", price: "$35" },
+    ],
     ticketUrl: "https://www.eventbrite.com/e/janam-tickets-1405610983289",
     image: "/images/events/janam.jpg",
   },
@@ -345,81 +392,309 @@ const upcomingEvents = [
     year: "2025",
     time: "7:30 PM",
     doors: "7:00 PM",
-    artists: "Misha Khalikulov (Cello), Aaron Kierbel (Percussion), Arslen Metouii (Kanun), Daniel Riera (Flute/Ewi)",
+    artists: [
+      { name: "Misha Khalikulov", instrument: "Cello" },
+      { name: "Aaron Kierbel", instrument: "Percussion" },
+      { name: "Arslen Metouii", instrument: "Kanun" },
+      { name: "Daniel Riera", instrument: "Flute/Ewi" },
+    ],
     description:
-      "An improvised journey, weaving melodies and rhythms from around the world - sometimes tender and meditative, other times fiery and exuberant - inviting the audience into a world without borders.",
-    price: "$25 - $35",
+      "An improvised journey weaving melodies and rhythms from around the world - sometimes tender, other times fiery and exuberant.",
+    fullDescription:
+      "String, Skin & Breath will take you on an improvised journey, weaving melodies and rhythms from around the world. Together, they create a dynamic, spontaneous dialogue - sometimes tender and meditative, other times fiery and exuberant - inviting the audience into a world without borders, where music speaks beyond words. Each instrument brings the voice of a different tradition: the cello's European depth, the kanun's Middle Eastern shimmer, the flute's universal breath, and percussion's primal heartbeat.",
+    pricing: [
+      { label: "Students & Seniors", price: "$25" },
+      { label: "Early Bird", price: "$29" },
+      { label: "General", price: "$35" },
+      { label: "At the Door", price: "$35" },
+    ],
     ticketUrl: "https://www.eventbrite.com/e/string-skin-breath-tickets-1368311920789",
     image: "/images/events/string-skin-breath.png",
   },
 ];
 
-function EventCard({ event, index }: { event: typeof upcomingEvents[0]; index: number }) {
+/* ─── Event Detail Modal ─── */
+function EventModal({ event, open, onOpenChange }: { event: EventData; open: boolean; onOpenChange: (open: boolean) => void }) {
   const [month, dayNum] = event.date.split(" ");
 
   return (
-    <motion.div
-      variants={fadeUp}
-      custom={index + 1}
-      className="event-card group bg-surface rounded-2xl border border-cream-200 overflow-hidden"
-    >
-      {/* Event Image */}
-      <div className="relative aspect-[16/9] overflow-hidden">
-        <Image
-          src={event.image}
-          alt={event.title}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+    <Dialog.Root open={open} onOpenChange={onOpenChange}>
+      <AnimatePresence>
+        {open && (
+          <Dialog.Portal forceMount>
+            {/* Overlay */}
+            <Dialog.Overlay asChild>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm"
+              />
+            </Dialog.Overlay>
 
-        {/* Date Badge */}
-        <div className="absolute top-4 left-4 bg-poppy-700/90 backdrop-blur-sm text-cream-50 rounded-xl px-3 py-2 text-center min-w-[60px]">
-          <div className="text-xs uppercase font-semibold tracking-wider">{month}</div>
-          <div className="text-2xl font-bold font-serif leading-none">{dayNum}</div>
+            {/* Content */}
+            <Dialog.Content asChild>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="fixed inset-0 z-[101] flex items-center justify-center p-4 md:p-8"
+              >
+                <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-cream-50 rounded-3xl shadow-2xl">
+                  {/* Hero Image Area */}
+                  <div className="relative aspect-[2/1] md:aspect-[5/2] overflow-hidden rounded-t-3xl">
+                    <Image
+                      src={event.image}
+                      alt={event.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 720px"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+                    {/* Close button */}
+                    <Dialog.Close className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm text-cream-100 hover:bg-black/60 transition-colors flex items-center justify-center z-10">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-5 h-5" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                      <span className="sr-only">Close</span>
+                    </Dialog.Close>
+
+                    {/* Date badge */}
+                    <div className="absolute top-4 left-4 bg-poppy-700/90 backdrop-blur-sm text-cream-50 rounded-xl px-4 py-2.5 text-center min-w-[70px]">
+                      <div className="text-xs uppercase font-semibold tracking-wider">{month}</div>
+                      <div className="text-3xl font-bold font-serif leading-none">{dayNum}</div>
+                      <div className="text-[10px] uppercase tracking-wider opacity-80 mt-0.5">{event.year}</div>
+                    </div>
+
+                    {/* Title overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                      <Dialog.Title className="font-serif text-3xl md:text-4xl font-bold text-cream-50 mb-1 drop-shadow-lg">
+                        {event.title}
+                      </Dialog.Title>
+                      <p className="text-poppy-200 font-medium italic text-lg">
+                        {event.subtitle}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Body Content */}
+                  <div className="p-6 md:p-8 space-y-6">
+                    {/* Time & Day Bar */}
+                    <div className="flex flex-wrap gap-3">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-cream-200 rounded-full text-sm font-medium text-cream-800">
+                        <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-poppy-600" aria-hidden="true">
+                          <path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2z" clipRule="evenodd" />
+                        </svg>
+                        {event.day}, {event.date}, {event.year}
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-cream-200 rounded-full text-sm font-medium text-cream-800">
+                        <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-poppy-600" aria-hidden="true">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z" clipRule="evenodd" />
+                        </svg>
+                        Doors {event.doors} &middot; Show {event.time}
+                      </span>
+                    </div>
+
+                    {/* Description */}
+                    <Dialog.Description asChild>
+                      <div>
+                        <p className="text-cream-800 leading-relaxed text-base">
+                          {event.fullDescription}
+                        </p>
+                      </div>
+                    </Dialog.Description>
+
+                    {/* Artists */}
+                    <div>
+                      <h3 className="font-serif text-lg font-bold text-cream-900 mb-3">Featuring</h3>
+                      <div className="grid sm:grid-cols-2 gap-2">
+                        {event.artists.map((artist) => (
+                          <div
+                            key={artist.name}
+                            className="flex items-center gap-3 bg-cream-100 rounded-xl px-4 py-3 border border-cream-200"
+                          >
+                            <div className="w-8 h-8 rounded-full bg-poppy-100 text-poppy-700 flex items-center justify-center shrink-0">
+                              <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+                                <path d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z" />
+                              </svg>
+                            </div>
+                            <div>
+                              <div className="font-semibold text-cream-900 text-sm">{artist.name}</div>
+                              <div className="text-xs text-cream-600">{artist.instrument}</div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Pricing */}
+                    <div>
+                      <h3 className="font-serif text-lg font-bold text-cream-900 mb-3">Admission</h3>
+                      <div className="bg-cream-100 rounded-2xl border border-cream-200 overflow-hidden">
+                        <div className="grid grid-cols-2 sm:grid-cols-4">
+                          {event.pricing.map((tier, i) => (
+                            <div
+                              key={tier.label}
+                              className={`p-4 text-center ${i < event.pricing.length - 1 ? "border-r border-cream-200" : ""}`}
+                            >
+                              <div className="font-serif text-2xl font-bold text-poppy-700">{tier.price}</div>
+                              <div className="text-xs text-cream-600 mt-1">{tier.label}</div>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="px-4 py-2.5 bg-cream-200/60 text-center">
+                          <p className="text-xs text-cream-700 italic">
+                            Sliding scale &middot; Every dollar at the door goes primarily to the performing artists
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Venue Info */}
+                    <div className="flex flex-wrap gap-4 text-sm text-cream-700">
+                      <span className="flex items-center gap-1.5">
+                        <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-poppy-500" aria-hidden="true">
+                          <path fillRule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433a19.695 19.695 0 002.683-2.006c1.9-1.7 3.945-4.293 3.945-7.593a7.25 7.25 0 00-14.5 0c0 3.3 2.045 5.893 3.945 7.593a19.695 19.695 0 002.683 2.006 12.21 12.21 0 00.757.433l.281.14.018.008.006.003zM10 11.25a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" clipRule="evenodd" />
+                        </svg>
+                        2698 Folsom St, SF
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-poppy-500" aria-hidden="true">
+                          <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+                        </svg>
+                        49 Seats
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-poppy-500" aria-hidden="true">
+                          <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+                        </svg>
+                        ADA Accessible
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-poppy-500" aria-hidden="true">
+                          <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+                        </svg>
+                        All Ages
+                      </span>
+                    </div>
+
+                    {/* CTA */}
+                    <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                      <a
+                        href={event.ticketUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 flex-1 px-6 py-4 text-base font-semibold bg-poppy-700 text-cream-50 rounded-full hover:bg-poppy-600 transition-all duration-300 hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
+                      >
+                        Reserve Tickets on Eventbrite
+                        <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5" aria-hidden="true">
+                          <path d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5z" />
+                          <path d="M6.194 12.753a.75.75 0 001.06.053L16.5 4.44v2.81a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75h-4.5a.75.75 0 000 1.5h2.553l-9.056 8.194a.75.75 0 00-.053 1.06z" />
+                        </svg>
+                      </a>
+                      <Dialog.Close className="inline-flex items-center justify-center px-6 py-4 text-base font-medium border-2 border-cream-300 text-cream-800 rounded-full hover:bg-cream-100 transition-colors">
+                        Close
+                      </Dialog.Close>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </Dialog.Content>
+          </Dialog.Portal>
+        )}
+      </AnimatePresence>
+    </Dialog.Root>
+  );
+}
+
+/* ─── Event Card ─── */
+function EventCard({ event, index }: { event: EventData; index: number }) {
+  const [open, setOpen] = useState(false);
+  const [month, dayNum] = event.date.split(" ");
+
+  return (
+    <>
+      <motion.div
+        variants={fadeUp}
+        custom={index + 1}
+        className="event-card group bg-surface rounded-2xl border border-cream-200 overflow-hidden cursor-pointer"
+        onClick={() => setOpen(true)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setOpen(true); } }}
+        aria-label={`View details for ${event.title}`}
+      >
+        {/* Event Image */}
+        <div className="relative aspect-[16/9] overflow-hidden">
+          <Image
+            src={event.image}
+            alt={event.title}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+
+          {/* Date Badge */}
+          <div className="absolute top-4 left-4 bg-poppy-700/90 backdrop-blur-sm text-cream-50 rounded-xl px-3 py-2 text-center min-w-[60px]">
+            <div className="text-xs uppercase font-semibold tracking-wider">{month}</div>
+            <div className="text-2xl font-bold font-serif leading-none">{dayNum}</div>
+          </div>
+
+          {/* Price Badge */}
+          <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm text-cream-100 rounded-full px-3 py-1 text-xs font-medium">
+            Sliding scale &middot; {event.pricing[0].price} - {event.pricing[event.pricing.length - 1].price}
+          </div>
         </div>
 
-        {/* Price Badge */}
-        <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm text-cream-100 rounded-full px-3 py-1 text-xs font-medium">
-          Sliding scale &middot; {event.price}
+        {/* Content */}
+        <div className="p-6">
+          <div className="flex items-center gap-2 text-xs text-cream-600 mb-2">
+            <span className="font-medium">{event.day}</span>
+            <span>&middot;</span>
+            <span>Doors {event.doors}</span>
+            <span>&middot;</span>
+            <span>Show {event.time}</span>
+          </div>
+
+          <h3 className="font-serif text-xl font-bold text-cream-900 mb-1 group-hover:text-poppy-700 transition-colors">
+            {event.title}
+          </h3>
+          <p className="text-sm text-poppy-600 font-medium italic mb-3">
+            {event.subtitle}
+          </p>
+          <p className="text-sm text-cream-700 leading-relaxed mb-4 line-clamp-2">
+            {event.description}
+          </p>
+
+          {/* Artists preview */}
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {event.artists.slice(0, 3).map((artist) => (
+              <span key={artist.name} className="inline-flex items-center px-2.5 py-1 bg-cream-100 rounded-full text-xs text-cream-700 border border-cream-200">
+                {artist.name}
+              </span>
+            ))}
+            {event.artists.length > 3 && (
+              <span className="inline-flex items-center px-2.5 py-1 bg-cream-100 rounded-full text-xs text-cream-600 border border-cream-200">
+                +{event.artists.length - 3} more
+              </span>
+            )}
+          </div>
+
+          <span className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-poppy-700 text-cream-50 rounded-full group-hover:bg-poppy-600 transition-all duration-300 shadow-sm group-hover:shadow-md">
+            View Details & Tickets
+            <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+              <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
+            </svg>
+          </span>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Content */}
-      <div className="p-6">
-        <div className="flex items-center gap-2 text-xs text-cream-600 mb-2">
-          <span className="font-medium">{event.day}</span>
-          <span>&middot;</span>
-          <span>Doors {event.doors}</span>
-          <span>&middot;</span>
-          <span>Show {event.time}</span>
-        </div>
-
-        <h3 className="font-serif text-xl font-bold text-cream-900 mb-1 group-hover:text-poppy-700 transition-colors">
-          {event.title}
-        </h3>
-        <p className="text-sm text-poppy-600 font-medium italic mb-3">
-          {event.subtitle}
-        </p>
-        <p className="text-sm text-cream-700 leading-relaxed mb-4 line-clamp-2">
-          {event.description}
-        </p>
-
-        <a
-          href={event.ticketUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-poppy-700 text-cream-50 rounded-full hover:bg-poppy-600 transition-all duration-300 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
-        >
-          Reserve Tickets
-          <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
-            <path d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5z" />
-            <path d="M6.194 12.753a.75.75 0 001.06.053L16.5 4.44v2.81a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75h-4.5a.75.75 0 000 1.5h2.553l-9.056 8.194a.75.75 0 00-.053 1.06z" />
-          </svg>
-        </a>
-      </div>
-    </motion.div>
+      <EventModal event={event} open={open} onOpenChange={setOpen} />
+    </>
   );
 }
 
@@ -442,7 +717,9 @@ export function UpcomingEventsSection() {
             </h2>
             <p className="text-cream-700 max-w-2xl mx-auto text-lg leading-relaxed">
               Two to three nights a week, Thursday through Sunday, our 49-seat room
-              fills with music, poetry, dance, and conversation.
+              fills with music, poetry, dance, and conversation. Advance tickets available
+              on Eventbrite - advance ticket guarantees admission but not a seat (first
+              come, first served).
             </p>
           </motion.div>
 
@@ -458,11 +735,12 @@ export function UpcomingEventsSection() {
             variants={fadeIn}
             className="text-center bg-cream-100 rounded-2xl border border-cream-200 p-8 mb-10"
           >
-            <p className="font-serif text-lg text-cream-800 italic">
+            <p className="font-serif text-lg text-cream-800 italic mb-2">
               &quot;Every dollar at the door goes primarily to the performing artists.&quot;
             </p>
-            <p className="text-sm text-cream-600 mt-2">
+            <p className="text-sm text-cream-600">
               Sliding scale admission, typically $15 to $25. Consider your contribution an &quot;audience grant.&quot;
+              We encourage guests to consider their admission as a contribution to the local arts economy.
             </p>
           </motion.div>
 
@@ -505,49 +783,49 @@ const programs = [
   {
     emoji: "\uD83C\uDFB5",
     title: "Performance Series",
-    description: "Diverse and international artists in traditional and contemporary performing arts.",
+    description: "Diverse and international artists working in both traditional and contemporary performing arts. The Art House produces an average of 150 multi-disciplinary performance events per year, featuring music, poetry, dance, and literary events.",
     color: "bg-poppy-50 text-poppy-700 border-poppy-100",
   },
   {
     emoji: "\uD83D\uDDBC\uFE0F",
     title: "Exhibitions",
-    description: "Rotating works and socially engaged large-scale installations.",
+    description: "Rotating works and socially engaged large-scale installations featuring artists connected to the Mission District and beyond. Current exhibition: \"Fracture Zones\" by Andrea Guskin.",
     color: "bg-earth-terracotta/10 text-earth-terracotta border-earth-terracotta/20",
   },
   {
     emoji: "\uD83C\uDFE0",
     title: "Artist Residencies",
-    description: "Free and accessible space for rehearsal, development, and collaborative work.",
+    description: "Free and accessible space for artists-in-residence to rehearse, develop, and explore new collaborative and interdisciplinary work. Including A Feast of Communities and Crossover Collaborative Residencies.",
     color: "bg-earth-olive/10 text-earth-olive border-earth-olive/20",
   },
   {
     emoji: "\uD83D\uDC68\u200D\uD83D\uDC69\u200D\uD83D\uDC67",
     title: "Family Art",
-    description: "Free bilingual (Spanish/English) art programming for Mission District families.",
+    description: "Arte entre Familia - free bilingual (Spanish/English) art programming for families in the Mission District, nurturing creativity across generations for over a decade. Supported by Sam Mazza Foundation and Art4Moore.",
     color: "bg-earth-sage/20 text-earth-olive border-earth-sage/30",
   },
   {
     emoji: "\uD83C\uDF10",
     title: "MAPP",
-    description: "The Mission Arts and Performance Project, a bi-monthly multidisciplinary happening since 2003.",
+    description: "The Mission Arts and Performance Project - a bi-monthly, multidisciplinary, intercultural happening launched in 2003. On the first Saturday of every even month, MAPP transforms ordinary spaces into pop-up sites for artistic and cultural exchange.",
     color: "bg-poppy-50 text-poppy-700 border-poppy-100",
   },
   {
     emoji: "\uD83C\uDF89",
     title: "FRESH Festival",
-    description: "SF's annual festival of experimental dance, music, and performance.",
+    description: "San Francisco's annual festival of experimental dance, music, and performance. A body-based art, action, and interaction festival established in 2010 by ALTERNATIVA.",
     color: "bg-earth-warm/10 text-earth-warm border-earth-warm/20",
   },
   {
     emoji: "\uD83C\uDFE1",
     title: "Mission Stoop Fest",
-    description: "A civil society arts experiment on front stoops.",
+    description: "A civil society arts experiment on front stoops where traditional and contemporary artists perform and local residents share stories and histories. A daytime sister project to MAPP.",
     color: "bg-earth-clay/10 text-earth-clay border-earth-clay/20",
   },
   {
     emoji: "\uD83D\uDCDA",
     title: "Development Track",
-    description: "PRESENCE - professional development cohort for community arts presentation.",
+    description: "PRESENCE - a nine-month professional development program closing the gap between the roles of artist, arts administrator, and community builder. Ongoing enrollment with a three-month summer intensive.",
     color: "bg-cream-200 text-cream-800 border-cream-300",
   },
 ];
@@ -620,7 +898,6 @@ export function ProgramsSection() {
 export function MissionSection() {
   return (
     <section className="relative overflow-hidden bg-poppy-800 text-cream-50 grain-overlay">
-      {/* Background accents */}
       <div className="absolute inset-0">
         <div className="absolute -right-32 -bottom-32 w-[500px] h-[500px] opacity-[0.06]">
           <svg viewBox="0 0 200 200" fill="currentColor" className="w-full h-full text-poppy-300">
@@ -663,12 +940,18 @@ export function MissionSection() {
               that seeks to empower and transform society by addressing current social
               issues that impact our community and society at large through creative processes.
             </p>
-            <p className="text-lg text-cream-300 leading-relaxed mb-10">
+            <p className="text-lg text-cream-300 leading-relaxed mb-6">
               Operating from a neighborhood storefront, we demonstrate the unique, powerful,
               and irreplaceable capacity of intimate community spaces through hosting over
               150 diverse performances, exhibitions, workshops, and artist residencies annually.
               The intent of Red Poppy Art House is to forge a bridge between high-caliber
               artistic work and community life through visibility and inclusiveness.
+            </p>
+            <p className="text-base text-cream-400 leading-relaxed mb-10">
+              Our desire is to serve as a space of multiplicity, not defined by a singular
+              culture or aesthetic, but as a well-spring of socially engaged art and discourse
+              that invites growth and transformation. If we had to name our dominant aesthetic,
+              we would call it... &quot;slow.&quot;
             </p>
           </motion.div>
 
@@ -698,7 +981,7 @@ const involvementOptions = [
       </svg>
     ),
     title: "Volunteer",
-    description: "Help with event productions and earn free passes to Poppy events",
+    description: "Help with event productions - admissions at the door or concessions at the counter. Each volunteer receives one free pass to another Poppy event. Call time 6:00 PM.",
     cta: "Sign Up",
     href: "/participate/volunteer",
     color: "bg-poppy-50 text-poppy-600",
@@ -710,7 +993,7 @@ const involvementOptions = [
       </svg>
     ),
     title: "Donate",
-    description: "Support the arts economy of San Francisco",
+    description: "Support the arts economy of San Francisco. Become a Patron on Patreon for as low as $5-$10/month, make a one-time donation, or participate in corporate matching through Benevity.",
     cta: "Give Now",
     href: "/participate/give",
     color: "bg-earth-warm/10 text-earth-warm",
@@ -724,7 +1007,7 @@ const involvementOptions = [
       </svg>
     ),
     title: "Perform",
-    description: "Submit a booking inquiry to perform at the Poppy",
+    description: "Interested in performing at the Poppy? Submit a booking inquiry. We present a diverse and international program of artists working in both traditional and contemporary performing arts.",
     cta: "Inquire",
     href: "mailto:booking@redpoppyarthouse.org",
     color: "bg-earth-olive/10 text-earth-olive",
@@ -737,7 +1020,7 @@ const involvementOptions = [
       </svg>
     ),
     title: "Rent the Space",
-    description: "A cozy 650 sq ft venue with kitchen, piano, and sound equipment",
+    description: "A cozy 650 sq ft venue with kitchen, French-made Pleyel piano, professional sound equipment, performance lighting, Wi-Fi, and wheelchair access. 100% of rental funds support programming.",
     cta: "Learn More",
     href: "/rentals",
     color: "bg-earth-terracotta/10 text-earth-terracotta",
@@ -839,7 +1122,6 @@ export function VisitUsSection() {
 
             {/* Contact Info */}
             <motion.div variants={fadeUp} custom={2} className="space-y-6">
-              {/* Address Card */}
               <div className="bg-cream-50 rounded-2xl border border-cream-200 p-6 flex gap-4">
                 <div className="w-12 h-12 shrink-0 rounded-xl bg-poppy-50 text-poppy-600 flex items-center justify-center">
                   <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden="true">
@@ -866,7 +1148,6 @@ export function VisitUsSection() {
                 </div>
               </div>
 
-              {/* Hours Card */}
               <div className="bg-cream-50 rounded-2xl border border-cream-200 p-6 flex gap-4">
                 <div className="w-12 h-12 shrink-0 rounded-xl bg-earth-warm/10 text-earth-warm flex items-center justify-center">
                   <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden="true">
@@ -882,7 +1163,6 @@ export function VisitUsSection() {
                 </div>
               </div>
 
-              {/* Phone & Email Card */}
               <div className="bg-cream-50 rounded-2xl border border-cream-200 p-6 flex gap-4">
                 <div className="w-12 h-12 shrink-0 rounded-xl bg-earth-olive/10 text-earth-olive flex items-center justify-center">
                   <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden="true">
@@ -892,26 +1172,26 @@ export function VisitUsSection() {
                 <div>
                   <h3 className="font-semibold text-cream-900 mb-1">Contact</h3>
                   <p>
-                    <a href="tel:+16507315383" className="text-cream-700 hover:text-poppy-700 transition-colors">
-                      (650) 731-5383
-                    </a>
+                    <a href="tel:+16507315383" className="text-cream-700 hover:text-poppy-700 transition-colors">(650) 731-5383</a>
                   </p>
                   <p>
-                    <a href="mailto:info@redpoppyarthouse.org" className="text-poppy-700 hover:text-poppy-600 transition-colors font-medium">
-                      info@redpoppyarthouse.org
-                    </a>
+                    <a href="mailto:info@redpoppyarthouse.org" className="text-poppy-700 hover:text-poppy-600 transition-colors font-medium">info@redpoppyarthouse.org</a>
                   </p>
+                  <div className="mt-2 text-sm text-cream-600 space-y-0.5">
+                    <p>Booking &amp; PR: <a href="mailto:booking@redpoppyarthouse.org" className="text-poppy-700 hover:text-poppy-600">booking@redpoppyarthouse.org</a></p>
+                    <p>Rentals: <a href="mailto:rentals@redpoppyarthouse.org" className="text-poppy-700 hover:text-poppy-600">rentals@redpoppyarthouse.org</a></p>
+                    <p>Volunteer: <a href="mailto:volunteer@redpoppyarthouse.org" className="text-poppy-700 hover:text-poppy-600">volunteer@redpoppyarthouse.org</a></p>
+                  </div>
                 </div>
               </div>
 
-              {/* ADA & Transit Note */}
               <div className="bg-cream-50 rounded-2xl border border-cream-200 p-6">
                 <div className="flex flex-wrap gap-4 text-sm text-cream-700">
                   <span className="flex items-center gap-1.5">
                     <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-poppy-600" aria-hidden="true">
                       <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
                     </svg>
-                    ADA Accessible
+                    ADA Accessible (ramp at 23rd St entrance)
                   </span>
                   <span className="flex items-center gap-1.5">
                     <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-poppy-600" aria-hidden="true">
@@ -930,6 +1210,18 @@ export function VisitUsSection() {
                       <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
                     </svg>
                     Kids 10 &amp; Under Free
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-poppy-600" aria-hidden="true">
+                      <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+                    </svg>
+                    All Major Credit Cards
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-poppy-600" aria-hidden="true">
+                      <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+                    </svg>
+                    Bring Your Own Food
                   </span>
                 </div>
               </div>
