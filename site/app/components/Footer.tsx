@@ -47,18 +47,12 @@ export default function Footer() {
         <div className="grid md:grid-cols-12 gap-10 md:gap-8">
           {/* Brand & Description */}
           <div className="md:col-span-5">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-poppy-800 flex items-center justify-center">
-                <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
-                  <circle cx="12" cy="12" r="3" fill="#FFF8F0" />
-                  <path d="M12 2C12 2 14 6 14 9C14 9 18 7 18 7C18 7 16 11 14 12C16 13 18 17 18 17C18 17 14 15 12 14C12 17 12 22 12 22C12 22 12 17 12 14C10 15 6 17 6 17C6 17 8 13 10 12C8 11 6 7 6 7C6 7 10 9 10 9C10 6 12 2 12 2Z" fill="#FBE0E0" stroke="#FFF8F0" strokeWidth="0.5" />
-                </svg>
-              </div>
-              <div>
-                <span className="font-serif text-xl font-bold text-cream-50 leading-tight">
-                  Red Poppy Art House
-                </span>
-              </div>
+            <div className="mb-4">
+              <img
+                src="/images/brand/logo-transparent.png"
+                alt="Red Poppy Art House"
+                className="h-14 w-auto brightness-0 invert"
+              />
             </div>
             <p className="text-sm leading-relaxed text-cream-300 mb-6 max-w-sm">
               A community-driven arts venue in San Francisco&apos;s Mission

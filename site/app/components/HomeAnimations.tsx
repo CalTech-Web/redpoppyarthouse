@@ -168,10 +168,10 @@ function StatItem({ value, suffix, label }: { value: number; suffix: string; lab
   const { count, ref } = useCountUp(value, 2000);
   return (
     <div ref={ref} className="text-center px-4">
-      <div className="font-serif text-5xl md:text-6xl font-bold text-cream-50 mb-2 tabular-nums">
+      <div className="font-serif text-2xl md:text-3xl font-bold text-cream-50 mb-1 tabular-nums">
         {count}{suffix}
       </div>
-      <div className="text-sm uppercase tracking-[0.15em] text-poppy-200/80 font-medium">
+      <div className="text-xs uppercase tracking-[0.15em] text-poppy-200/80 font-medium">
         {label}
       </div>
     </div>
@@ -185,8 +185,8 @@ export function StatsSection() {
         <div className="absolute top-0 left-1/4 w-64 h-64 bg-poppy-400 rounded-full blur-[100px]" />
         <div className="absolute bottom-0 right-1/4 w-48 h-48 bg-earth-warm rounded-full blur-[80px]" />
       </div>
-      <div className="relative max-w-6xl mx-auto px-6 py-16 md:py-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
+      <div className="relative max-w-6xl mx-auto px-6 py-10 md:py-14">
+        <div className="flex justify-center items-center gap-6 md:gap-10 flex-wrap sm:flex-nowrap">
           {stats.map((stat) => (
             <StatItem key={stat.label} {...stat} />
           ))}
