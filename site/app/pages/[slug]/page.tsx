@@ -17,9 +17,7 @@ const fadeUp: Variants = {
 function processHtml(html: string): string {
   if (!html) return "";
   return html
-    .replace(/https?:\/\/(www\.)?redpoppyarthouse\.org/g, "")
-    .replace(/\\r\\n|\\n|\\r/g, "\n")
-    .replace(/\r\n|\r/g, "\n");
+    .replace(/https?:\/\/(www\.)?redpoppyarthouse\.org/g, "");
 }
 
 // Map slug to breadcrumb parent
@@ -75,7 +73,7 @@ export default function WPPage() {
     return (
       <main className="min-h-screen bg-cream-50">
         <section className="relative bg-poppy-900 text-cream-50 pt-32 pb-20">
-          <div className="relative max-w-5xl mx-auto px-6 text-center">
+          <div className="relative max-w-7xl mx-auto px-6 text-center">
             <h1 className="font-serif text-4xl font-bold mb-4">Page Not Found</h1>
             <p className="text-cream-200 mb-8">The page you are looking for does not exist.</p>
             <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold bg-cream-50 text-poppy-900 rounded-full hover:bg-cream-100 transition-colors">
@@ -98,7 +96,7 @@ export default function WPPage() {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-earth-warm rounded-full blur-[100px]" />
         </div>
-        <div className="relative max-w-5xl mx-auto px-6">
+        <div className="relative max-w-7xl mx-auto px-6">
           <motion.div initial="hidden" animate="visible">
             <motion.nav variants={fadeUp} custom={0} aria-label="Breadcrumb" className="mb-8">
               <ol className="flex items-center gap-2 text-sm text-cream-300">
@@ -128,7 +126,7 @@ export default function WPPage() {
       </section>
 
       {/* Content */}
-      <section className="max-w-4xl mx-auto px-6 py-16 md:py-24">
+      <section className="max-w-7xl mx-auto px-6 py-16 md:py-24">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -157,7 +155,7 @@ export default function WPPage() {
       {/* Back navigation */}
       {parent && (
         <section className="bg-cream-100 texture-paper">
-          <div className="max-w-5xl mx-auto px-6 py-12 text-center">
+          <div className="max-w-7xl mx-auto px-6 py-12 text-center">
             <Link
               href={parent.href}
               className="inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold bg-poppy-700 text-cream-50 rounded-full hover:bg-poppy-600 transition-all duration-300"

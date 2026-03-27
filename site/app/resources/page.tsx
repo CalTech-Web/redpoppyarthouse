@@ -62,7 +62,7 @@ export default function ResourcesPage() {
           <img src="/images/hero/collage-1.png" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
         </div>
-        <div className="relative max-w-5xl mx-auto px-6 py-16">
+        <div className="relative max-w-7xl mx-auto px-6 py-16">
           <motion.div initial="hidden" animate="visible">
             <motion.nav variants={fadeUp} custom={0} aria-label="Breadcrumb" className="mb-8">
               <ol className="flex items-center gap-2 text-sm text-cream-300">
@@ -85,7 +85,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Community & Curatorial Partners */}
-      <section className="max-w-5xl mx-auto px-6 py-16 md:py-24">
+      <section className="max-w-7xl mx-auto px-6 py-16 md:py-24">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -128,7 +128,7 @@ export default function ResourcesPage() {
 
       {/* Supporters */}
       <section className="bg-cream-100 texture-paper">
-        <div className="max-w-5xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -150,7 +150,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Fiscal Sponsor */}
-      <section className="max-w-5xl mx-auto px-6 py-16 md:py-24">
+      <section className="max-w-7xl mx-auto px-6 py-16 md:py-24">
         <motion.div
           initial="hidden"
           whileInView="visible"
