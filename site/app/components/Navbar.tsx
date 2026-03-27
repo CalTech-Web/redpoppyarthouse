@@ -42,7 +42,7 @@ export default function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-cream-50/95 backdrop-blur-md border-b border-cream-300/50 shadow-sm"
-          : "bg-transparent"
+          : "bg-black/30 backdrop-blur-sm"
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -51,9 +51,7 @@ export default function Navbar() {
           <img
             src="/images/brand/logo-transparent.png"
             alt="Red Poppy Art House"
-            className={`h-12 w-auto transition-all duration-300 ${
-              scrolled ? "brightness-100" : "brightness-0 invert"
-            }`}
+            className="h-12 w-auto transition-all duration-300"
           />
         </Link>
 

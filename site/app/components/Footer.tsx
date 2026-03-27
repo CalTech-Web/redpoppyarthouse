@@ -51,7 +51,7 @@ export default function Footer() {
               <img
                 src="/images/brand/logo-transparent.png"
                 alt="Red Poppy Art House"
-                className="h-14 w-auto brightness-0 invert"
+                className="h-14 w-auto"
               />
             </div>
             <p className="text-sm leading-relaxed text-cream-300 mb-6 max-w-sm">
