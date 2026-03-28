@@ -86,12 +86,12 @@ export default function BlogPostPage() {
             <img src="/images/hero/collage-4.png" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
           </div>
-          <div className="relative max-w-7xl mx-auto px-6 py-16 w-full">
+          <div className="relative max-w-7xl mx-auto px-6 py-[75px] w-full">
             <Link
               href="/blog"
               className="inline-flex items-center gap-2 text-sm text-poppy-200 hover:text-cream-50 transition-colors mb-6"
             >
-              <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 animate-pulse" aria-hidden="true">
                 <path fillRule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clipRule="evenodd" />
               </svg>
               Back to Blog
@@ -131,14 +131,14 @@ export default function BlogPostPage() {
           <img src="/images/hero/collage-4.png" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-6 py-16 w-full">
+        <div className="relative max-w-7xl mx-auto px-6 py-[75px] w-full">
           <motion.div initial="hidden" animate="visible">
             <motion.div variants={fadeUp} custom={0}>
               <Link
                 href="/blog"
                 className="inline-flex items-center gap-2 text-sm text-poppy-200 hover:text-cream-50 transition-colors mb-8"
               >
-                <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 animate-pulse" aria-hidden="true">
                   <path fillRule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clipRule="evenodd" />
                 </svg>
                 Back to Blog
@@ -179,22 +179,6 @@ export default function BlogPostPage() {
         <div className="grid lg:grid-cols-[1fr_320px] gap-10">
           {/* Main Content */}
           <div>
-            {/* Featured Image */}
-            {imageSrc && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                className="relative rounded-2xl overflow-hidden shadow-xl border border-cream-200 mb-8"
-              >
-                <img
-                  src={imageSrc}
-                  alt={post.title}
-                  className="w-full h-auto max-h-[500px] object-cover"
-                />
-              </motion.div>
-            )}
-
             {/* Article Body */}
             <motion.article
               initial={{ opacity: 0, y: 20 }}
@@ -336,7 +320,7 @@ export default function BlogPostPage() {
                 href="/blog"
                 className="inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold bg-poppy-700 text-cream-50 rounded-full hover:bg-poppy-600 transition-all duration-300 hover:-translate-y-0.5 shadow-md"
               >
-                <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 animate-pulse" aria-hidden="true">
                   <path fillRule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clipRule="evenodd" />
                 </svg>
                 All Blog Posts

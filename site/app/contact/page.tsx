@@ -278,7 +278,7 @@ export default function ContactPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 py-16 w-full">
+        <div className="relative max-w-7xl mx-auto px-6 py-[75px] w-full">
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 text-sm text-poppy-200">
               <li>
@@ -575,7 +575,7 @@ export default function ContactPage() {
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
-                  className="w-4 h-4"
+                  className="w-4 h-4 animate-pulse"
                   aria-hidden="true"
                 >
                   <path

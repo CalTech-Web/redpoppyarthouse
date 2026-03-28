@@ -136,7 +136,7 @@ export default function BlogPage() {
           <img src="/images/events/string-skin-breath.png" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-6 py-16 w-full">
+        <div className="relative max-w-7xl mx-auto px-6 py-[75px] w-full">
           <motion.div initial="hidden" animate="visible">
             <motion.nav variants={fadeUp} custom={0} aria-label="Breadcrumb" className="mb-8">
               <ol className="flex items-center gap-2 text-sm text-cream-300">
@@ -261,7 +261,7 @@ export default function BlogPage() {
                     {/* Read More */}
                     <span className="inline-flex items-center gap-1 mt-4 text-sm font-medium text-poppy-700 group-hover:gap-2 transition-all">
                       Read more
-                      <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+                      <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 animate-pulse" aria-hidden="true">
                         <path
                           fillRule="evenodd"
                           d="M3 10a.75.75 0 01.75-.75h10.638l-3.96-4.158a.75.75 0 111.08-1.04l5.25 5.5a.75.75 0 010 1.08l-5.25 5.5a.75.75 0 11-1.08-1.04l3.96-4.158H3.75A.75.75 0 013 10z"
@@ -298,7 +298,7 @@ export default function BlogPage() {
               className="inline-flex items-center gap-2 px-8 py-3 text-sm font-semibold border border-cream-300 text-cream-800 rounded-full hover:bg-cream-100 transition-all duration-300 hover:-translate-y-0.5"
             >
               Load More Posts
-              <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 animate-pulse" aria-hidden="true">
                 <path
                   fillRule="evenodd"
                   d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z"

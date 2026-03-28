@@ -94,7 +94,7 @@ export default function EventDetailPage() {
             <img src="/images/venue/performance.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
           </div>
-          <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24 w-full">
+          <div className="relative max-w-7xl mx-auto px-6 py-[75px] w-full">
             <Link
               href="/event"
               className="inline-flex items-center gap-2 text-sm text-poppy-200 hover:text-cream-50 transition-colors mb-6"
@@ -102,7 +102,7 @@ export default function EventDetailPage() {
               <svg
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                className="w-4 h-4"
+                className="w-4 h-4 animate-pulse"
                 aria-hidden="true"
               >
                 <path
@@ -204,7 +204,7 @@ export default function EventDetailPage() {
           </div>
         )}
 
-        <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24 w-full">
+        <div className="relative max-w-7xl mx-auto px-6 py-[75px] w-full">
           <motion.div initial="hidden" animate="visible">
             <motion.div variants={fadeUp} custom={0}>
               <Link
@@ -214,7 +214,7 @@ export default function EventDetailPage() {
                 <svg
                   viewBox="0 0 20 20"
                   fill="currentColor"
-                  className="w-4 h-4"
+                  className="w-4 h-4 animate-pulse"
                   aria-hidden="true"
                 >
                   <path
@@ -437,7 +437,7 @@ export default function EventDetailPage() {
                       <svg
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        className="w-4 h-4"
+                        className="w-4 h-4 animate-pulse"
                         aria-hidden="true"
                       >
                         <path d="M15.236 3.046c-1.753.56-3.127 1.736-4.069 3.188-.094.146-.13.157-.3.088a5.344 5.344 0 00-2.867-.476c-2.476.27-4.543 2.14-5.103 4.586a5.514 5.514 0 005.02 6.68c.32.022.643.005.963-.03.153-.017.205.015.268.15.725 1.563 1.866 2.71 3.437 3.376 2.844 1.207 6.13-.103 7.465-2.888a5.494 5.494 0 00-1.19-6.357c-.118-.114-.127-.177-.043-.318a5.474 5.474 0 00.722-3.576c-.322-2.57-2.456-4.628-5.042-4.96a5.6 5.6 0 00-.695-.043c-.19 0-.376.01-.566.03v.55z" />
@@ -455,7 +455,7 @@ export default function EventDetailPage() {
                       <svg
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        className="w-4 h-4"
+                        className="w-4 h-4 animate-pulse"
                         aria-hidden="true"
                       >
                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />

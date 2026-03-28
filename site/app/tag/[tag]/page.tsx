@@ -30,7 +30,7 @@ export default async function TagPage({ params }: Props) {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-1/4 w-72 h-72 bg-earth-warm rounded-full blur-3xl" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24 w-full">
+        <div className="relative max-w-7xl mx-auto px-6 py-[75px] w-full">
           <Link
             href="/event"
             className="inline-flex items-center gap-2 text-sm text-poppy-200 hover:text-cream-50 transition-colors mb-6"
@@ -38,7 +38,7 @@ export default async function TagPage({ params }: Props) {
             <svg
               viewBox="0 0 20 20"
               fill="currentColor"
-              className="w-4 h-4"
+              className="w-4 h-4 animate-pulse"
               aria-hidden="true"
             >
               <path

@@ -287,7 +287,7 @@ export function OurStorySection() {
                 className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold bg-earth-warm text-cream-50 rounded-full hover:bg-earth-warm/90 transition-all duration-300 hover:-translate-y-0.5 shadow-md hover:shadow-lg"
               >
                 Learn Our Story
-                <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 animate-pulse" aria-hidden="true">
                   <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
                 </svg>
               </Link>
@@ -533,7 +533,7 @@ function EventModal({ event, open, onOpenChange }: { event: EventData; open: boo
                             className="flex items-center gap-3 bg-cream-100 rounded-xl px-4 py-3 border border-cream-200"
                           >
                             <div className="w-8 h-8 rounded-full bg-poppy-100 text-poppy-700 flex items-center justify-center shrink-0">
-                              <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+                              <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 animate-pulse" aria-hidden="true">
                                 <path d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z" />
                               </svg>
                             </div>
@@ -702,7 +702,7 @@ function EventCard({ event, index }: { event: EventData; index: number }) {
 
           <span className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-poppy-700 text-cream-50 rounded-full group-hover:bg-poppy-600 transition-all duration-300 shadow-sm group-hover:shadow-md">
             View Details & Tickets
-            <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+            <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 animate-pulse" aria-hidden="true">
               <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
             </svg>
           </span>
@@ -907,7 +907,7 @@ export function ProgramsSection() {
               className="inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold bg-poppy-700 text-cream-50 rounded-full hover:bg-poppy-600 transition-all duration-300 hover:-translate-y-0.5 shadow-md hover:shadow-lg"
             >
               Explore All Programs
-              <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 animate-pulse" aria-hidden="true">
                 <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
               </svg>
             </Link>
