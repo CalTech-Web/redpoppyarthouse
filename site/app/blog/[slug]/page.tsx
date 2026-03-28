@@ -86,7 +86,7 @@ export default function BlogPostPage() {
             <img src="/images/hero/collage-4.png" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
           </div>
-          <div className="relative max-w-7xl mx-auto px-6 py-[75px] w-full">
+          <div className="relative max-w-7xl mx-auto px-6 pt-[100px] pb-[75px] w-full">
             <Link
               href="/blog"
               className="inline-flex items-center gap-2 text-sm text-poppy-200 hover:text-cream-50 transition-colors mb-6"
@@ -131,7 +131,7 @@ export default function BlogPostPage() {
           <img src="/images/hero/collage-4.png" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-6 py-[75px] w-full">
+        <div className="relative max-w-7xl mx-auto px-6 pt-[100px] pb-[75px] w-full">
           <motion.div initial="hidden" animate="visible">
             <motion.div variants={fadeUp} custom={0}>
               <Link
@@ -184,13 +184,9 @@ export default function BlogPostPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="bg-[#fdf6e8]/80 rounded-2xl border border-earth-warm/15 p-6 sm:p-8 md:p-12 shadow-sm backdrop-blur-sm ring-1 ring-white/50"
-            >
-              <div
-                className="prose-content"
-                dangerouslySetInnerHTML={{ __html: processedHtml }}
-              />
-            </motion.article>
+              className="prose-content"
+              dangerouslySetInnerHTML={{ __html: processedHtml }}
+            />
 
             {/* Post Navigation */}
             <motion.div

@@ -72,7 +72,7 @@ export default function WPPage() {
   if (!page) {
     return (
       <main className="min-h-screen bg-cream-50">
-        <section className="relative bg-poppy-900 text-cream-50 py-[75px]">
+        <section className="relative bg-poppy-900 text-cream-50 pt-[100px] pb-[75px]">
           <div className="relative max-w-7xl mx-auto px-6 w-full text-center">
             <h1 className="font-serif text-4xl font-bold mb-4">Page Not Found</h1>
             <p className="text-cream-200 mb-8">The page you are looking for does not exist.</p>
@@ -92,7 +92,7 @@ export default function WPPage() {
   return (
     <main className="min-h-screen bg-cream-50">
       {/* Hero */}
-      <section className="relative bg-poppy-900 text-cream-50 py-[75px] overflow-hidden">
+      <section className="relative bg-poppy-900 text-cream-50 pt-[100px] pb-[75px] overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-earth-warm rounded-full blur-[100px]" />
         </div>
