@@ -92,9 +92,10 @@ export default function WPPage() {
   return (
     <main className="min-h-screen bg-cream-50">
       {/* Hero */}
-      <section className="relative bg-poppy-900 text-cream-50 pt-[100px] pb-[75px] overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-earth-warm rounded-full blur-[100px]" />
+      <section className="relative overflow-hidden bg-poppy-900 text-cream-50 min-h-[500px] flex items-center">
+        <div className="absolute inset-0">
+          <img src="/images/hero/collage-1.png" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
         </div>
         <div className="relative max-w-7xl mx-auto px-6 w-full">
           <motion.div initial="hidden" animate="visible">

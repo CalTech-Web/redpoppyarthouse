@@ -26,9 +26,10 @@ export default async function TagPage({ params }: Props) {
   return (
     <main className="min-h-screen">
       {/* Tag Hero */}
-      <section className="relative overflow-hidden bg-poppy-900 text-cream-50">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-1/4 w-72 h-72 bg-earth-warm rounded-full blur-3xl" />
+      <section className="relative overflow-hidden bg-poppy-900 text-cream-50 min-h-[500px] flex items-center">
+        <div className="absolute inset-0">
+          <img src="/images/venue/performance.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40" />
         </div>
         <div className="relative max-w-7xl mx-auto px-6 pt-[100px] pb-[75px] w-full">
           <Link
